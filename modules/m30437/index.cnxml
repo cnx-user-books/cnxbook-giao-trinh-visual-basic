@@ -1,0 +1,498 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Các đối tượng truy cập dữ liệu</title>
+  <metadata>
+  <md:content-id>m30437</md:content-id><md:title>Các đối tượng truy cập dữ liệu</md:title>
+  <md:abstract>Mục tiêu:
+	Chương này gồm các bài tập nhằm rèn luyện sinh viên cách thức lập trình cơ sở dữ liệu sử dụng thư viện đối tượng Data Access Objects (DAO). Đây là cách thức lập trình phổ biến đối với các ứng dụng chạy trên máy đơn.</md:abstract>
+  <md:uuid>5f33987a-5194-4059-9d44-66c1292c3ed1</md:uuid>
+</metadata>
+
+<content>
+    <para id="id8760907">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id8760921">- Sử dụng điều khiển dữ liệu để truy xuất cơ sở dữ liệu.</para>
+    <para id="id8760932">- Sử dụng thư viện đối tượng DAO để lập trình cơ sở dữ liệu.</para>
+    <para id="id8760944">Kiến thức có liên quan:</para>
+    <para id="id8760956">- Giáo trình Visual Basic, chương 9.</para>
+    <para id="id8760966">Tài liệu tham khảo:</para>
+    <para id="id8760978">Visual Basic 6 Certification Exam Guide - Chapter 5, Page 139 - Dan Mezick &amp; Scot Hillier - McGraw-Hill - 1998.</para>
+    <para id="id8761021">
+      <link url="http://www.vovisoft.com/VisualBasic/VB6Chapter14.htm">http://www.vovisoft.com/VisualBasic/VB6Chapter14.htm</link>
+    </para>
+    <para id="id8761040">
+      <link url="http://www.vovisoft.com/VisualBasic/VB6Chapter15.htm">http://www.vovisoft.com/VisualBasic/VB6Chapter15.htm</link>
+    </para>
+    <para id="id8761059">HƯỚNG DẪN</para>
+    <section id="id-336663358907">
+      <title>Bài tập 4-1</title>
+      <section id="id-242786921579">
+        <title>SỬ DỤNG DATA CONTROL</title>
+        <para id="id8761079">Bước 1: Tạo một dự án mới tên DataControl trong thư mục Basic\Bt4-1.</para>
+        <para id="id8761094">Bước 2: Nhấp đúp lên Icon của Control Data trong Toolbox. Một Control Data tên Data1 sẽ hiện ra trên Form. Muốn cho nó nằm bên dưới Form, hãy đặt thuộc tính Align của nó trong Properties Window thành 2 - Align Bottom.</para>
+        <para id="id8761139">Nhấp bên phải hàng property DatabaseName, kế đó click lên nút lựa chọn có ba chấm để chọn một file cơ sở dữ liệu Access từ hộp thoại cho Data1. Ở đây ta chọn E:\Program Files\Microsoft Visual Studio\VB98\BIBLIO.MDB (tùy máy tính có thể là ổ C hay ổ đĩa D)</para>
+        <figure id="id8761176">
+          <media id="id3697136" alt=""><image src="../../media/graphics1-3b36.png" mime-type="image/png" height="363" width="455"/></media>
+        </figure>
+        <para id="id8761205">Hình IV.1: Xác lập thuộc tính cho Data Control</para>
+        <para id="id8761232">Bước 3: Trong chương trình này ta làm việc với table Titles của cơ sở dữ liệu BIBLIO.MDB, để xem và sửa đổi các records. Để ý thuộc tính DefaultType của Data1 có trị số 2- UseJet, tức là dùng kỹ thuật DAO, thay vì dùng kỹ thuật ODBC.</para>
+        <para id="id8761279"><figure id="id8761282"><media id="id7515268" alt=""><image src="../../media/graphics2-516c.png" mime-type="image/png" height="175" width="273"/></media></figure>Khi ta nhấp chuột lên thuộc tính Recordsource của Data1, rồi nhấp lên tam giác nhỏ bên phải, một ComboBox sẽ mở ra cho ta thấy danh sách các tables trong cơ sở dữ liệu, chọn Titles. Để ý thuộc tính RecordsetType của Data1 có trị số là 0 - Table:</para>
+        <para id="id8761358">Hình IV.2: Recordset Type</para>
+        <para id="id8761385">Bước 4: Một từ mới mà ta sẽ dùng thường xuyên khi truy cập dữ liệu trong VB6 là Recordset (bộ records). Recordset là một Set of records, nó có thể chứa một số records hay không có record nào cả. Một record trong Recordset có thể là một record lấy từ một Table. Trong trường hợp ấy có thể ta lấy về tất cả records trong table hay chỉ những records thỏa đúng một điều kiện, thí dụ như ta chỉ muốn lấy các records của những sách xuất bản trước năm 1990 (Year Published &lt; 1990).</para>
+        <para id="id7271546">Tạo Form có dạng như sau:</para>
+        <figure id="id7271556">
+          <media id="id2665088" alt=""><image src="../../media/graphics3-11e2.png" mime-type="image/png" height="304" width="623"/></media>
+        </figure>
+        <para id="id7271584">Hình IV.3: Giao diện ban đầu</para>
+        <para id="id7271611">4 labels với caption của chúng: Title, Year Published, ISBN và Publisher ID. Kế đó cho thêm 4 textboxes tương ứng và đặt tên chúng là txtTitle, txtYearPublished, txtISBN và txtPublisherID.</para>
+        <para id="id7271659">Bước 5: Chọn textbox txtTitle, rồi đặt thuộc tính Datasource của nó trong Properties Window thành Data1. Khi click lên property Datafield của txtTitle và mở ComboBox ra ta sẽ thấy liệt kê tên các trường trong table Titles. Đó là vì Data1 được coi như trung gian lấy table Titles từ cơ sở dữ liệu. Ở đây ta sẽ chọn cột Title.</para>
+        <para id="id7271708">Tương tự cho 3 textboxes còn lại, và chọn các cột Year Published (năm xuất bản), ISBN (số lý lịch trong thư viện quốc tế), và PubID (số lý lịch nhà xuất bản) làm Datafield cho chúng.</para>
+        <para id="id7271721">Bước 6: Lưu dự án và chạy chương trình. Ta sẽ thấy giao diện như sau:</para>
+        <figure id="id7271739">
+          <media id="id1167592178230" alt=""><image src="../../media/graphics4-735d.png" mime-type="image/png" height="246" width="333"/></media>
+        </figure>
+        <para id="id7271767">Hình IV.4: Kết quả thực thi ứng dụng</para>
+        <para id="id7271795">Nhận xét: </para>
+        <list id="id7271800" list-type="bulleted">
+          <item>Ta có thể bấm các nút di chuyển Navigator Buttons để đi đến các record đầu (first), trước (previous), kế (next) và cuối (last). Mỗi lần ta di chuyển đến một record mới là chi tiết của record ấy sẽ hiển thị. Nếu không dùng các Navigator Buttons, ta cũng có thể viết đoạn mã để làm công tác tương đương bằng cách gọi các hàm trên Recordset là MoveFirst, MovePrevious, MoveNext và MoveLast.</item>
+          <item>Khi record cuối của Recordset đang hiển thị, nếu ta gọi hàm MoveLast thì thuộc tính EOF (End-Of-File) của Recordset trở thành True. Tương tự như vậy, khi record thứ nhất của Recordset đang hiển thị, nếu ta gọi hàm MovePrevious thì thuộc tính BOF (Begin-Of-File) của Recordset trở thành True. Nếu một Recordset không có chứa một record nào cả thì cả hai thuộc tính EOF và BOF đều là True.</item>
+          <item>Khi record đầu tiên đang hiển thị, nếu ta sửa Year Published để đổi từ 1985 thành 1983 rồi nhấp Navigator button Next để hiển thị record thứ nhì, kế đó click Navigator button Previous để hiển thị lại record đầu tiên thì ta sẽ thấy là trường Year Published của record đầu tiên đã thật sự được thay đổi (updated) thành 1983.</item>
+        </list>
+        <para id="id7271946">Điều nầy có nghĩa rằng khi di chuyển từ record nầy đến record khác thì nếu record nầy đã có sự thay đổi do người sử dụng, nó lưu trữ sự thay đổi đó trước khi di chuyển. Chưa chắc là ta muốn điều nầy, do đó, nếu ta không muốn người sử dụng tình cờ sửa đổi một record thì ta có thể đặt thuộc tính Locked của các textboxes ấy thành True để người sử dụng không thể sửa đổi các textboxes như trong hình dưới đây:</para>
+        <para id="id7271980">Hình IV.5: Khóa (lock) Textbox<figure id="id7272007"><media id="id1167592175676" alt=""><image src="../../media/graphics5-1a84.png" mime-type="image/png" height="323" width="662"/></media></figure></para>
+        <para id="id7272031">CHỈ ĐỊNH VỊ TRÍ CƠ SỞ DỮ LIỆU LÚC CHẠY CHƯƠNG TRÌNH</para>
+        <para id="id7272038">Bước 7: Cách chỉ định tên cơ sở dữ liệu trong giai đoạn thiết kế (at design time) ta đã dùng trước đây tuy tiện lợi nhưng hơi nguy hiểm, vì khi ta cài chương trình nầy lên máy tính khác, chưa chắc tập tin cơ sở dữ liệu ấy nằm trong một thư mục có cùng tên. Ví dụ trên máy tính này thì cơ sở dữ liệu nằm trong thư mục E:\Program Files\Microsoft Visual Studio\VB98, nhưng trên máy tính khác thì cơ sở dữ liệu nằm trong thư mục D:\Basic\Bt4-1 chẳng hạn. Do đó, khi chương trình khởi động ta nên xác định lại vị trí của cơ sở dữ liệu. Chẳng hạn ta muốn để cơ sở dữ liệu trong cùng một thư mục với chương trình đang chạy, ta có thể dùng thuộc tính Path của Application Object App.</para>
+        <para id="id7272095">Khai báo một biến tên duongdan trong phần [General]\[Declaration] của Form1:</para>
+        <para id="id7272115"> Dim duongdan As String</para>
+        <para id="id7272148">Bước 8: Ta xử lý sự kiện Form_Load như sau:</para>
+        <para id="id7272161">Private Sub Form_Load() </para>
+        <para id="id7272183"> duongdan = App.Path </para>
+        <para id="id7272194"> If Right(duongdan, 1) &lt;&gt; "\" Then duongdan = duongdan &amp; "\" </para>
+        <para id="id7272223"> Data1.DatabaseName = duongdan &amp; "BIBLIO.MDB" </para>
+        <para id="id7272235">End Sub </para>
+        <para id="id7272256">THÊM BỚT CÁC RECORDS</para>
+        <para id="id7272261">Bước 9: Chương trình đến đây tạm ổn, nhưng nó không cho ta công cụ để thêm (add), bớt (delete) các records. Bây giờ hãy đặt vào Form 5 buttons tên: cmdEdit, cmdNew, cmdDelete, cmdUpdate và cmdCancel.</para>
+        <para id="id7272296">Bước 10: Lúc chương trình mới khởi động, người sử dụng đang xem thông tin các records thì hai buttons Update và Cancel không cần phải làm việc. Do đó ta sẽ Lock (khóa) các textboxes và disable hai buttons nầy vì không cần dùng chúng.</para>
+        <para id="id7272336">Bước 11: Trong Sub SetControls dưới đây, ta dùng một tham số gọi là Editing với trị số False hay True tùy theo người dùng đang xem (browse) hay sửa đổi (Edit), ta gọi là Browse mode và Edit mode. Trong Edit mode, các Textboxes được unlocked (mở khóa) và các nút cmdNew, cmdDelete và cmdEdit trở nên vô hiệu lực:</para>
+        <para id="id10738598">Sub SetControls(ByVal Editing As Boolean) </para>
+        <para id="id10738627">' Lock/Unlock textboxes</para>
+        <para id="id10738641">txtTitle.Locked = Not Editing </para>
+        <para id="id10738660">txtYearPublished.Locked = Not Editing </para>
+        <para id="id10738679">txtISBN.Locked = Not Editing </para>
+        <para id="id10738699">txtPublisherID.Locked = Not Editing </para>
+        <para id="id10738718">' Enable/Disable buttons</para>
+        <para id="id10738732">CmdUpdate.Enabled = Editing </para>
+        <para id="id10738739">CmdCancel.Enabled = Editing </para>
+        <para id="id10738746">CmdDelete.Enabled = Not Editing </para>
+        <para id="id10738766">cmdNew.Enabled = Not Editing </para>
+        <para id="id10738785">CmdEdit.Enabled = Not Editing </para>
+        <para id="id10738804">End Sub </para>
+        <para id="id10738824">Trong Browse mode, Form có dạng như sau:</para>
+        <para id="id10738842">Hình IV.7: Kết quả thực thi<figure id="id10738869"><media id="id1167588288153" alt=""><image src="../../media/graphics6-ed55.png" mime-type="image/png" height="290" width="402"/></media></figure></para>
+        <para id="id10738893">Bước 12: Thủ tục SetControls được gọi trong Sub Form_Load khi chương trình khởi động và sự kiện CmdEdit_Click được xử lý như sau:</para>
+        <para id="id10738928">Private Sub Form_Load() </para>
+        <para id="id10738948">duongdan = App.Path </para>
+        <para id="id10738956">If Right(duongdan, 1) &lt;&gt; "\" Then duongdan = duongdan &amp; "\" </para>
+        <para id="id10738984">Data1.DatabaseName = duongdan &amp; "BIBLIO.MDB" </para>
+        <para id="id10738992">SetControls (False) </para>
+        <para id="id10739000">End Sub </para>
+        <para id="id10739019">Private Sub CmdEdit_Click() </para>
+        <para id="id10739040">SetControls (True) </para>
+        <para id="id10739050">End Sub </para>
+        <para id="id10739070">Bước 13: Khi ta xóa một record trong recordset, vị trí của record hiện tại (current record) vẫn không thay đổi. Do đó, sau khi xóa một record ta phải MoveNext. Tuy nhiên, nếu ta vừa xóa record cuối của Recordset thì sau khi MoveNext, thuộc tính EOF của Recordset sẽ thành True. Thành ra ta phải kiểm tra điều đó, nếu đúng vậy thì lại phải MoveLast để hiển thị record cuối của Recordset như trong đoạn mã của Sub cmdDelete_Click dưới đây:</para>
+        <para id="id10739133">Private Sub CmdDelete_Click() </para>
+        <para id="id10739153">On Error GoTo DeleteErr </para>
+        <para id="id10739179">With Data1.Recordset </para>
+        <para id="id10739197">' Xoa record</para>
+        <para id="id10739211">.Delete </para>
+        <para id="id10739219">' Nhay den record ke</para>
+        <para id="id10739232">.MoveNext </para>
+        <para id="id10739240">If .EOF Then .MoveLast </para>
+        <para id="id10739266">Exit Sub </para>
+        <para id="id10739292">End With </para>
+        <para id="id10739318">DeleteErr: </para>
+        <para id="id10739323">MsgBox Err.Description </para>
+        <para id="id10739331">Exit Sub </para>
+        <para id="id10739357">End Sub </para>
+        <para id="id10739376">Bước 14: Ta có thể Update (cập nhật) một record trong Recordset bằng hàm Update. Nhưng ta chỉ có thể gọi hàm Update của một Recordset khi Recordset đang ở trong Edit hay AddNew mode. Ta đặt một Recordset vào Edit mode bằng cách gọi hàm Edit của Recordset, thí dụ như Data1.Recordset.Edit. Tương tự như vậy, ta đặt một Recordset vào AddNew mode bằng cách gọi hàm AddNew của Recordset, thí dụ như Data1.Recordset.AddNew.</para>
+        <para id="id10739454">Private Sub cmdNew_Click() </para>
+        <para id="id7257278">Data1.Recordset.AddNew </para>
+        <para id="id7257285">SetControls (True) </para>
+        <para id="id7257293">End Sub</para>
+        <para id="id7257308">Private Sub cmdUpdate_Click()</para>
+        <para id="id7257313">Data1.Recordset.Edit</para>
+        <para id="id7257321">Data1.Recordset.Update</para>
+        <para id="id7257329">SetControls (False)</para>
+        <para id="id7257336">End Sub</para>
+        <para id="id7257341">Bước 15: Lưu dự án và chạy chương trình.</para>
+      </section>
+    </section>
+    <section id="id-943347291775">
+      <title>Bài 4-2</title>
+      <para id="id7257364">CÁC ĐỐI TƯỢNG CƠ BẢN CỦA DAO</para>
+      <para id="id7257369">Bước 1: Tạo thư mục Basic\Bt4-2. Tạo giao diện cho chương trình như sau:</para>
+      <figure id="id7257388">
+        <media id="id1167583812168" alt=""><image src="../../media/graphics7-97c3.png" mime-type="image/png" height="225" width="273"/></media>
+      </figure>
+      <para id="id7257416">Hình IV.8: Giao diện ban đầu</para>
+      <para id="id7257443">Các tên của thành phần menu lần lượt là: mnuFile, mnuOpen, mnuExit.</para>
+      <para id="id7257451">Sau đó vào Project\References…, đánh dấu vào Microsoft DAO 3.51 Object Library; chọn OK.</para>
+      <para id="id7257460">Bước 2: Thêm một Common Dialog vào Form1, tên là dlgDatabase.</para>
+      <para id="id7257474">Bước 3: Thêm một DBGrid vào form bằng cách chọn: Project\Components…, đánh dấu Microsoft Data Bound Grid Control 5.0 (SP3); rồi chọn DBGrid trên ToolBox. Sau đó thêm một TextBox và một Data Control vào form1. Ta có các tên của điều khiển là: DBGrid1, Text1, Data1 với các thuộc tính như sau:</para>
+      <para id="id7257496">Item 1: TextBox</para>
+      <para id="id7257502">Name: Text1</para>
+      <para id="id7257508">Multiline: True</para>
+      <para id="id7257515">ScrollBars = 3</para>
+      <para id="id7257522">Item 2: DBGrid</para>
+      <para id="id7257527">Name: DBGrid1</para>
+      <para id="id7257534">DataSource = Data1</para>
+      <para id="id7257541">Ta được hình dạng của form1 như sau:</para>
+      <figure id="id7257551">
+        <media id="id1167588957702" alt=""><image src="../../media/graphics8-9bd0.png" mime-type="image/png" height="275" width="429"/></media>
+      </figure>
+      <para id="id7257579">Hình IV.9: Giao diện đầy đủ</para>
+      <para id="id7257606">Sau đó, thêm đoạn mã sau trong thủ tục xử lý sự kiện mnuOpen_Click:</para>
+      <para id="id7257614">CommonDialog1.FileName = "*.mdb"</para>
+      <para id="id7257624">CommonDialog1.Filter = "Access DBs (*.mdb)|*.mdb"</para>
+      <para id="id7257635">CommonDialog1.ShowOpen</para>
+      <para id="id7257644">Data1.DatabaseName = CommonDialog1.FileName</para>
+      <para id="id7257654">Bước 4: Thêm một nút nhấn (Button) như hình trên, Caption là Run query. Nút này có mục đích là thực thi câu lệnh SQL mà người dùng nhập vào ô Text1. Để thực thi được lệnh SQL này, ta phải gán thuộc tính Recordsource của Data Control Data1 như trong thủ tục xử lý sự kiện Command1_Click:</para>
+      <para id="id7257676">Private Sub Command1_Click()</para>
+      <para id="id7257681">Data1.RecordSource = Text1.Text</para>
+      <para id="id7257692">Data1.Refresh</para>
+      <para id="id7257703">End Sub</para>
+      <para id="id7257707">Bước 5: Trong hàm xử lý sự kiện mnuExit_Click thêm dòng mã sau:</para>
+      <para id="id7257721">End</para>
+      <para id="id7257728">Chạy chương trình, trong mục File\Open của menu chọn tập tin C:\Program Files\Microsoft Visual Studio\VB98\Biblio.mdb. Sau đó ta gõ câu lệnh SQL sau vào Text Box:</para>
+      <para id="id7257742">Select * from Publishers</para>
+      <para id="id7257749">Nhấp chuột vào nút nhấn Run query. Quan sát kết quả hiển thị.</para>
+      <para id="id7257757">Ta đã tạo một chương trình cho phép người sử dụng để mở một CSDL và chạy câu SQL trên CSDL đó. Bây giờ, đối với CSDL được mở ở trên, tìm xem các bảng của nó là gì nhằm mục đích xây dựng các câu truy vấn cho phù hợp.</para>
+      <para id="id7257772">Bước 6: Thêm đoạn mã sau vào phần khai báo của Form1:</para>
+      <para id="id7257786">Private db As DAO.Database</para>
+      <para id="id7257792">Private td As DAO.TableDef</para>
+      <para id="id7257797">Private qd As DAO.QueryDef</para>
+      <para id="id7257802">Private fld As DAO.Field</para>
+      <para id="id7257806">Bước 7: Trong hàm xử lý sự kiện mnuOpen_Click ta cần kiểm tra xem tập tin được chọn có phải là tập tin CSDL của Access hay không (*.mdb)? Sau đó dùng các biến được khai báo ở trên để thao tác
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mo stretchy="false">⇒</m:mo></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ drarrow } {}</m:annotation></m:semantics></m:math> Sửa thủ tục mnuOpen_Click như dưới đây:</para>
+      <para id="id7257883">Private Sub mnuOpen_Click()</para>
+      <para id="id7257889">CommonDialog1.FileName = "*.mdb"</para>
+      <para id="id7257902">CommonDialog1.Filter = "Access DBs (*.mdb)|*.mdb"</para>
+      <para id="id7257912">CommonDialog1.ShowOpen</para>
+      <para id="id7257925">If UCase(Right(CommonDialog1.FileName, 3)) &lt;&gt; "MDB" Then</para>
+      <para id="id7257936">MsgBox "Khong phai la tap tin cua Microsoft Access"</para>
+      <para id="id7257948">Else</para>
+      <para id="id7257957">On Error Resume Next</para>
+      <para id="id7257967">db.Close</para>
+      <para id="id7257977">On Error GoTo 0</para>
+      <para id="id7257986">Screen.MousePointer = vbHourglass</para>
+      <para id="id7257996">' Mo CSDL</para>
+      <para id="id7258006"/>
+      <para id="id7258014">Set db = _</para>
+      <para id="id7258019">DBEngine.Workspaces(0).OpenDatabase(CommonDialog1.FileName)</para>
+      <para id="id7258024">Form1.Caption = "Cau SQL: Chon " &amp; CommonDialog1.FileName</para>
+      <para id="id7258038">Screen.MousePointer = vbDefault</para>
+      <para id="id7258048">Data1.DatabaseName = CommonDialog1.FileName</para>
+      <para id="id7258057">End If</para>
+      <para id="id7258063">End Sub</para>
+      <para id="id7258068">Bước 8: Ta đã mở được CSDL, bây giờ ta dùng một List Box để hiển thị tất cả các bảng của CSDL được mở ỏ trên.</para>
+      <para id="id7258084">Thêm một ListBox vào Form tên List1, trong hàm xử lý sự kiện mnuOpen, thêm đoạn mã sau trước lệnh End If:</para>
+      <para id="id7258094">' Them vao ListBox</para>
+      <para id="id7258101">List1.Clear</para>
+      <para id="id7258109">For Each td In db.TableDefs</para>
+      <para id="id7258118">List1.AddItem td.Name</para>
+      <para id="id7258127">Next</para>
+      <para id="id7258135">Chạy chương trình, ListBox sẽ hiển thị tất cả các bảng của CSDL trên.</para>
+      <para id="id7258144">Bước 9: Thêm một ListBox nữa vào Form, tên List2. Thêm đoạn mã sau trong hàm xử lý sự kiện List1_Click:</para>
+      <para id="id8032106">Private Sub List1_Click()</para>
+      <para id="id8032110">' Tim bang duoc chon trong CSDL</para>
+      <para id="id8032121">Set td = New TableDef</para>
+      <para id="id8032135">For Each td In db.TableDefs</para>
+      <para id="id8032146">If td.Name = Me.List1.List(Me.List1.ListIndex) Then</para>
+      <para id="id8032158">Exit For</para>
+      <para id="id8032169">End If</para>
+      <para id="id8032180">Next</para>
+      <para id="id8032194">' Hien thi cac truong cua bang duoc chon</para>
+      <para id="id8032204">For Each fld In td.Fields</para>
+      <para id="id8032215">List2.AddItem fld.Name</para>
+      <para id="id8032226">Next</para>
+      <para id="id8032237">End Sub</para>
+      <para id="id8032241">Bước 10: Chạy chương trình, chọn File\Open để chọn tập tin CSDL, lúc đó List1 sẽ hiển thị các bảng của CSDL. Nhấp chọn một bảng trong List1, List2 sẽ hiển thị tên các trường của bảng đó. Bây giờ ta tiến thêm một bước nữa là hiển thị tất cả các câu truy vấn (SQL) được lưu trong CSDL trên bằng cách:</para>
+      <para id="id8032263">Thêm một ListBox nữa vào Form1 tên là List3, sau đó thêm vào đoạn mã sau trong hàm xử lý sự kiện mnuOpen trước lệnh End If:</para>
+      <para id="id8032275">List2.Clear</para>
+      <para id="id8032281">List3.Clear</para>
+      <para id="id8032291">Text1.Text = ""</para>
+      <para id="id8032304">For Each qd In db.QueryDefs</para>
+      <para id="id8032317">List3.AddItem qd.Name</para>
+      <para id="id8032326">Next</para>
+      <para id="id8032336">Bước 11: Chạy chương trình, kiểm tra xem điều gì xảy ra trên List3.</para>
+      <para id="id8032350">Đóng chương trình lại, thêm đoạn mã sau trong hàm xử lý sự kiện List3_Click:</para>
+      <para id="id8032357">Private Sub List3_Click()</para>
+      <para id="id8032362">For Each qd In db.QueryDefs</para>
+      <para id="id8032376">If qd.Name = List3.List(List3.ListIndex) Then</para>
+      <para id="id8032387">Text1.Text = qd.SQL</para>
+      <para id="id8032398">End If</para>
+      <para id="id8032409">Next</para>
+      <para id="id8032420">End Sub</para>
+      <para id="id8032424">Chạy chương trình, mở BIBLIO.MDB, nhấp vào List3. Quan sát kết quả.</para>
+      <para id="id8032432">Bước 12: Chúng ta lưu câu SQL nhập từ bàn phím vào trong CSDL trên với một tên cho trước. Ý tưởng chính là ta kiểm tra câu SQL được nhập đó, nếu nó không có lỗi ta sẽ lưu vào CSDL.</para>
+      <para id="id8032452">Thêm một nút nhấn (Button) vào Form1 với Name: Command2, Caption: Save Query. Sau đó xử lý sự kiện Command2_Click như sau:</para>
+      <para id="id8032462">Private Sub Command2_Click()</para>
+      <para id="id8032467">' Luu cau SQL</para>
+      <para id="id8032478">Set qd = New QueryDef</para>
+      <para id="id8032489">qd.SQL = Trim$(Text1.Text)</para>
+      <para id="id8032500">MsgBox "Cau SQL duoc luu la: " &amp; qd.SQL</para>
+      <para id="id8032512">' Nhap ten cua cau SQL</para>
+      <para id="id8032522">qd.Name = InputBox("Nhap ten cau SQL: ")</para>
+      <para id="id8032533">db.QueryDefs.Append qd</para>
+      <para id="id8032547">End Sub</para>
+      <para id="id8032551">Bước 13: Chạy chương trình, mở BIBLIO.MDB, chọn câu một query, chạy nó (Run query); sau đó nhấp vào nút Save Query để lưu lại với tên ta phải nhập vào từ bàn phím. Để kiểm tra, hãy mở lại tập tin trên (File\Open): câu query trên được hiển thị trong List3.</para>
+      <para id="id8032573">Hình bên dưới hiển thị kết quả khi thực thi chương trình.</para>
+      <figure id="id8032584">
+        <media id="id1167588910163" alt=""><image src="../../media/graphics9-1a04.png" mime-type="image/png" height="471" width="624"/></media>
+      </figure>
+      <section id="id-543154361132">
+        <title>Hình IV.10: Kết quả thực thi ứng dụng</title>
+        <para id="id8032608">
+          <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+        </para>
+      </section>
+    </section>
+    <section id="id-984742902972">
+      <title>Bài 4-3</title>
+      <para id="id8032640">
+        <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+      </para>
+    </section>
+    <section id="id-836687990479">
+      <title>MÔ HÌNH DAO</title>
+      <para id="id8032656">Bước 1: Trong bài này ta sẽ tìm hiểu những cách lập trình căn bản với cơ sở dữ liệu MS Access qua kỹ thuật DAO mà không cần dùng đến Control Data  như bài tập 4-1. Ta sẽ cần đến các đối tượng (Object) trong thư viện DAO, do đó nếu bạn mở một dự án VB mới thì hãy dùng Menu Command Project | References... để chọn Microsoft DAO 3.51 Object Library bằng cách click checkbox bên trái như trong hình dưới đây.</para>
+      <figure id="id8032714">
+        <media id="id3742287" alt=""><image src="../../media/graphics10-2487.png" mime-type="image/png" height="379" width="468"/></media>
+      </figure>
+      <para id="id8032742">Hình IV.11: Tham chiếu đến thư viện DAO</para>
+      <para id="id8032770">Bước 2: Sau đó trong cửa sổ soạn thảo mã lệnh của Form chính ta sẽ khai báo biến myDatabase kiểu DAO database và biến myRS cho một DAO recordset. Ở đây ta nói rõ Database và Recordset là thuộc loại DAO để phân biệt với Database và Recordset thuộc loại ADO (ActiveX Data Object) sau này.</para>
+      <figure id="id8032849">
+        <media id="id1167589965612" alt=""><image src="../../media/graphics11-c1b8.png" mime-type="image/png" height="246" width="476"/></media>
+      </figure>
+      <para id="id8032878">Hình IV.12: Khai báo biến</para>
+      <para id="id8032905">Bước 3: Bây giờ hãy đặt lên Form chính, tên frmDAO, 4 labels với captions: Title, Year Published, ISBN và Publisher ID. Kế đó cho thêm 4 textboxes tương ứng và đặt tên chúng là txtTitle, txtYearPublished, txtISBN và txtPublisherID.</para>
+      <para id="id8032966">Điều ta muốn làm là khi Form mới được thực thi, nó sẽ lấy về từ cơ sở dữ liệu một Recordset chứa tất cả records trong table Titles theo thứ tự abc của field (trường) Title và hiển thị record đầu tiên.</para>
+      <para id="id8033005">DÙNG TỪ KHÓA SET</para>
+      <para id="id8033010">Bước 4: Trước hết là mở một cơ sở dữ liệu dựa vào tên tập tin của Access database:</para>
+      <para id="id8033025">Set myDB = OpenDatabase(AppFolder &amp; "BIBLIO.MDB")</para>
+      <para id="id8033038">Để ý từ khóa Set trong đoạn mã trên. Đó là vì myDB là một Pointer (con trỏ) chỉ đến một Object (đối tượng). Mặc dù từ đây về sau ta sẽ dùng myDB như một Database (cơ sở dữ liệu) theo cách giống như bất cứ một biến thuộc kiểu dữ liệu nào khác, nhưng khi chỉ định lần đầu là nó từ đâu đến thì ta dùng chữ Set, để nói rằng thật ra myDB không phải là Object Database, nhưng là Pointer đến Object Database. </para>
+      <para id="id8712638">Nguyên nhân là VB dành ra một phần trong bộ nhớ (memory) để chứa đối tượng Database khi ta nhận được nó khi hàm OpenDatabase thực thi. Dù vị trí chỗ chứa đối tượng Database trong bộ nhớ không nhất định, nhưng vì ta nắm cán chỉ đến vị trí ấy nên ta vẫn có thể làm việc với nó một cách bình thường. Cái cán ấy là trị số của biến myDB. Vì trị số này không phải là Object (đối tượng), nhưng nó chứa memory address (địa chỉ trong bộ nhớ) chỉ đến (point to) đối tượng Database, nên ta gọi nó là Pointer (con trỏ).</para>
+      <para id="id8712690">Tương tự như vậy, vì Recordset là một Pointer chỉ đến một đối tượng, ta cũng dùng Set khi chỉ định một DAO Recordset lấy về từ hàm OpenRecordset của database myDB.</para>
+      <para id="id8712722">Set myRS = myDB.OpenRecordset("Select * from Titles ORDER BY Title")</para>
+      <para id="id8712734">Tham số kiểu String ta dùng cho hàm OpenRecordset là một câu lệnh SQL. Nó chỉ định cho cơ sở dữ liệu lấy tất cả mọi trường của mỗi mẩu tin từ Table Titles làm một Recordset và sắp xếp các mẩu tin trong Recordset ấy theo thứ tự abc của trường Title (ORDER BY Title).</para>
+      <para id="id8712781">Để ý là Recordset nầy cũng giống như thuộc tính Recordset của một Data Control mà ta dùng trong bài 7-1. Bây giờ có Recordset rồi, ta có thể hiển thị chi tiết của record đầu tiên nếu Recordset ấy có ít nhất một record. Ta kiểm tra điều ấy dựa vào thuộc tính RecordCount của Recordset như trong đoạn mã dưới đây của sự kiện Form_Load:</para>
+      <para id="id8712819">Private Sub Form_Load() </para>
+      <para id="id8712839">AppFolder = App.Path </para>
+      <para id="id8712847">If Right(AppFolder, 1) &lt;&gt; "\" Then AppFolder = AppFolder &amp; "\" </para>
+      <para id="id8712875">Set myDB = OpenDatabase(AppFolder &amp; "BIBLIO.MDB") </para>
+      <para id="id8712893">Set myRS = myDB.OpenRecordset("Select * from Titles ORDER BY Title") </para>
+      <para id="id8712912">If myRS.RecordCount &gt; 0 Then </para>
+      <para id="id8712939">myRS.MoveFirst </para>
+      <para id="id8712948">Displayrecord </para>
+      <para id="id8712956">End If </para>
+      <para id="id8712982">End Sub </para>
+      <para id="id8713002">Bước 5: Sau khi dùng hàm MoveFirst của Recordset để định vị mẩu tin hiện thời là mẩu tin đầu tiên, ta hiển thị trị số các trường của mẩu tin bằng cách gán chúng vào các textboxes của Form như sau:</para>
+      <para id="id8713030">Private Sub Displayrecord() </para>
+      <para id="id8713050">With myRS </para>
+      <para id="id8713068">txtTitle.Text = .Fields("Title") </para>
+      <para id="id8713076">txtYearPublished.Text = .Fields("[Year Published]") </para>
+      <para id="id8713084">txtISBN.Text = .Fields("ISBN") </para>
+      <para id="id8713092">txtPublisherID.Text = .Fields("PubID") </para>
+      <para id="id8713099">End With </para>
+      <para id="id8713125">End Sub</para>
+      <para id="id8713141">Để ý vì trường Year Published gồm có hai từ nên ta phải đặt tên của trường ấy giữa hai dấu ngoặc vuông ([]). Để tránh bị phiền phức như trong trường hợp nầy, khi đặt tên các trường tcủa table trong lúc thiết kế cơ sở dữ liệu hãy dán dính các chữ lại với nhau, đừng để rời ra. Thí dụ như dùng YearPublished thay vì Year Published.</para>
+      <para id="id8713199">CÁC NÚT DI CHUYỂN</para>
+      <para id="id8713204">Bước 6: Muốn có các nút Navigators giống như của một Control Data, ta hãy đặt lên Form 4 buttons mang tên CmdFirst, CmdPrevious, CmNext và CmdLast với captions: &lt;&lt;, &lt;, &gt;, &gt;&gt;.</para>
+      <para id="id8713272">Bước 7: Mã lệnh cho các nút nầy cũng đơn giản, nhưng ta phải coi chừng khi người dùng muốn di chuyển quá mẩu tin cuối cùng hay mẩu tin đầu tiên. Ta phải kiểm tra xem EOF có trở thành True khi người dùng nhấp CmdNext, hay BOF có trở thành True khi người dùng nhấp CmdPrevious.</para>
+      <para id="id8713312">Các sự kiện này được xử lý như sau:</para>
+      <para id="id8713318">Private Sub CmdNext_Click() </para>
+      <para id="id8713339">myRS.MoveNext </para>
+      <para id="id8713347">If Not myRS.EOF Then </para>
+      <para id="id8713382">Displayrecord </para>
+      <para id="id8713390">Else </para>
+      <para id="id8713407">myRS.MoveLast </para>
+      <para id="id8713416">End If </para>
+      <para id="id8713442">End Sub </para>
+      <para id="id8713461">Private Sub CmdPrevious_Click() </para>
+      <para id="id8713482">myRS.MovePrevious </para>
+      <para id="id8713490">If Not myRS.BOF Then </para>
+      <para id="id8713525">Displayrecord </para>
+      <para id="id8713534">Else </para>
+      <para id="id8919183">myRS.MoveFirst </para>
+      <para id="id8919191">End If </para>
+      <para id="id8919217">End Sub </para>
+      <para id="id8919237">Private Sub CmdFirst_Click() </para>
+      <para id="id8919257">myRS.MoveFirst </para>
+      <para id="id8919266">Displayrecord </para>
+      <para id="id8919274">End Sub </para>
+      <para id="id8919294">Private Sub CmdLast_Click() </para>
+      <para id="id8919314">myRS.MoveLast </para>
+      <para id="id8919323">Displayrecord </para>
+      <para id="id8919331">End Sub </para>
+      <para id="id8919351">Bước 7: Chạy chương trình. Khi chạy chương trình ta sẽ thấy nó hiển thị chi tiết của mẩu tin đầu tiên khác với các bài trước đây vì các mẩu tin đã được sắp xếp.</para>
+      <para id="id8919370">Ta hãy thử dùng các nút di chuyển &lt;, &lt;&lt;, &gt;, &gt;&gt; xem chúng làm việc có đúng không.</para>
+      <para id="id8919379">Tới đây, ta nhận thấy rằng dù người dùng có vô tình sửa đổi một chi tiết nào trong các textboxes, không có mẩu tin nào bị cập nhật hóa trong cơ sở dữ liệu khi người dùng di chuyển từ mẩu tin nầy đến mẩu tin khác. Lý do là các Texboxes không có ràng buộc dữ liệu (Data Bound) với các trường của Recordset.</para>
+      <section id="id-586993569347">
+        <title>THÊM BỚT CÁC RECORDS</title>
+        <para id="id8919402">Bước 8: Giống như chương trình trong bài rồi, ta sẽ thêm công cụ để thêm (add), bớt (delete) các mẩu tin. Hãy thêm vào Form 5 buttons tên: cmdEdit, cmdNew, cmdDelete, cmdUpdate và cmdCancel.</para>
+        <para id="id8919436">Bước 9: Chỗ nào trong chương trình 4-1 ta dùng Data1.Recordset thì bây giờ ta dùng myRS. </para>
+        <para id="id8919472">Ta sẽ dùng lại Sub SetControls với tham số Editing có trị số False hay True tùy theo người dùng đang xem (Browse) hay sửa đổi (Edit). Trong Browse mode, các Textboxes bị Locked (khóa) và các nút cmdUpdate và cmdCancel bị vô hiệu lực. Trong Edit mode, các Textboxes được unlocked (mở khóa) và các nút cmdNew, cmdDelete và cmdEdit bị vô hiệu lực.</para>
+        <para id="id8919564">Do đó ta chỉ cần nhớ là khi người dùng đang sửa đổi một mẩu tin hiện hành hay thêm một mẩu tin mới. Ta chứa trị số Boolean ấy trong biến AddNewRecord. Nếu user sắp thêm một record mới thì AddNewRecord = True, nếu User sắp Edit một record hiện hữu thì AddNewRecord = False.</para>
+        <para id="id8919592">Ngoài ra, khi người dùng sắp thêm một mẩu tin mới bằng cách nhấp nút New thì ta phải tự xóa hết các textboxes bằng cách gán chuỗi rỗng cho các TextBox đó.</para>
+        <para id="id8919604">Ta có các đoạn mã sau:</para>
+        <para id="id8919611">Dim AddNewRecord As Boolean </para>
+        <para id="id8919639">Private Sub ClearAllFields() </para>
+        <para id="id8919659">txtTitle.Text = "" </para>
+        <para id="id8919667">txtYearPublished.Text = "" </para>
+        <para id="id8919675">txtISBN.Text = "" </para>
+        <para id="id8919682">txtPublisherID.Text = "" </para>
+        <para id="id8919690">End Sub </para>
+        <para id="id8919710">Private Sub cmdNew_Click() </para>
+        <para id="id8919730">AddNewRecord = True </para>
+        <para id="id8919749">ClearAllFields </para>
+        <para id="id8919757">SetControls (True) </para>
+        <para id="id8919764">End Sub </para>
+        <para id="id8919784">Private Sub CmdEdit_Click() </para>
+        <para id="id8919804">SetControls (True) </para>
+        <para id="id8919812">AddNewRecord = False </para>
+        <para id="id8919831">End Sub </para>
+        <para id="id8919851">Bước 10: Khi người dùng nhấp Cancel trong khi đang sửa đổi các textboxes, ta không cần gọi hàm vì Recordset chưa bị đặt vào AddNew hay Edit mode. Ở đây ta chỉ cần hiển thị lại chi tiết của mẩu tin hiện hành, tức là hủy bỏ những gì người dùng đang đánh vào:</para>
+        <para id="id8919873">Private Sub CmdCancel_Click() </para>
+        <para id="id8919893">SetControls (False) </para>
+        <para id="id8919901">Displayrecord </para>
+        <para id="id8919909">End Sub </para>
+        <para id="id8919928">Bước 11: Lúc người dùng nhấp Update, ta sẽ kiểm tra dữ liệu xem có trường nào bị bỏ trống (nhất là khóa chính ISBN bắt buộc phải có trị số) hay có gì không hợp lệ bằng cách gọi hàm GoodData. Nếu GoodData trả lại một trị số False thì ta không xúc tiến với việc Update. Nếu GoodData trả về trị số True thì ta đặt Recordset vào AddNew hay Edit mode tùy theo trị số của biến AddNewRecord là True hay False.</para>
+        <para id="id8919976">Giống như khi hiển thị chi tiết của một Record ta phải gán từng trường vào textbox, thì bây giờ khi Update ta phải làm ngược lại, tức là gán nội dung của từng textbox vào các trường tương ứng. Sau cùng ta gọi hàm Update của recordset và cho các điều khiển trở lại Browse mode:</para>
+        <para id="id8920004">Private Function GoodData() As Boolean </para>
+        <para id="id8920041">GoodData = True </para>
+        <para id="id8920060">End Function </para>
+        <para id="id8920080">Private Sub CmdUpdate_Click() </para>
+        <para id="id8920100">If Not GoodData Then Exit Sub </para>
+        <para id="id10762330">With myRS </para>
+        <para id="id10762348">If AddNewRecord Then </para>
+        <para id="id10762374">.AddNew </para>
+        <para id="id10762383">Else </para>
+        <para id="id10762400">.Edit </para>
+        <para id="id10762409">End If </para>
+        <para id="id10762435">.Fields("Title") = txtTitle.Text </para>
+        <para id="id10762442">.Fields("[Year Published]") = txtYearPublished.Text </para>
+        <para id="id10762451">.Fields("ISBN") = txtISBN.Text </para>
+        <para id="id10762459">.Fields("PubID") = txtPublisherID.Text </para>
+        <para id="id10762467">.Update </para>
+        <para id="id10762474">End With </para>
+        <para id="id10762500">SetControls (False) </para>
+        <para id="id10762508">End Sub </para>
+      </section>
+      <section id="id-11696361318">
+        <title>TÌM MỘT RECORD</title>
+        <para id="id10762536">Bước 11: Tiếp theo đây, ta muốn liệt kê các sách có tiêu đề chứa một chữ hay câu nào đó, thí dụ như chữ "Guide". Kế đó người dùng có thể chọn một sách bằng cách chọn tiêu đề sách ấy và nhấp nút Go. Chương trình sẽ locate (tìm ra) record của sách ấy và hiển thị chi tiết của nó.</para>
+        <para id="id10762577">Bây giờ bạn hãy cho vào Form một textbox tên txtSearch và một Image tên ImgSearch. Kế đó đặt một frame tên fraSearch vào Form. Để lên frame nầy một listbox tên List1 để tựa các sách.</para>
+        <para id="id10762627">Ta sẽ cho ImgSearch hiển thị hình một ống nhòm nên bạn hãy click vào bên phải property Picture trong Properties Window để chọn Icon BINOCULR.ICO từ folder E:\Program Files\Microsoft Visual Studio\Common\Graphics\Icons\Misc.</para>
+        <para id="id10762651">Khi người dùng nhấp vào ImgSearch, chương trình sẽ tự động tìm kiếm các sách có tựa được người dùng đánh vào trong TextBox. Sự kiện ImgSearch được xử lý như sau:</para>
+        <para id="id10762662">Private Sub ImgSearch_Click() </para>
+        <para id="id10762682">fraSearch.Visible = True </para>
+        <para id="id10762702">Dim SrchRS As DAO.Recordset </para>
+        <para id="id10762729">Dim SQLCommand As String </para>
+        <para id="id10762764">SQLCommand = "Select * from Titles where Title LIKE '" &amp; "*" &amp; txtSearch &amp; "*" &amp; "' ORDER BY Title" </para>
+        <para id="id10762773">Set SrchRS = myDB.OpenRecordset(SQLCommand) </para>
+        <para id="id10762792">If SrchRS.RecordCount &gt; 0 Then </para>
+        <para id="id10762819">List1.Clear </para>
+        <para id="id10762828">With SrchRS </para>
+        <para id="id10762846">Do While Not SrchRS.EOF </para>
+        <para id="id10762881">List1.AddItem .Fields("Title") </para>
+        <para id="id10762889">.MoveNext </para>
+        <para id="id10762897">Loop </para>
+        <para id="id10762915">End With </para>
+        <para id="id10762941">End If </para>
+        <para id="id10762967">End Sub </para>
+        <para id="id10762987">Trong câu SELECT trên ta dùng toán tử LIKE, nội dung của TextBox, có dấu * ở hai bên. Dấu * là chỗ có (hay không có) chữ gì cũng được.</para>
+        <para id="id10763015">Bước 12: Lưu dự án và chạy chương trình. Kiểm tra kết quả.</para>
+        <para id="id10763030">Bài tập 4-4</para>
+        <para id="id10763035">THÍ DỤ VỀ SỬ DỤNG DAO</para>
+        <para id="id10763040">Bài tập này nhằm mục đích giới thiệu về cách thức sử dụng điều khiển dữ liệu và thư viện DAO trong việc thiết kế một Form nhập liệu hoàn chỉnh cho bảng THangHoa trong CSDL HangHoa.mdb. Giao diện cùng với mã lệnh chỉ mang tính chất gợi ý; sinh viên có thể thực hiện theo ý riêng của mình.</para>
+        <para id="id10763058">Bước 1: Thiết kế form như sau:</para>
+        <figure id="id10763074">
+          <media id="id7616568" alt=""><image src="../../media/graphics12-f17a.png" mime-type="image/png" height="453" width="475"/></media>
+        </figure>
+        <para id="id10763103">Hình IV.13: Sử dụng Data Control</para>
+        <para id="id10763130">+</para>
+        <para id="id10763238">*</para>
+        <para id="id8098157">Với *: DataControl: Điều khiển dữ liệu</para>
+        <para id="id8098163">DatabaseName: HangHoa.MDB</para>
+        <para id="id8098170">RecordSource: THangHoa</para>
+        <para id="id8098177">Name: datHH</para>
+        <para id="id8098183">Bước 2: Thiết lập các thuộc tính cho các TextBox &amp; ComboBox.</para>
+        <para id="id8098197">DataSource: DatHH</para>
+        <para id="id8098204">DataField:</para>
+        <section id="id-221650192486">
+          <title>Bước 3: Đặt điều khiển lưới lên Form (+) sau khi đã tham chiếu đến nó</title>
+          <para id="id8098210">
+            <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+          </para>
+        </section>
+        <section id="id-383076302564">
+          <title>(Project\Components\Microsoft Data Bound Grid Control 5.0 SP3).</title>
+          <para id="id8098237">DataSource: datHH</para>
+          <para id="id8098243">Chạy chương trình, ta được kết quả như trên.</para>
+          <para id="id8098251">Bước 4: Sự kiện cmdThem_Click</para>
+          <para id="id8098264">Private Sub cmdThem_Click()</para>
+          <para id="id8098268">datHH.Recordset.AddNew</para>
+          <para id="id8098276">DoiTThai False</para>
+          <para id="id8098284">End Sub</para>
+          <para id="id8098288">Trong đó:</para>
+          <para id="id8098293">Private Sub DoiTThai(ByVal TThai As Boolean)</para>
+          <para id="id8098298">cmdThem.Enabled = TThai</para>
+          <para id="id8098306">cmdSua.Enabled = TThai</para>
+          <para id="id8098313">cmdXoa.Enabled = TThai</para>
+          <para id="id8098321">cmdHuy.Enabled = Not TThai</para>
+          <para id="id8098329">cmdLuu.Enabled = Not TThai</para>
+          <para id="id8098337">End Sub</para>
+          <para id="id8098341">Bước 4: Sự kiện cmdSua_Click &amp; sự kiện cmdXoa_Click:</para>
+          <para id="id8098354">Private Sub cmdSua_Click()</para>
+          <para id="id8098359">datHH.Recordset.Edit</para>
+          <para id="id8098367">DoiTThai False</para>
+          <para id="id8098374">End Sub</para>
+          <para id="id8098379">Private Sub cmdXoa_Click()</para>
+          <para id="id8098383">On Error GoTo Xuly</para>
+          <para id="id8098391">datHH.Recordset.Delete</para>
+          <para id="id8098399">Exit Sub</para>
+          <para id="id8098409">Xuly:</para>
+          <para id="id8098414">MsgBox Err.Description, vbCritical + vbSystemModal, "Loi"</para>
+          <para id="id8098422">End Sub</para>
+          <section id="id-480492540564">
+            <title>Bước 5: Sự kiện cmdLuu_Click &amp; cmdHuy_Click</title>
+            <para id="id8098450">Private Sub cmdHuy_Click()</para>
+            <para id="id8098454">'dathh.Database =</para>
+            <para id="id8098462">datHH.Recordset.CancelUpdate</para>
+            <para id="id8098470">DoiTThai True</para>
+            <para id="id8098477">End Sub</para>
+            <para id="id8098482">Private Sub cmdLuu_Click()</para>
+            <para id="id8098486">datHH.Recordset.Update</para>
+            <para id="id8098494">DoiTThai True</para>
+            <para id="id8098502">End Sub</para>
+            <para id="id8098506">Bước 6: Sự kiện Form_Load:</para>
+            <para id="id8098519">Private Sub Form_Load()</para>
+            <para id="id8098524">DoiTThai True</para>
+            <para id="id8098531">End Sub</para>
+            <para id="id8098536">- Có nhận xét gì nếu khi chạy chương trình, ta thêm mới một mẩu tin có khóa là Mahang trùng với một MaHang đã có. Để giái quyết ta làm thế nào?</para>
+          </section>
+        </section>
+      </section>
+    </section>
+    <section id="id-899741479982">
+      <title>BÀI TẬP TỰ LÀM</title>
+      <para id="id8098558">Sử dụng CSDL HangHoa.mdb, anh (chị) hãy:</para>
+      <list id="id8098564" list-type="enumerated">
+        <item>Cải tiến Form nhập ở bài 4-4, sao cho trường MaLoai phải được lấy từ các MaLoai của bảng TLoaiHang. Hơn nữa thay vì hiển thị MaLoai, ta hiển thị TenLoai cho dễ theo dõi; nhưng khi thêm vào bảng THangHoa, ta lại thêm vào MaLoai của TenLoai đó.</item>
+      </list>
+      <para id="id8098640">Bằng cách sử dụng DAO (tương tự 4-3), anh (chị) hãy:</para>
+      <list id="id8098647" list-type="bulleted">
+        <item>Thiết kế Form nhập liệu cho bảng THANGHOA.</item>
+        <item>Thiết kế Form nhập liệu cho bảng TNHANVIEN.</item>
+      </list>
+    </section>
+  </content>
+</document>

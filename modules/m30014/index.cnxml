@@ -1,0 +1,195 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Thiết lập báo cáo</title>
+  <metadata>
+  <md:content-id>m30014</md:content-id><md:title>Thiết lập báo cáo</md:title>
+  <md:abstract>Mục tiêu:
+	Chương này giới thiệu cách thức để tạo báo cáo bao gồm hiển thị dữ liệu cũng như sắp xếp và phân nhóm dữ liệu.</md:abstract>
+  <md:uuid>c1c217c6-18d0-4b7a-86fb-9bef3be2d8a9</md:uuid>
+</metadata>
+
+<content>
+    <para id="id5361117">Học xong chương này, sinh viên có thể:</para>
+    <list id="id8208906" list-type="bulleted">
+      <item>Sử dụng tính năng Report của Microsoft Access trong các ứng dụng nhỏ.</item>
+      <item>Sử dụng Data Report để tạo báo biểu.</item>
+      <item>Sử dụng Crystal Report, công cụ mạnh để tạo báo biểu.</item>
+    </list>
+    <para id="id8033907">Kiến thức cần thiết:</para>
+    <list id="id10771344" list-type="bulleted">
+      <item>Thư viện đối tượng ActiveX Data Objects (ADO).</item>
+      <item>Môi trường dữ liệu Data Environment.</item>
+    </list>
+    <para id="id12334251">Tài liệu tham khảo:</para>
+    <para id="id11952218">Visual Basic 6.0 và Lập trình cơ sở dữ liệu - Chương 21, trang 637 - Nguyễn Thị Ngọc Mai (chủ biên) – Nhà xuất bản Giáo dục - 2001.</para>
+    <para id="id5556173">SỬ DỤNG MICROSOFT ACCESS ĐỂ LẬP BÁO CÁO</para>
+    <para id="id7276626">Có hai kỹ thuật để thi hành một báo cáo Access từ ứng dụng VB:</para>
+    <para id="id11470792">- Sử dụng Automation để phóng một thể hiện (instance) của Microsoft Access, thi hành báo cáo trực tiếp từ trong ứng dụng. Automation là một kỹ thuật cho phép giao tiếp giữa các ứng dụng trên Windows. Ở đây Microsoft Access sẽ làm Automation Server.</para>
+    <para id="id5459168">- Dùng VSREPORTS của VideoSoft cho phép người sử dụng VB thi hành báo cáo của Microsoft Access bất kể máy của họ có cài đặt Microsoft Access hay là không. Đây là một điều khiển ActiveX chuyển đổi báo cáo từ tập tin MDB thành một định dạng mà ta có thể cung cấp cùng ứng dụng.</para>
+    <para id="id12961854">Trong bài giảng này, chúng tôi chỉ trình bày cách thứ nhất mặc dù cách này có nhiều hạn chế. Đối với cách thứ hai, để có thể thực hiện được ta cần phải cài đặt một số thư viện liên kết động (DLL). Các thư viện này tương đối khó tìm và nhất là chúng đòi hỏi bản quyền.</para>
+    <para id="id10770579">Bất lợi của kỹ thuật dùng Automation là buộc người dùng phải chạy một thể hiện (instance) của Microsoft Access cũng như phải cài đặt Microsoft Access trên máy. Để lập trình theo kỹ thuật này, ta tiến hành theo các bước sau:</para>
+    <para id="id10770583">- Tham chiếu đến Microsoft Access bằng cách từ menu Project chọn Preferences -&gt; Microsoft Access 9.0 Object Library.</para>
+    <para id="id7472119">- Sau đó ta tạo một đối tượng như là đối tượng ứng dụng của Access như sau: </para>
+    <para id="id12967244">Dim MSAccess As Access.Application</para>
+    <list id="id10777425" list-type="bulleted">
+      <item>Sau đó ta cần tạo mới đối tượng này cũng như tạo một tham chiếu đến cơ sở dữ liệu chứa báo cáo:</item>
+    </list>
+    <para id="id11845731"> Set MSAccess = New Access.Application</para>
+    <para id="id8383665"> MSAccess.OpenCurrentDatabase(“Database Name”)</para>
+    <para id="id8890765">- Sử dụng thuộc tính DoCmd để thi hành báo cáo:</para>
+    <para id="id7170582"> MSAccess.DoCmd.OpenReport "Report Name",acViewNormal</para>
+    <para id="id8333630">- Đóng cơ sở dữ liệu:</para>
+    <para id="id8333635">MSAccess.CloseCurrentDatabase</para>
+    <para id="id8213046">Lưu ý: Tránh dùng ràng buộc trễ với Automation</para>
+    <para id="id10762297">Phiên bản cũ của Automation là OLE Automation, dùng trong VB 3.0 và Microsoft Access 2.0.</para>
+    <para id="id12848545">Trong VB 3.0, ta có thể viết chương trình như sau:</para>
+    <para id="id7136173">Dim MSAccess As Object</para>
+    <para id="id3757538">Set MSAccess = CreateObject(“Access.Application”)</para>
+    <para id="id10771372">Đoạn chương trình trên hoạt động tốt đối với VB 3.0 nhưng có một cách khác tốt hơn. Thay vì dùng kiểu Object, ta nên chỉ rõ kiểu dữ liệu đối tượng mà Automation Server cung cấp (chẳng hạn Access.Aplication nếu là Access). Bởi vì khi đó, VB không cần thi hành câu truy vấn trên Automation Server mỗi khi ta truy cập nó để xác định kiểu đối tượng cần tạo. Kỹ thuật này gọi là ràng buộc trễ, giờ đây chỉ phủ hợp với 2 tình huống:</para>
+    <list id="id7899749" list-type="bulleted">
+      <item>Ta không biết trước kiểu đối tượng Automation Server.</item>
+      <item>Ta đang sử dụng một môi trường phát triển ứng dụng không hỗ trợ ràng buộc sớm, như VBScript hay ASP.</item>
+    </list>
+    <section id="id-174372043515">
+      <title>SỬ DỤNG THIẾT KẾ DATA REPORT</title>
+      <para id="id7243109">Thiết kế báo cáo dùng DataReport là điểm mới trong VB6, đây là một công cụ được hỗ trợ bởi VB6, cung cấp một cách trực quan về thiết kế báo cáo và có ưu diểm là rất dễ dùng.</para>
+      <section id="id-393450109246">
+        <title>Thiết kế với DataReport</title>
+        <para id="id11078584">- Chọn Project -&gt; Components.</para>
+        <para id="id11547993">- Chọn Tab Designers, đánh dấu chọn Data Report.</para>
+        <para id="id11580793"><figure id="id8939793"><media id="id1170482096128" alt=""><image src=".png" mime-type="image/png" height="257" width="297"/></media></figure>Hình 13.1 Đưa thiết kế báo cáo về đề án</para>
+        <para id="id9009863">Các thành phần của một báo cáo như sau:</para>
+        <para id="id8381008">- Report Header: Hiển thị một lần ở đầu báo cáo.</para>
+        <para id="id7244208">- Report Footer: Hiển thị một lần ở cuối báo cáo.</para>
+        <para id="id8256967">- Page Header: Hiển thị tại đầu mỗi trang.</para>
+        <para id="id7137515">- Page Footer: Hiển thị tại cuối mỗi trang.</para>
+        <para id="id4404784">- Detail Section: Hiển thị các dòng dữ liệu.</para>
+        <para id="id3856774">- Một hoặc nhiều nhóm đầu cuối hiển thị tại đầu và cuối mỗi phân nhóm.</para>
+        <para id="id8034490">Các điều khiển của thiết kế Data Report như sau:</para>
+        <para id="id7288187">- Điều khiển nhãn (Rpt Label).</para>
+        <para id="id8479191">- Điều khiển hộp văn bản (Rpt Textbox).</para>
+        <para id="id7878316">- Điều khiển ảnh (Rpt Image).</para>
+        <para id="id7254251">- Điều khiển hình dạng (Rpt Shape).</para>
+        <para id="id12791036">- Điều khiển các hàm tính toán (Report Function: rptFuncSum, rptFuncAve, rptFuncMin, rptFuncMax…).</para>
+        <para id="id11471527"><figure id="id8237918"><media id="id1170476836089" alt=""><image src=".png" mime-type="image/png" height="277" width="310"/></media></figure>Hình 13.2 Cửa sổ Data Report</para>
+        <para id="id7962444">Các điều khiển của Data Report cũng giống như là các điều khiển chuẩn trên biểu mẫu, chúng có thể ràng buộc với nguồn dữ liệu. Tuy nhiên, ta có một cách thức khác dễ dàng hơn đó là sử dụng môi trường dữ liệu (được giới thiệu ở chương trước).</para>
+        <para id="id11035172">Sử dụng DataEnvironment trong việc tạo DataReport:</para>
+        <para id="id8136359">Quá trình thực hiện trải qua các bước sau:</para>
+        <para id="id9244818">- Tạo đối tượng Command.</para>
+        <para id="id10772738">- Kéo thả các trường của đối tượng Command này vào thiết kế của Report.</para>
+        <para id="id3316238">- Thêm các tiêu đề đầu trang &amp; cuối trang.</para>
+        <para id="id8035203">Ví dụ: Tạo báo cáo về các sinh viên trong bảng STUDENT thuộc cơ sở dữ liệu Student.</para>
+        <para id="id8334731"><figure id="id8472838"><media id="id5925250" alt=""><image src=".png" mime-type="image/png" height="255" width="206"/></media></figure>Hình 13.3 Thiết lập Data Environment- Bước 1: Tạo một nối kết đến CSDL Student trong trình Data Environment, thêm một đối tượng Command cho phép lấy dữ liệu từ bảng Student.</para>
+        <para id="id10700910">- Bước 2: Kéo thả các trường cần hiển thị vào báo cáo tại mục Detail, chỉ giữ lại trường liên quan đến thông tin dữ liệu (đặt trong phần Detail Section). Thiết lập tên trường dưới dạng tiếng Việt tại phần Page Header.</para>
+        <para id="id8221180">- Bước 3: Cung cấp các thông tin cho phép DataReport nhận dữ liệu từ đâu bằng cách xác lập: DataSource: DataEnvironment1, DataMember: Student.</para>
+        <para id="id7485704"><figure id="id10750151"><media id="id1170486526299" alt=""><image src=".png" mime-type="image/png" height="264" width="476"/></media></figure>Hình 13.4: Report khi đã kéo thả các trường</para>
+        <para id="id7967670">Thiết kế báo biểu có phân nhóm dữ liệu</para>
+        <para id="id8074914"><figure id="id8469093"><media id="id1170472463157" alt=""><image src=".png" mime-type="image/png" height="243" width="297"/></media></figure>Hình 13.4: Nhóm dữ liệu- Chọn đối tượng Command của trình DataEnvironment cần nhóm cơ sở dữ liệu.</para>
+        <para id="id12694661">- Hiển thị trang thuộc tính, chọn Tab Grouping.</para>
+        <para id="id11014230">- Chọn tùy chọn Group Command Object.</para>
+        <para id="id8879228">- Đặt tên cho nhóm cũng như chọn các trường tham gia vào nhóm dữ liệu. </para>
+        <para id="id8038490">- Đặt lại giá trị cho thuộc tính Data Member chỉ đến nối kết mới đã nhóm dữ liệu.</para>
+        <para id="id7231589">- Chọn báo cáo thiết kế, ấn chuột phải, chọn Insert Group Header/Footer.</para>
+        <para id="id12344988">- Chọn tên trường nhóm dữ liệu đưa vào đoạn Group Header.</para>
+        <para id="id8905817">Khi đó báo cáo được thiết kế như sau:</para>
+        <para id="id7256186"><figure id="id8479600"><media id="id1170472225986" alt=""><image src=".png" mime-type="image/png" height="259" width="360"/></media></figure>Hình 13.5 Báo cáo có nhóm dữ liệu</para>
+      </section>
+      <section id="id-593577466333">
+        <title>Xem và xuất Data Report</title>
+        <para id="id8879111">Ta có thể xem thông tin và in báo cáo trên một cửa sổ riêng biệt sử dụng chế độ Print Preview bằng cách thi hành phương thức Show.</para>
+        <para id="id11585062">Khi đó báo cáo sẽ được hiển thị như sau:</para>
+        <para id="id10385478"><figure id="id7223966"><media id="id1170475227767" alt=""><image src=".png" mime-type="image/png" height="237" width="334"/></media></figure>Hình 13.6: Thi hành báo cáo trong VB</para>
+        <para id="id8101110">Khi đó người sử dụng có thể duyệt qua các trang nếu như báo cáo có nhiều trang, cũng như chọn một trang báo cáo nào đó để in.</para>
+        <para id="id10608429">Ngoài ra người dùng có thể chọn Export báo cáo của mình ra tập tin có định dạng khác, các loại định dạng ở đây có thể là tập tin văn bản, tập tin HTML. Ta có thể chọn lựa xuất một số trang cụ thể nào đó hoặc toàn bộ báo cáo.</para>
+        <para id="id12130815"><figure id="id12182079"><media id="id1170472379599" alt=""><image src=".png" mime-type="image/png" height="232" width="282"/></media></figure>Hình 13.7: Hộp thoại xuất báo cáo</para>
+        <para id="id8930705">SỬ DỤNG CRYSTAL REPORT ĐỂ LẬP BÁO CÁO</para>
+        <para id="id8695414">Crystal Report cho phép tạo báo cáo cơ sở dữ liệu trong ứng dụng viết bằng VB. Nó gồm 2 phần chủ yếu:</para>
+        <para id="id13062753">- Trình thiết kế báo cáo xác định dữ liệu sẽ đưa vào báo cáo và cách thể hiện của báo cáo.</para>
+        <para id="id12707165">- Một điều khiển ActiveX cho phép thi hành, hiển thị, điều khiển và in báo cáo khi thi hành ứng dụng.</para>
+        <para id="id13074948">Crystal Report không có sẵn khi cài VB6, ta cần cài đặt thêm. Chương trình cài đặt Crystal Report chỉ có trên bản Professional. Chạy tập tin Crystl32.exe trong thư mục \COMMON\TOOLS\VB\CRYSREPT.</para>
+      </section>
+      <section id="id-675608785203">
+        <title>Thiết kế báo cáo</title>
+        <para id="id12458152">Một điểm khác biệt khi dùng Crystal Report là ta không thiết lập báo cáo đi đôi với ứng dụng cụ thể. Ta sẽ xây dựng báo cáo trước và sau đó sẽ gọi thi hành báo cáo từ phía ứng dụng, báo cáo không phải là một bộ phận thuộc ứng dụng. Cửa sổ thiết kế Crystal Report như hình bên dưới:</para>
+        <para id="id12418653"><figure id="id6201679"><media id="id1170477279486" alt=""><image src=".png" mime-type="image/png" height="259" width="372"/></media></figure>Hình 13.8 Cửa sổ Crystal Report</para>
+        <para id="id13030866">Khi ta chọn tạo một báo cáo mới, Crystal Report trình bày một hộp thoại cho phép lựa chọn một trong nhiều những khuôn mẫu báo cáo đã định sẵn.</para>
+        <para id="id12448336"><figure id="id13297675"><media id="id1170481321491" alt=""><image src=".png" mime-type="image/png" height="216" width="450"/></media></figure>Hình 13.9 Hộp thoại chọn các mẫu</para>
+        <table id="id12721449" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Kiểu báo cáo</entry>
+                <entry>Mô tả</entry>
+              </row>
+              <row>
+                <entry>Standard</entry>
+                <entry>Báo cáo sắp xếp thông tin theo dòng và cột, cho phép nhóm dữ liệu.</entry>
+              </row>
+              <row>
+                <entry>Listing</entry>
+                <entry>Báo cáo là danh sách dữ liệu liên tục không có tổng kết hay trường tổng cộng..</entry>
+              </row>
+              <row>
+                <entry>Cross-Tab</entry>
+                <entry>Sắp xếp dữ liệu theo hai chiều.</entry>
+              </row>
+              <row>
+                <entry>Mail label</entry>
+                <entry>Báo cáo được thiết kế để in dữ liệu theo cột cho nhãn thư.</entry>
+              </row>
+              <row>
+                <entry>Summary</entry>
+                <entry>Báo cáo chỉ hiển thị thông tin tổng quát, không chứa dữ liệu chi tiết.</entry>
+              </row>
+              <row>
+                <entry>Graph</entry>
+                <entry>Báo cáo thể hiện dữ liệu một cách trực quan bằng biểu đồ</entry>
+              </row>
+              <row>
+                <entry>Top N</entry>
+                <entry>Báo cáo cho phép chỉ hiển thị một số mẩu tin được chọn</entry>
+              </row>
+              <row>
+                <entry>Drill Down</entry>
+                <entry>Báo cáo cho phép nhấn đúp chuột lên dữ liệu tổng quát để hiển thị dữ liệu chi tiết.</entry>
+              </row>
+              <row>
+                <entry>Another</entry>
+                <entry>Các báo cáo có khuôn mẫu do người dùng định nghĩa trước đó.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id8749626">Chúng ta xét qua một ví dụ sử dụng Crystal Report để lập báo cáo</para>
+        <para id="id10147676">- Khởi động Crystal Report và chọn New, chọn kiểu báo cáo là Standard.</para>
+        <para id="id11545604">- Tiếp theo chọn Data File.</para>
+        <para id="id12566118">- Trong hộp thoại chọn tập tin cơ sở dữ liệu, ta chỉ đến một tập tin cơ sở dữ liệu, sau đó ấn nút Done. Ta sẽ thấy các bảng cũng như các quan hệ giữa các bảng được hiển thị.</para>
+        <para id="id12566122"><figure id="id12806737"><media id="id1170476313242" alt=""><image src=".png" mime-type="image/png" height="249" width="310"/></media></figure>Hình 13.10 Hộp thoại quan hệ giữa các bảng</para>
+        <para id="id13033425">Quan hệ giữa các bảng đã được xác định ở mức thiết kế cơ sở dữ liệu nên ta không cần phải thay đổi những mối liên kết này.</para>
+        <para id="id12418582">- Nhấn nút Next qua bước tiếp theo, ta sẽ chọn những trường tham gia vào báo cáo.</para>
+        <para id="id12707037">- Bước kế tiếp ta chọn qua Tab Sort để thực hiện việc sắp xếp dữ liệu.</para>
+        <para id="id13046035">- Tab Style cho phép chọn các dạng khác nhau của báo cáo.</para>
+        <para id="id13045288">- Sau khi đã thiết kế xong, ta ấn Save để lưu lại báo cáo.</para>
+        <para id="id12790833">Khi mở lại báo cáo đã thiết kế, ta thấy Crystal Report hiển thị báo cáo ở hai mức, thiết kế và duyệt trước.</para>
+        <para id="id6087093"><figure id="id12651288"><media id="id1170470765756" alt=""><image src=".png" mime-type="image/png" height="250" width="360"/></media></figure>Hình 13.11: Cửa sổ xem trước báo cáo và thiết kế báo cáo</para>
+      </section>
+      <section id="id-780719433377">
+        <title>Thi hành báo cáo trong ứng dụng thông qua điều khiển ActiveX của Crystal Report</title>
+        <para id="id12395164">Bước đầu tiên để có thể thi hành báo cáo Crystal Report, ta cần tham khảo đến điều khiển ActiveX của Crystal Report bằng cách thêm công cụ Crystal Report vào đề án của chúng ta.</para>
+        <para id="id13246507">Chọn công cụ Crystal Report và đưa vào ứng dụng, biểu tượng trên hộp công cụ như sau. Trong sự kiện Click của một nút lệnh, ta viết đoạn mã sau:</para>
+        <para id="id12789841">Private Sub Command1_Click()</para>
+        <para id="id12331804">CrystalReport1.ReportFileName = "d:\VB\bc.rpt"</para>
+        <para id="id12331810">CrystalReport1.PrintReport</para>
+        <para id="id12500228">End Sub</para>
+        <para id="id10385463">Thuộc tính ReportFileName xác định đường dẫn cũng như tên tập tin báo cáo.</para>
+        <para id="id7948095">Việc thi hành báo cáo được thực hiện nhờ vào thuộc tính PrintReport. Ngoài ra, báo cáo có thể thi hành bằng cách hiển thị trên một cửa sổ khác hoặc là xuất ra thẳng trên máy in, … Ta thiết đặt thuộc tính đó qua hộp thoại thuộc tính.</para>
+        <para id="id12741805"><figure id="id10771166"><media id="id8083538" alt=""><image src=".png" mime-type="image/png" height="233" width="322"/></media></figure>Hình 13.11 Hộp thoại xác lập thuộc tính</para>
+        <para id="id10547164">Báo cáo thi hành trên một cửa sổ riêng biệt, ta có thể lựa chọn nhiều công việc như xem qua các trang, in ấn báo cáo, phóng to thu nhỏ …</para>
+        <para id="id12873272"><figure id="id12449983"><media id="id4409420" alt=""><image src=".png" mime-type="image/png" height="258" width="425"/></media></figure>Hình 13.12: Báo cáo Crystal Report</para>
+        <para id="id13032140">LỜI KẾT</para>
+        <para id="id13032145">Chương Thiết lập báo cáo cũng là chương kết thúc của giáo trình Visual Basic. Tuy nhiên lập trình sự kiện và lập trình cơ sở dữ liệu với VB chỉ là một phần trong những khả năng mà VB mang lại. Hy vọng chúng tôi sẽ gặp lại bạn đọc trong những chuyên đề khác của VB.</para>
+      </section>
+    </section>
+  </content>
+</document>

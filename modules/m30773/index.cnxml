@@ -1,0 +1,511 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Tập tin</title>
+  <metadata>
+  <md:content-id>m30773</md:content-id><md:title>Tập tin</md:title>
+  <md:abstract>Mục tiêu:
+	Chương này nhằm mục đích rèn luyện sinh viên các kỹ năng thao tác với hệ thống tập tin của Windows trong VB. Bên cạnh đó, việc hệ thống lại các kiến thức của các chương trước cũng là một mục tiêu quan trọng của chương.</md:abstract>
+  <md:uuid>e3a94c7f-a736-4b13-ad75-380a8554ae7b</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7488085">Học xong chương này, sinh viên phải nắm được các vấn đề sau:</para>
+    <para id="id7488100">- Sử dụng mô hình hệ thống tập tin.</para>
+    <para id="id8935153">- Cách thức truy cập tập tin tuần tự.</para>
+    <para id="id8935160">- Cách thức truy cập tập tin truy xuất ngẫu nhiên.</para>
+    <para id="id8935167">Kiến thức có liên quan:</para>
+    <para id="id8935178">Giáo trình Visual Basic, Chương 7.</para>
+    <para id="id8935188">Tài liệu tham khảo:</para>
+    <para id="id7173641">- Visual Basic 6 Certification Exam Guide - Chapter 7, Page 191; Chapter 13, Page 377 - Dan Mezick &amp; Scot Hillier - McGraw-Hill - 1998.</para>
+    <para id="id7254134">BÀI TẬP HƯỚNG DẪN</para>
+    <section id="id-200138356127">
+      <title>Bài tập 3-1:</title>
+      <para id="id7254147">XUẤT NHẬP TẬP TIN VĂN BẢN</para>
+      <para id="id7171193">Bước 1: Tạo Project mới tên Bt3-1 trong thư mục Basic\Bt3-1. Tạo giao diện có dạng sau:</para>
+      <figure id="id7171212">
+        <media id="id6529501" alt=""><image src="../../media/graphics1-7fb0.png" mime-type="image/png" height="213" width="325"/></media>
+      </figure>
+      <para id="id8851224">Hình III.1: Tập tin văn bản</para>
+      <para id="id8851251">Item 1 – TextBox</para>
+      <para id="id7484875">NameText1</para>
+      <para id="id7484890">Height2220</para>
+      <para id="id7484906">Width6630</para>
+      <para id="id5744289">MultilineTrue</para>
+      <para id="id5744298">ScrollBarsBoth</para>
+      <para id="id5744307">Item 2 – CommandButton</para>
+      <para id="id5744319">NameCommand1</para>
+      <para id="id8769191">CaptionNew</para>
+      <para id="id8769200">Item 3 – CommandButton</para>
+      <para id="id8769212">NameCommand2</para>
+      <para id="id10770944">CaptionOpen</para>
+      <para id="id10770956">Item 4 – CommandButton</para>
+      <para id="id10770969">NameCommand3</para>
+      <para id="id8004232">CaptionSave</para>
+      <para id="id8004241">Item 5 – CommandButton</para>
+      <para id="id8004254">NameCommand4</para>
+      <para id="id8039572">CaptionPrint</para>
+      <para id="id8039581">Item 6 – CommandButton</para>
+      <para id="id8039593">NameCommand5</para>
+      <para id="id8892496">CaptionCopy</para>
+      <para id="id8892504">Bước 2: Nút New có nhiệm vụ xóa văn bản trong TextBox để ta có thể khởi tạo một tài liệu mới. Do đó, trong hàm sự kiện Command1_Click, thêm vào đoạn mã:</para>
+      <para id="id8034341">Text1.Text = “”</para>
+    </section>
+    <section id="id-583015816901">
+      <title>GHI CHUỖI LÊN TẬP TIN</title>
+      <para id="id8034352">Bước 3: Ở đây ta nhập vào đoạn văn bản rồi ghi lên tập tin. Để đơn giản ta đọc và ghi từ một tập tin văn bản duy nhất tên là vidu.txt nằm trong thư mục của dự án của mình (ở đây là thư mục Bt5-1). Để ghi lên tập tin, trong hàm sự kiện Command3_Click, thêm đoạn mã sau:</para>
+      <para id="id8034364">' Ghi len tap tin</para>
+      <para id="id8034369"> Open App.Path &amp; "\vidu.txt" For Output As #1</para>
+      <para id="id7880338">' Ghi du lieu</para>
+      <para id="id7880347">Print #1, Text1.Text</para>
+      <para id="id7880355">' Dong tap tin</para>
+      <para id="id7948128">Close #1</para>
+      <para id="id7948136">MsgBox "Van ban da duoc luu"</para>
+      <para id="id7948145">Bước 4: Việc thao tác trên tập tin được thực hiện nhờ thẻ tập tin. Thực chất đây là một số nguyên chỉ bởi VB một liên kết đến một tập tin xác định để xuất hay nhập vào tập tin đó. Ở đây là sử dụng #1. Câu lệnh Print sử dụng thẻ tập tin để ghi văn bản lên tập tin. Khi việc ghi hoàn tất, thẻ tập tin được đóng lại nhờ câu lệnh Close. </para>
+      <para id="id7948157">Bước 5: Chạy ứng dụng, nhấp nút Command3. Nếu chương trình thực thi tốt, ta có thể mở tập tin vidu.txt trong Notepad xem.</para>
+      <para id="id8874070">ĐỌC TỪ TẬP TIN VĂN BẢN</para>
+      <para id="id8874078">Bước 6: Đọc tập tin từ đĩa tương tự như ghi tập tin. Chèn đoạn mã sau trong hàm xử lý sự kiện Command2_Click</para>
+      <para id="id8033191">Text1.Text = ""</para>
+      <para id="id8033195">Close #1</para>
+      <para id="id8033204">' Mo tap tin</para>
+      <para id="id8033213">Open App.Path &amp; "\vidu.txt" For Input As #1</para>
+      <para id="id8879624">Dim filetext As String ' Bien chuoi luu van ban</para>
+      <para id="id8879639">Do While Not EOF(1)</para>
+      <para id="id8879643">Input #1, filetext ' Doc tung dong</para>
+      <para id="id8879651">' Hien thi trong TextBox, chu y them vao ky tu xuong dong</para>
+      <para id="id10757381">Text1.Text = Text1.Text &amp; filetext &amp; vbCrLf</para>
+      <para id="id10757389">Loop</para>
+      <para id="id10757398">Close #1</para>
+      <para id="id10757406">Bước 7: Chạy ứng dụng. Nhấp nút Command2 để đọc từ tập tin vidu.txt vào TextBox. Ở đây ta có định nghĩa một biến trong lệnh</para>
+      <para id="id7908996">Dim filetext as String</para>
+      <para id="id7909002">Ở đây, mỗi lần ta đọc từng dòng trong tập tin vidu.txt; mỗi lần đọc như vậy ta lưu vào biến kiểu chuỗi filetext; sau đó ta nối chuỗi filetext vào sau chuỗi Text1.Text (hiển thị trong TextBox). Quá trình trên được thực hiện liên tục đến khi đọc hết nội dung tập tin nhờ vào vòng lặp:</para>
+      <para id="id3038550">Do While Not EOF(1)</para>
+      <para id="id3038557">EOF là một hàm được định nghĩa sẵn trong VB, hàm này có nhiệm vụ kiểm tra xem có đạt đến cuối tập tin hay không? Nếu nội dung tập tin vẫn chưa được đọc hết, quá trình đọc vẫn tiếp tục đến khi EOF là True.</para>
+      <para id="id3038576">Input #1</para>
+      <para id="id8033507">Đọc một chuỗi từ tập tin cho đến khi gặp ký tự xuống dòng. Ký tự xuống dòng này được bỏ qua trong lệnh Input; do đó nếu muốn hiển thị thành nhiều dòng trên TextBox, ta phải thêm vào ký tự xuống dòng cho mỗi dòng ta đọc được từ tập tin sau đó ta mới hiển thị trên TextBox. Hằng số vbCrLf là sự liên kết 2 ký tự xuống dòng và về đầu dòng.</para>
+      <para id="id8033531">IN VĂN BẢN RA MÁY IN</para>
+      <para id="id8033540">Bước 8: Nếu máy in được nối vào, máy in phải được kích hoạt. Ta có thể kiểm tra chúng bằng cách in thử vài dòng văn bản trong Word hay trong Notepad.</para>
+      <para id="id8887914">Bước 9: Đối tượng Printer sẽ chỉ đến máy in mặc định. Trong hàm xử lý sự kiện Command4_Click chèn thêm đoạn mã:</para>
+      <para id="id8887928">Printer.Print Text1.Text</para>
+      <para id="id8887936">Câu lệnh này dùng để in nội dung trong TextBox ra máy in. Tuy nhiên nội dung của TextBox chỉ được in khi chương trình chấm dứt. Để in ngay lập tức, ta cần phải thêm dòng sau:</para>
+      <para id="id7254332">Printer.EndDoc</para>
+    </section>
+    <section id="id-97927624405">
+      <title>CHÉP DỮ LIỆU VÀO CLIPBOARD</title>
+      <para id="id7254348">Bước 10: Trong nhiều ứng dụng, nhiều khi ta cần sử dụng dữ liệu qua lại với nhau. Chẳng hạn, người dùng có thể sử dụng dữ liệu được hiển thị trên form hiển thị của chương trình chúng ta sang chương trình xử lý văn bản Microsoft Word. Lúc này, một cách hiệu quả nhất là sử dụng đối tượng Clipboard, đối tượng này cho phép đọc và ghi lên Windows Clipboard từ chương trình ứng dụng:</para>
+      <para id="id8755716">Thêm đoạn mã sau vào hàm sự kiện Command5_Click:</para>
+      <para id="id8755727">Clipboard.Clear</para>
+      <para id="id8755734">Clipboard.SetText Text1.Text</para>
+      <para id="id8755740">Đóng cửa số mã lệnh lại và chạy chương trình ứng dụng. Nhập một đoạn văn bản, sau đó nhấp Command5. Từ Microsoft Word, sử dụng menu Edit\Paste để lấy dữ liệu từ Clipboard hiển thị.</para>
+      <para id="id7940294">Bài tập 3-2</para>
+    </section>
+    <section id="id-506523339672">
+      <title>THAO TÁC VỚI RESOURCE FILE</title>
+      <para id="id7940307">Mục tiêu: Giúp làm quen với tập tin resource của VB, nhất là củng cố các thao tác trên tập tin.</para>
+      <para id="id7940317">Bước 1: Tạo thư mục Basic\Bt3-2. Tạo một dự án mới trong thư mục này.</para>
+      <para id="id7274882">Bước 2: Tạo giao diện như hình sau:</para>
+      <para id="id7274895"><figure id="id7274908"><media id="id1171018387035" alt=""><image src=".png" mime-type="image/png" height="225" width="325"/></media></figure>51234679108</para>
+      <para id="id7338232">Hình III.2: Tập tin resource</para>
+      <para id="id7338259">Trong đó:</para>
+      <para id="id8673783">Item 1: Caption: Thong tin nguoi su dung</para>
+      <para id="id8673787">BorderStyle: 3-Fixed Dialog</para>
+      <para id="id8673793">StartUpPosition: 2-Center Screen</para>
+      <para id="id8673803">Item 2: Label</para>
+      <para id="id8673808">Name: lblHelp</para>
+      <para id="id8673812">Index: 0</para>
+      <para id="id8673819">Item 3: Label</para>
+      <para id="id10727145">Name: lblHelp</para>
+      <para id="id10727150">Index: 1</para>
+      <para id="id10727156">Item 4: Label</para>
+      <para id="id10727162">Name: lblHelp</para>
+      <para id="id10727167">Index: 2</para>
+      <para id="id10727173">Item 5: TextBox</para>
+      <para id="id10727179">Name: txtHelp</para>
+      <para id="id8729243">Index: 0</para>
+      <para id="id8729250">Item 6: TextBox</para>
+      <para id="id8729255">Name: txtHelp</para>
+      <para id="id8729260">Index: 1</para>
+      <para id="id8729266">Item 7: TextBox</para>
+      <para id="id8729272">Name: txtHelp</para>
+      <para id="id8729276">Index: 2</para>
+      <para id="id8729283">Item 8: CommandButton</para>
+      <para id="id7234617">Name: cmdHelp</para>
+      <para id="id7234622">Index: 0</para>
+      <para id="id7234628">Item 9: CommandButton</para>
+      <para id="id7234633">Name: cmdHelp</para>
+      <para id="id7234638">Index: 1</para>
+      <para id="id7234644">Item 10: CommandButton</para>
+      <para id="id7234650">Name: cmdHelp</para>
+      <para id="id7238732">Index: 2</para>
+      <para id="id7238738">Bước 3: Ta nhận thấy các điều khiển có cùng một tên hiển thị (Thong tin). Mục tiêu của ta là sử dụng tập tin resource (tài nguyên) để thay đổi tên hiển thị trên các điều khiển. Để tạo tập tin tài nguyên, ta vào mục ADD-IN\ADD-IN MANAGER trên menu của VB. Trong các mục của ADD-IN MANAGER nhấp đúp vào resource editor và đóng mục ADD-IN MANAGER lại.</para>
+      <para id="id8088831">Bước 4: Chọn Tools\Resource Editor trên menu. Mở String Table Editor bằng cách nhấp chuột lên biểu tượng abc của Resource Editor. Cửa sổ soạn thảo cho tập tin tài nguyên sẽ mở ra. Ta nhập các hàng như sau:</para>
+      <table id="id7560107" summary="">
+        <tgroup cols="4">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <tbody>
+            <row>
+              <entry>ID</entry>
+              <entry>RESOURCE STRING</entry>
+              <entry>ID</entry>
+              <entry>RESOURCE STRING</entry>
+            </row>
+            <row>
+              <entry>1</entry>
+              <entry>Ten</entry>
+              <entry>7</entry>
+              <entry>So dt</entry>
+            </row>
+            <row>
+              <entry>2</entry>
+              <entry>Ho</entry>
+              <entry>8</entry>
+              <entry>So CMND</entry>
+            </row>
+            <row>
+              <entry>3</entry>
+              <entry>Ma nv</entry>
+              <entry>9</entry>
+              <entry>T. trang hn</entry>
+            </row>
+            <row>
+              <entry>4</entry>
+              <entry>Huy bo</entry>
+              <entry>10</entry>
+              <entry>Huy bo</entry>
+            </row>
+            <row>
+              <entry>5</entry>
+              <entry>Vo hieu hoa</entry>
+              <entry>11</entry>
+              <entry>Ve truoc</entry>
+            </row>
+            <row>
+              <entry>6</entry>
+              <entry>Ke</entry>
+              <entry>12</entry>
+              <entry>Hoan tat</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id8814463">Bước 5: Lưu tập tin tài nguyên lại.</para>
+      <para id="id8751683">Bước 6: Mở cửa sổ soạn thảo mã lệnh. Tạo kiểu do người dùng định nghĩa để lưu dữ liệu cần nhập vào. Thêm đoạn mã sau:</para>
+      <para id="id8751700">Private Type yeucau</para>
+      <para id="id8751705">ho As String</para>
+      <para id="id8751714">ten As String</para>
+      <para id="id7249415">manv As String</para>
+      <para id="id7249425">sodt As String</para>
+      <para id="id7249435">socmnd As String</para>
+      <para id="id7249444">tinhtranghn As String</para>
+      <para id="id7249454">End Type</para>
+      <para id="id8699006">Bước 7: Ta thêm 2 biến nữa; một biến lưu thông tin về người sử dụng (theo kiểu ở trên), một biến lưu thứ tự các bước mà người sử dụng đã nhập thông tin của mình vào.</para>
+      <para id="id8699025">Private chisobuoc As Integer</para>
+      <para id="id8699029">Private cacyeucau As yeucau</para>
+      <para id="id8699033">Bước 8: Trong chương trình này, người sử dụng phải nhập thông tin của mình vào thông qua các bước nhập, trong đó các điều khiển được sử dụng như một mảng các điều khiển. Để tận dụng chúng ta cần khai báo các hằng số để biết hiện thời người dùng đang ở bước thứ mấy của quá trình nhập thông tin cũng như biết được mình đã nhấp vào nút nhấn nào trong quá trình trên. Do đó, ta thêm đoạn khai báo sau:</para>
+      <para id="id8699044">' cac hang so</para>
+      <para id="id7255932">Private Enum buoc</para>
+      <para id="id7255937">buoc1 = 1</para>
+      <para id="id7255946">buoc2 = 2</para>
+      <para id="id7255956">buoc3 = 3</para>
+      <para id="id8033784">End Enum</para>
+      <para id="id8033789">Private Enum nhannut</para>
+      <para id="id8033793">nuttrai</para>
+      <para id="id8033802">nutgiua</para>
+      <para id="id8033812"> nutphai</para>
+      <para id="id7895540">End Enum</para>
+      <para id="id7895544">Bước 9: Chương trình này thể hiện trên một form duy nhất và sử dụng mảng các điều khiển để tạo các bước để người dùng nhập thông tin vào. Do đó ta sử dụng tập tin tài nguyên để hiển thị các tên của điều khiển nhằm hiển thị cho chính xác. Vì thế ta cần có một hàm (thủ tục) để cập nhật thông tin nhập vào dựa vào các bước của người dung khi nhập thông tin vào. Vào Tools\Add Procedure để thêm thủ tục sau:</para>
+      <para id="id7895566">Public Sub Hienthi()</para>
+      <para id="id7895570">Dim i As Integer</para>
+      <para id="id7895581">' Kiem tra cac buoc</para>
+      <para id="id7254655">Debug.Assert chisobuoc = 1 Or chisobuoc = 2</para>
+      <para id="id7254670">For i = 0 To 2</para>
+      <para id="id7254680"> ‘ Nhan</para>
+      <para id="id8917726"> lblHelp(i).Caption = LoadResString((chisobuoc - 1) * 6 + (i + 1))</para>
+      <para id="id8917739"> ' Nut</para>
+      <para id="id8917752"> cmdHelp(i).Caption = LoadResString((chisobuoc - 1) * 6 + (i + 4))</para>
+      <para id="id8917764"> If UCase(cmdHelp(i).Caption) = "VO HIEU HOA" Then</para>
+      <para id="id8821854">cmdHelp(i).Visible = False</para>
+      <para id="id8821863"> Else</para>
+      <para id="id8821875">cmdHelp(i).Visible = True</para>
+      <para id="id7244452"> End If</para>
+      <para id="id7244465">txtHelp(i).Text = ""</para>
+      <para id="id7244472">Next</para>
+      <para id="id7244482">End Sub</para>
+      <para id="id7244486">Bước 10: Khi chương trình thực hiện, ta phải ở bước thứ nhất của quá trình nhập liệu 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mo stretchy="false">⇒</m:mo></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ drarrow } {}</m:annotation></m:semantics></m:math> Thêm đoạn mã sau trong thủ tục xử lý sự kiện Form_Load:</para>
+      <para id="id8680730">chisobuoc = 1</para>
+      <para id="id8680736">Hienthi</para>
+      <para id="id8680745">Bước 11: Mỗi khi có một nút nhấn được nhấp, quá trình nhập liệu chuyển sang bước kế tiếp; người sử dụng có thể đi đến bước kế tiếp hay trở về bước trước đó trong quá trình này. Vì các nút nhấn (button) là một mảng điều khiển (control array) nên chúng có cùng một sự kiện Click tác động vào gọi là cmdHelp_Click. Hàm xử lý này có tham số là một chỉ số kiểu Integer để nhận biết nút nhấn nào được nhấp. Ở đây, ta thêm đoạn mã sau trong hàm xử lý sự kiện này.</para>
+      <para id="id7185211">Private Sub cmdHelp_Click(Index As Integer)</para>
+      <para id="id7185215"> Select Case chisobuoc</para>
+      <para id="id7185225">Case buoc1</para>
+      <para id="id7185235">cacyeucau.ten = txtHelp(0).Text</para>
+      <para id="id8796272">cacyeucau.ho = txtHelp(1).Text</para>
+      <para id="id8796282">cacyeucau.manv = txtHelp(2).Text</para>
+      <para id="id8796291">Case buoc2</para>
+      <para id="id8796300">cacyeucau.sodt = txtHelp(0).Text</para>
+      <para id="id8761551">cacyeucau.socmnd = txtHelp(1).Text</para>
+      <para id="id8761561">cacyeucau.tinhtranghn = txtHelp(2).Text</para>
+      <para id="id8761570"> End Select</para>
+      <para id="id8761584">' Cac nut nhan</para>
+      <para id="id8573275"> Select Case Index</para>
+      <para id="id8573286">Case nuttrai</para>
+      <para id="id8573295">' Huy bo</para>
+      <para id="id8573305"> End</para>
+      <para id="id8573314">Case nutgiua</para>
+      <para id="id10770611">' ve truoc</para>
+      <para id="id10770620">chisobuoc = buoc1</para>
+      <para id="id10770630">Hienthi</para>
+      <para id="id10770640">Case nutphai</para>
+      <para id="id10736710">' di toi</para>
+      <para id="id10736719">chisobuoc = chisobuoc + 1</para>
+      <para id="id10736728">If chisobuoc = buoc2 Then</para>
+      <para id="id10736737"> Hienthi</para>
+      <para id="id10736748">Else</para>
+      <para id="id7168193">Guiyeucau</para>
+      <para id="id7168204">End If</para>
+      <para id="id7168214"> End Select</para>
+      <para id="id7168224">End Sub</para>
+      <para id="id7168229">Bước 12: Khi quá trình nhập thông tin kết thúc, thông tin này được lưu vào trong một tập tin văn bản, nhờ thủ tục Guiyeucau. Thêm thủ tục Guiyeucau vào nhờ mục Tools\Add Procedure và nhập đoạn mã sau:</para>
+      <para id="id7168092">Public Sub Guiyeucau()</para>
+      <para id="id7168096"> On Error GoTo Guiloi</para>
+      <para id="id7168108">' Lay the tap tin</para>
+      <para id="id10772639">Dim intFile As Integer</para>
+      <para id="id10772648">intFile = FreeFile()</para>
+      <para id="id10772661">' Viet len tap tin</para>
+      <para id="id10772671">Open App.Path &amp; "\yeucau.txt" For Output As #intFile</para>
+      <para id="id10770686">Print #1, "ho: " &amp; cacyeucau.ho</para>
+      <para id="id10770696">Print #1, "ten: " &amp; cacyeucau.ten</para>
+      <para id="id10770706">Print #1, "manv: " &amp; cacyeucau.manv</para>
+      <para id="id10770716">Print #1, "sodt: " &amp; cacyeucau.sodt</para>
+      <para id="id10770726">Print #1, "socmnd: " &amp; cacyeucau.socmnd</para>
+      <para id="id10757289">Print #1, "tinhtranghn: " &amp; cacyeucau.tinhtranghn</para>
+      <para id="id10757300">Close #intFile</para>
+      <para id="id10757312">MsgBox "Yeu cau cua ban da duoc goi di", vbOKOnly + vbInformation, _</para>
+      <para id="id8776731">"Goi yeu cau"</para>
+      <para id="id8776742"> End</para>
+      <para id="id8776754"> Exit Sub</para>
+      <para id="id8776770">Guiloi:</para>
+      <para id="id8784876">MsgBox Err.Description, vbOKOnly + vbExclamation, "Goi yeu cau"</para>
+      <para id="id8784886"> Exit Sub</para>
+      <para id="id8784899">End Sub</para>
+      <para id="id8784903">Bước 13: Lưu và thực thi chương trình.</para>
+    </section>
+    <section id="id-143733689245">
+      <title>Bài tập 3-3</title>
+      <para id="id7139456">CHƯƠNG TRÌNH XỬ LÝ VĂN BẢN ĐƠN GIẢN</para>
+      <para id="id7139465">GIAO DIỆN ĐA TÀI LIỆU</para>
+      <para id="id7139473">Bước 1: Tạo một dự án lưu trong thư mục Basic\Bt3-3.</para>
+      <para id="id7139487">Giao diện đa tài liệu (MDI Form) gồm một cửa sổ cha chứa nhiều cửa sổ con (chẳng hạn như các chương trình Microsoft Word, Excel được tổ chức theo dạng này). Để thêm vào dự án, ta chọn mục Project\Add MDI Form từ menu của VB.</para>
+      <para id="id7560311">Bước 2: Ta cho Form1 trở thành một cửa sổ con của MDI Form bằng cách chọn thuộc tính MDIChild = True.</para>
+      <para id="id7560326">HÀM MAIN (SUB MAIN)</para>
+      <para id="id7560330">Bước 3: Trong chương trình ta cần điều khiển mọi thứ kể từ khi các cửa sổ con của MDI Form xuất hiện, do đó ta cần phải bắt đầu thực thi chương trình của ta từ hàm Main (Sub Main). Ta chọn mục Project\ Add Module để thêm một Modul vào dự án của mình, sau đó ta chọn Tools\Add Procedure để thêm hàm Main vào (Public Sub Main); hàm này ta dùng để bắt đầu gọi thực thi chương trình của mình. Để chọn thực thi chương trình từ hàm Main, chọn Project\Properties; chọn Start up Object là Sub Main.</para>
+      <para id="id8573361">Bước 4: Thêm dòng lệnh sau vào hàm Main:</para>
+      <para id="id8573374">MDIForm1.Show</para>
+      <para id="id8573380">Bước 5: Chương trình cần có một hệ thống menu để gọi thực thi. Do đó, chọn MDI Form, sau đó chọn Tools\Menu Editor để tạo menu sau:</para>
+      <para id="id10719382">Menu NameMenu Caption</para>
+      <para id="id10719390">mnuFile&amp;File</para>
+      <para id="id10719398">mnuFileNew &amp;New</para>
+      <para id="id10719405">mnuFileOpen&amp;Open…</para>
+      <para id="id10719413">muFileSave&amp;Save</para>
+      <para id="id8573392">mnuFileBar-</para>
+      <para id="id8658655">mnuFileExitE&amp;xit</para>
+      <para id="id8658663">Bước 6: Ta xử lý sự kiện mnuFileExit_Click nhờ đoạn mã sau:</para>
+      <para id="id8658677">Private Sub mnuFileExit_Click()</para>
+      <para id="id8658681">Dim f As Form</para>
+      <para id="id8658691">' Thoat cac cua so con</para>
+      <para id="id8778325"> For Each f In Forms</para>
+      <para id="id8778335">If TypeOf f Is Form1 Then</para>
+      <para id="id8778345">Unload f</para>
+      <para id="id8778357">Set f = Nothing</para>
+      <para id="id8658536">End If</para>
+      <para id="id8658546">Next</para>
+      <para id="id8658558">' Thoat cua so cha</para>
+      <para id="id8658568">Unload Me</para>
+      <para id="id10773470">End Sub</para>
+      <para id="id10773475">Bước 7: Để tạo ra một tài liệu trắng cho chương trình xử lý văn bản, ta cần phải có một TextBox trong Form1. Người sử dụng đánh nội dung vào TextBox, do đó ta thêm một TextBox vào Form1 với các thuộc tính sau:</para>
+      <para id="id10773491">MultiLine: True</para>
+      <para id="id10773498">ScrollBars: 2-Vertical</para>
+      <para id="id10773504">Ta xử lý sự kiện Form_Resize của Form1 như sau:</para>
+      <para id="id10773511">Private Sub Form_Resize()</para>
+      <para id="id8709980">Text1.Height = Me.ScaleHeight</para>
+      <para id="id8709990">Text1.Width = Me.ScaleWidth</para>
+      <para id="id8710001">Text1.Left = 0</para>
+      <para id="id8710012">Text1.Top = 0</para>
+      <para id="id8907126">End Sub</para>
+      <para id="id8907131">Bước 8: Mỗi lần chọn mục New trên cửa sổ chương trình ứng dụng, một khung cửa sổ trắng hiện ra để ta nhập văn bản vào. Do đó, thêm đoạn mã sau trong thủ tục xử lý sự kiện mnuFileNew_Click:</para>
+      <para id="id8907151">Private Sub mnuFileNew_Click()</para>
+      <para id="id8907155">Dim f As Form1</para>
+      <para id="id8907166">Static n As Integer</para>
+      <para id="id5460585">Set f = New Form1</para>
+      <para id="id5460596">f.Text1.Text = ""</para>
+      <para id="id5460607">n = n + 1</para>
+      <para id="id5460617">f.Caption = "Document " &amp; Format(n)</para>
+      <para id="id8283913">f.Show</para>
+      <para id="id8283924">End Sub</para>
+    </section>
+    <section id="id-516589193642">
+      <title>THAO TÁC TRÊN TẬP TIN</title>
+      <para id="id8283937">Bước 9: Ta cần phải có hộp thoại nhằm chọn tập tin để lưu (hay mở tập tin) trong chương trình xử lý văn bản. Do đó ta cần thêm một Dialog Control vào chương trình. Đánh dấu vào mục chọn Microsoft Common Dialog Control 6.0 (SP3). Sau đó ta thêm Dialog Control từ ToolBox vào MDIForm1. Ta xử lý sự kiện mnuFileSave_Click nhờ đoạn mã sau:</para>
+      <para id="id7554739">Private Sub menuFileSave_Click()</para>
+      <para id="id7554743">Dim tenfile As String</para>
+      <para id="id7554754">CommonDialog1.ShowSave</para>
+      <para id="id7554765">tenfile = CommonDialog1.FileName</para>
+      <para id="id8802201">Open tenfile For Output As #1</para>
+      <para id="id8802211">Print #1, MDIForm1.ActiveForm.Text1.Text</para>
+      <para id="id8802222">Close #1</para>
+      <para id="id8802233">End Sub</para>
+      <para id="id8802237">Bước 10: Khi mục Open của menu được chọn, hộp thoại Open File được mở ra
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mo stretchy="false">⇒</m:mo></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ drarrow } {}</m:annotation></m:semantics></m:math> sự kiện mnuFileOpen_Click được xử lý như sau:</para>
+      <para id="id7466208">Private Sub mnuFileOpen_Click()</para>
+      <para id="id7466212">Dim tenfile As String, s As String</para>
+      <para id="id7466221">CommonDialog1.ShowOpen</para>
+      <para id="id7466231">tenfile = CommonDialog1.FileName</para>
+      <para id="id7250521">If UCase(Right(tenfile, 3)) &lt;&gt; "TXT" Then Exit Sub</para>
+      <para id="id7250535">Call mnuFileNew_Click</para>
+      <para id="id7250545">Open tenfile For Input As #1</para>
+      <para id="id7250554">Do Until EOF(1)</para>
+      <para id="id8782964">Line Input #1, s</para>
+      <para id="id8782974">Me.ActiveForm.Text1.Text = Me.ActiveForm.Text1.Text &amp; s &amp; vbCrLf</para>
+      <para id="id8782985">Loop</para>
+      <para id="id8782995">Close #1</para>
+      <para id="id8783004">End Sub</para>
+      <para id="id7139403">Bước 11: Lưu dự án và chạy chương trình. Tạo mới, lưu, mở một số tài liệu. Nhận xét kết quả.</para>
+      <para id="id7139419">Bài tập 3-4</para>
+      <para id="id7139423">THAO TÁC VỚI ĐỐI TƯỢNG WORD</para>
+      <para id="id7139432">Mục đích: Windows có sẵn một số đối tượng khi ta cài đặt Windows hay khi cài một số phần mềm. Bài tập này giúp ta tìm hiểu cách thức truy xuất các đối tượng có sẵn này từ Visual Basic.</para>
+      <section id="id-377215184715">
+        <title>THAM CHIẾU ĐỐI TƯỢNG</title>
+        <para id="id7139445">Bước 1: Tạo thư mục Basic\Bt3-4. Khởi động một dự án mới trong thư mục này.</para>
+        <para id="id7451051">Bước 2: Trong bài tập này ta có tham chiếu đến đối tượng Word của Microsoft Word; do đó ta phải có thao tác tham chiếu đến đối tượng này trong màn hình soạn thảo VB bằng cách: Chọn Project\References trên menu. Trong cửa số References, thiết lập tham chiếu đến: Microsoft Word 9.0 Object Library và Microsoft Office 9.0 Library. Sau đó đóng cửa sổ References lại.</para>
+        <para id="id7894304">Bước 3: Ta có thể kiểm tra các đối tượng trên có được đưa vào hay chưa nhờ thao tác: Chọn View\Object Browser.</para>
+      </section>
+      <section id="id-380526507531">
+        <title>XÂY DỰNG ỨNG DỤNG</title>
+        <para id="id7587827">Bước 4: Tạo giao diện chương trình có dạng sau:</para>
+        <para id="id7587840"><figure id="id7587851"><media id="id3089248" alt=""><image src=".png" mime-type="image/png" height="280" width="366"/></media></figure>123456</para>
+        <para id="id5365138">Hình III.3: Thao tác với đối tượng Word</para>
+        <para id="id8041967">Trong đó:</para>
+        <para id="id8041975">1: TextBox</para>
+        <para id="id8041980">Name: txtWord</para>
+        <para id="id8041987">Multiline: True</para>
+        <para id="id8041994">ScrollBar: 2-Vertical</para>
+        <para id="id10693195">2: CommandButton</para>
+        <para id="id10693200">Name: cmdLuu</para>
+        <para id="id10693207">Caption: Lưu</para>
+        <para id="id10693214">3: CommandButton</para>
+        <para id="id10693219">Name: cmdTruoc</para>
+        <para id="id10693226">Caption: Trước khi in</para>
+        <para id="id10693233">4: CommandButton</para>
+        <para id="id10693239">Name: cmdCTa</para>
+        <para id="id10725844">Caption: Kiểm lỗi.</para>
+        <para id="id10725851">5: CommandButton</para>
+        <para id="id10725856">Name: cmdThoat</para>
+        <para id="id10725863">Caption: Thoát</para>
+        <para id="id10725870">6: CommandButton</para>
+        <para id="id10725876">Name: cmdGiup</para>
+        <para id="id10725882">Caption: Trợ giúp</para>
+        <para id="id8034945">Bước 5: Để sử dụng được mô hình, ta phải khai báo một số biến đối tượng của Word. Trong phần [General]\ [Declarations], khai báo những biến sau:</para>
+        <para id="id8034960">Public ungdung As Word.Application</para>
+        <para id="id8034965">Public tailieu As Word.Document</para>
+        <para id="id8034969">Public trogiup As Office.Assistant</para>
+        <para id="id8034973">Bước 6: Khi chương trình thực hiện, điều ta muốn là một tài liệu mới của Word được tạo ra để ta có thể thao tác trên chúng một cách gián tiếp thông qua chương trình VB của mình. Tạo một tài liệu Word mới tương đương với việc tạo ra một thể hiện của đối tượng Document. Vì thế, chèn đoạn mã sau vào thủ tục Form_Load để tạo ra một tài liệu Word mới từ chương trình VB.</para>
+        <para id="id8034985">Set ungdung = CreateObject("Word.Application")</para>
+        <para id="id10721560">Set tailieu = ungdung.Documents.Add</para>
+        <para id="id10721569">Set trogiup = ungdung.Assistant</para>
+        <para id="id10721577">Bước 7: Nút Lưu có nhiệm vụ ghi tất cả những gì trên TextBox vào đối tượng Word mới tạo ra. Do đó, ta xử lý sự kiện cmdLuu_Click như sau:</para>
+        <para id="id10746983">' Ghi tai lieu moi</para>
+        <para id="id10746988">tailieu.Content.Text = txtWord.Text</para>
+        <para id="id10746996">MsgBox "Van ban duoc luu trong Word", vbOKOnly, "Word"</para>
+        <para id="id10747005">Bước 8: Nút Trước khi in có nhiệm vụ hiển thị tài liệu Word giống như khi chúng được in ra giấy; vì thế sự kiện cmdTruoc_Click được xử lý như sau:</para>
+        <para id="id10747023">tailieu.PrintPreview</para>
+        <para id="id10721592">ungdung.Visible = True</para>
+        <para id="id8812365">ungdung.Activate</para>
+        <para id="id8812369">Bước 9: Nút Kiểm lỗi thực hiện thao tác kiểm lỗi chính tả cho tài liệu Word, thao tác này được xử lý trong thủ tục cmdCTa_Click:</para>
+        <para id="id8812386">tailieu.CheckSpelling</para>
+        <para id="id8812391">txtWord.Text = tailieu.Content.Text</para>
+        <para id="id8812399">Bước 10: Nút Thoát sẽ đóng cửa sổ chứa tài liệu Word lại. Chèn đoạn mã sau trong thủ tục cmdThoat_Click để đóng Word lại:</para>
+        <para id="id7893551">ungdung.Quit SaveChanges = False</para>
+        <para id="id7893555">Bước 11: Khi ta nhấp vào nút Trợ giúp thì cửa sổ Help của Office hiện ra. Do đó, thêm đoạn mã sau trong thủ tục cmdGiup_Click để mở cửa sổ Help của Office:</para>
+        <para id="id7893573">ungdung.Visible = True</para>
+        <para id="id7893579">ungdung.Activate</para>
+        <para id="id7893588">trogiup.Help</para>
+        <para id="id7126651">Bước 12: Lưu dự án và chạy chương trình. Nhập vài dòng văn bản vào TextBox và nhấp nút Lưu. Mỗi khi văn bản được lưu, ta nhấp nút Trước khi in để xem tài liệu trước khi. Khi văn bản được hiển thị, nhấp nút Kiểm lỗi. Sau đó thử nhấp nút Trợ giúp để xem phần giúp đỡ của Office. Cuối cùng nhấp nút Thoát để thoát khỏi Word.</para>
+      </section>
+    </section>
+    <section id="id-02780172347">
+      <title>BÀI TẬP TỰ LÀM</title>
+      <list id="id7126682" list-type="enumerated">
+        <item>Thiết kế chương trình như ứng dụng Notepad của Windows.</item>
+      </list>
+      <list id="id8851261" list-type="bulleted">
+        <item>Thiết kế giao diện</item>
+      </list>
+      <para id="id7126690">Hình III.5: Giao diện Notepad<figure id="id8851297"><media id="id1171019177109" alt=""><image src="../../media/graphics2-3cb9.png" mime-type="image/png" height="261" width="392"/></media></figure></para>
+      <figure id="id8915233">
+        <media id="id1171012484307" alt=""><image src="../../media/graphics3-1f0f.png" mime-type="image/png" height="268" width="397"/></media>
+      </figure>
+      <list id="id8915257" list-type="bulleted">
+        <item>Xử lý các sự kiện</item>
+      </list>
+      <list id="id8283760" list-type="bulleted">
+        <item>Mỗi khi Form thay đổi kích thước, TextBox cũng thay đổi theo cho phù hợp với Form</item>
+        <item>New</item>
+        <item>Open, Save, Save As: mở hộp thoại Common Dialog cho phép chọn tập tin để mở hay lưu. Sử dụng đối tượng FileSystemObject để thao tác với tập tin văn bản.</item>
+        <item>Exit</item>
+        <item>Font Setting: Mở ra hộp thoại chọn Font, thiết lập Font của TextBox chính là Font được chọn trong hộp thoại.</item>
+      </list>
+      <list id="id8931069" list-type="bulleted">
+        <item>Xử lý mở rộng:</item>
+      </list>
+      <list id="id8283800" list-type="bulleted">
+        <item>Khi người dùng đã lưu tập tin rồi, lần thứ hai bấm vào Save thì không mở hộp thoại Common Dialog nữa mà sẽ lưu với tên tập tin đã chọn trong lần Save đầu tiên.</item>
+        <item>Mỗi khi người dùng thay đổi nội dung của một tập tin, sau đó họ chọn Exit để đóng ứng dụng lại; một hộp thông điệp (Message Box) sẽ mở ra hỏi có lưu tập tin hay không?</item>
+        <item>Đại lý Minh Thành của công ty Unilever Việt Nam tại Cần Thơ cần quản lý thông tin về các mặt hàng mà đại lý nhận từ công ty. Các thông tin cần quản lý gồm: Mã mặt hàng, tên mặt hàng, đơn vị tính, giá của mặt hàng đó. Các thông tin này được mô tả như sau:</item>
+      </list>
+      <para id="id8022158">Type HangHoa</para>
+      <para id="id8022174">MaHang As String*5</para>
+      <para id="id8034522">TenHang As String*40</para>
+      <para id="id8034540">DVTinh As String*15</para>
+      <para id="id8034558">Gia As Double</para>
+      <para id="id7174030">End Type</para>
+      <para id="id7174041">Dựa vào thông tin mô tả trên, Anh (Chị) hãy:</para>
+      <list id="id7174047" list-type="enumerated">
+        <item>Tạo dự án mới và viết các khai báo thích hợp.</item>
+        <item>Thiết kế Form chính như sau:</item>
+      </list>
+      <figure id="id7228617">
+        <media id="id1171015992673" alt=""><image src="../../media/graphics4-a7e9.png" mime-type="image/png" height="200" width="290"/></media>
+      </figure>
+      <para id="id7228640">Hình III.6: Giao diện chính</para>
+      <list id="id7228646" list-type="enumerated">
+        <item>Khi người dùng chọn mục Thoát, rồi nhấp chọn Thực hiện, chương trình chấm dứt. Viết mã lệnh để xử lý đối với trường hợp này. </item>
+        <item>Khi người dùng nhấp chọn Nhập liệu, rồi Thực hiện, một Form sẽ mở ra cho phép nhập thông tin hàng hóa vào. Hãy thiết kế Form này với các chức năng như hình dưới:</item>
+      </list>
+      <figure id="id7141520">
+        <media id="id1171022281118" alt=""><image src="../../media/graphics5-a8f1.png" mime-type="image/png" height="322" width="473"/></media>
+      </figure>
+      <para id="id7141544">Hình III.7: Form nhập liệu</para>
+      <list id="id7141550" list-type="enumerated">
+        <item>Mỗi khi người dùng nhập thông tin vào các ô TextBox, rồi chọn nút nhấn Nhập, những thông tin đó sẽ được lưu lên lưới hiển thị. Khi chọn Ghi tập tin, một hộp thoại (Common Dialog) lưu tập tin hiện ra cho phép chọn đường dẫn và tên tập tin, sau đó ghi những thông tin trên lưới vào tập tin đã chọn (với cấu trúc tập tin được mô tả ở phần đầu). Nút nhấn Thoát sẽ đóng Form này lại, trở về Form chính ban đầu. Viết các đoạn xử lý thích hợp.</item>
+        <item>Ở Form chính ban đầu (hình III.6), khi người dùng chọn Hiển thị thông tin hàng hóa, một hộp thoại mở tập tin (CommonDialog) hiện ra cho phép chọn tên tập tin chứa dữ liệu về hàng hóa đã được tạo ra ở câu e. Sau đó đọc dữ liệu từ tập tin rồi hiển thi trên lưới:</item>
+      </list>
+      <figure id="id8682386">
+        <media id="id1171010643758" alt=""><image src="../../media/graphics6-5afe.png" mime-type="image/png" height="270" width="521"/></media>
+      </figure>
+      <para id="id8682410">Hình III.8: Đọc từ tập tin</para>
+      <para id="id8682415">Hãy thiết kế Form và viết mã lệnh xử lý các sự kiện thích hợp.</para>
+    </section>
+    <section id="id-251206197833">
+      <title>CƠ SỞ DỮ LIỆU SỬ DỤNG</title>
+      <para id="id7448649">Các chương kế tiếp là phần lập trình Visual Basic truy xuất cơ sở dữ liệu (CSDL). Trong các bài tập trên CSDL, ta có sử dụng CSDL HangHoa.MDB của Access. Cơ sở dữ liệu này đã có sẵn, sinh viên có thể liên hệ cán bộ giảng dạy để lấy về. Thông tin các bảng (Table) của CSDL này như sau:</para>
+      <para id="id7448667">TLOAIHANG(MaLoai, TenLoai): Mỗi loại hàng hóa có mã loại và tên loại.</para>
+      <para id="id7448685">THANGHOA(MaHang, TenHang, DVTinh, MaLoai). Mỗi hàng hóa có mã hàng hóa, tên hàng hóa, đơn vị tính và chỉ thuộc 1 loại hàng hóa nào đó.</para>
+      <para id="id10693364">TNHANVIEN(MaNV, HoTen, Phai, Diachi, Ngaysinh, Luong, Ghichu): Mỗi nhân viên có mã nhân viên, họ tên, phái, địa chỉ nhân viên, ngày sinh, lương của nhân viên đó là bao nhiêu và có thể có một vài ghi chú về nhân viên đó.</para>
+      <para id="id10693382">TPHATSINH(SOTT, Ngay, Loai, Fieu, Hten, Lydo, MaHang, Solg, Dgia, MaNV): Mỗi một phát sinh được ghi nhận thành một chứng từ có SoTT, ngày phát sinh chứng từ, loại phát sinh là nhập (hay xuất)…, số phiếu, họ tên khách hàng, lý do phát sinh ứng với hàng hóa nào (mã hàng), số lượng và đơn giá là bao nhiêu, nhân viên phụ trách phát sinh là gì (MaNV).</para>
+      <para id="id7206093"><figure id="id7206096"><media id="id1171010736550" alt=""><image src="../../media/graphics7-ef6d.png" mime-type="image/png" height="275" width="532"/></media></figure>Bảng quan hệ giữa các Table này như sau:</para>
+      <para id="id8573142">Các mối quan hệ của CSDL HangHoa.mdb</para>
+    </section>
+  </content>
+</document>

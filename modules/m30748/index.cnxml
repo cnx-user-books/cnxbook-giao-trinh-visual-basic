@@ -1,0 +1,727 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Thiết kế biểu mẫu dùng các điều khiển</title>
+  <metadata>
+  <md:content-id>m30748</md:content-id><md:title>Thiết kế biểu mẫu dùng các điều khiển</md:title>
+  <md:abstract>Mục tiêu:
+Chương này gồm các bài tập nhằm rèn luyện cho sinh viên các thao tác cần thiết cho phép thiết kế các ứng dụng đơn giản trong môi trường lập trình Visual Basic cũng như một số kỹ năng lập trình cơ bản khi làm việc với Visual Basic.</md:abstract>
+  <md:uuid>9e8a6593-5670-4eca-b7dd-3ba0fef85616</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7906167">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id7906181">- Sử dụng các điều khiển để thiết kế giao diện trong Visual Basic.</para>
+    <para id="id7906189">- Vận dụng các cấu trúc lập trình trong Visual Basic để viết mã lệnh.</para>
+    <para id="id7906197">- Sử dụng một số cấu trúc dữ liệu trong Visual Basic.</para>
+    <para id="id7906205">Kiến thức có liên quan:</para>
+    <para id="id8724067">- Giáo trình “Visual Basic”; Chương 1, 2, 3, 4, 5.</para>
+    <para id="id8724077">Tài liệu tham khảo:</para>
+    <para id="id8724089">- Visual Basic 6 Certification Exam Guide - Chapter 1, Page 1; Chapter 2, Page 41; Chapter 4, Page 89 - Dan Mezick &amp; Scot Hillier - McGraw-Hill - 1998.</para>
+    <para id="id8696718">SỬ DỤNG MỘT SỐ ĐIỀU KHIỂN</para>
+    <section id="id-438971826995">
+      <title>Bài tập có hướng dẫn</title>
+      <section id="id-498851748262">
+        <title>Bài tập 1I-1</title>
+        <para id="id8696739">THAO TÁC TRÊN LISTBOX</para>
+        <para id="id8696744">Bước 1: Tạo thư mục Basic\Bt1-1. Tạo một dự án mới kiểu Standard EXE, lưu vào trong thư mục trên.</para>
+        <para id="id10720884">Bước 2: Thêm 2 List Box và một Button vào form (hình 1). Nhấn đúp lên form để mở ra cửa sổ Code, nhập các đoạn mã sau trong sự kiện Form_Load:</para>
+        <para id="id10720901">Form1.List1.AddItem “Thing 3”</para>
+        <para id="id10720907">Form1.List1.AddItem “Thing 2”</para>
+        <para id="id10720914">Form1.List1.AddItem “Thing 1”</para>
+        <figure id="id7943440">
+          <media id="id1171913354532" alt=""><image src="../../media/graphics1-0cc8.png" mime-type="image/png" height="200" width="273"/></media>
+        </figure>
+        <para id="id7943468"/>
+        <para id="id7943482">Hình 1.1: Thao tác với List Box</para>
+        <para id="id8723352">Bước 3: Chạy ứng dụng bằng cách chọn Run/Start. List1 hiển thị 3 phần tử vừa thêm vào ở bước 2. Chấm dứt chương trình bằng cách chọn Run/End trên menu để trở về môi trường soạn thảo.</para>
+        <para id="id8723372">Bước 4: Nhấp đúp lên Button Command1 để hiển thị sự kiện Click của Command1.</para>
+        <para id="id8723387">Bước 5: Mục đích của Command1 là chuyển những phần tử được chọn từ List1 sang List2. Thêm đoạn mã sau vào thủ tục sự kiện Click của Command1:</para>
+        <para id="id8882047">' Kiem tra neu mot phan tu duoc chon</para>
+        <para id="id8882053">If Form1.List1.ListIndex = -1 Then Exit Sub</para>
+        <para id="id8882059">' Chep cac phan tu duoc chon tu List1 sang List2</para>
+        <para id="id8882067">Form1.List2.AddItem Form1.List1.List(Form1.List1.ListIndex)</para>
+        <para id="id8882077">Bước 6: Chạy ứng dụng. Nhấp phần tử thứ nhất của List1, sau đó nhấp Command1. Điều gì xảy ra? Phần tử được chọn của List1 phải được hiển thị bên List2. Chấm dứt ứng dụng và trở về môi trường soạn thảo.</para>
+        <para id="id8882088">Bước 7: Tìm trong phần trợ giúp các thuộc tính sau của ListBox:</para>
+        <para id="id8819907">oListCount</para>
+        <para id="id8819913">oList</para>
+        <para id="id8819920">oListIndex</para>
+        <para id="id8819926">Bước 8: Tìm trong phần trợ giúp các hàm sau của ListBox:</para>
+        <para id="id8834014">oAddItem</para>
+        <para id="id8834021">oRemoveItem</para>
+        <para id="id8834027">oClear</para>
+        <para id="id8834034">Bước 9: Tìm trợ giúp cho lệnh VB:</para>
+        <para id="id8834047">Exit Sub </para>
+        <para id="id8834054">Bước 10: Đoạn mã trong thủ tục Command1_Click thực hiện thao tác chép phần tử từ một ListBox sang một ListBox khác. Bây giờ ta làm ngược lại: loại bỏ phần tử trong List1. Để làm điều này ta nhấp đúp lên Command1 và thêm dòng code sau vào cuối thủ tục:</para>
+        <para id="id8782553">' Xoa phan tu duoc chon trong List1</para>
+        <para id="id8782565">Form1.List1.RemoveItem Form1.List1.ListIndex</para>
+        <para id="id8782572">Bước 11: Chạy chương trình và chọn phần tử thứ nhất trong List1. Điều gì xảy ra?</para>
+        <para id="id8723472">Bước 12: Nếu không chọn phần tử nào trong List1, nhấp Command1. Điều gì xảy ra? Tại sao?</para>
+        <para id="id8723487">Bước 13: Ta đã có một button dùng để chuyển các phần tử được lựa chọn từ trái sang phải (List1 sang List2), với button còn lại ta sẽ dùng để chuyển các phần tử được chọn từ phải sang trái (List2 sang List1).</para>
+        <para id="id8723507">Bước 14: Với Command2 ta sẽ copy đoạn mã từ Command1 với 1 vài thay đổi nhỏ.</para>
+        <para id="id8674252">Bước 15: Command2 thực hiện các thao tác giống với Command1, nhưng có nhiệm vụ di chuyển phần tử được lựa chọn từ List2 sang List1. Đoạn mã trong Command1 sẽ được sử dụng lại với một vài thay đổi nhỏ. Nhấp đúp lên Command1, chọn các mã lệnh đã thêm vào ở các bước trước. Chọn Edit/Copy trên menu.</para>
+        <para id="id8674274">Bước 16: Đóng cửa sổ Code và nhấp đúp lên Command2. Sự kiện Command2_Click sẽ hiển thị trong cửa sổ Code. Nhấp bất kỳ bên trong thủ tục sự kiện và chọn Edit/Paste trên menu. Như vậy ta đã chép đoạn mã từ Command1 sang Command2.</para>
+        <para id="id8033418">Bước 17: Sửa lại các mã lệnh vừa được chép. Thay đổi các chú thích cho thích hợp; đổi List1 thành List2 và ngược lại. Những sửa đổi này giúp Command2 có thể thực hiện thao tác chuyển các phần tử được chọn từ List2 sang List1.</para>
+        <para id="id8033439">Lưu các công việc đã thực hiện bằng cách chọn File/Save Project.</para>
+        <para id="id8033450">Bước 18: Chạy chương trình. Chọn phần tử thứ nhất trong List1 và chọn Command1 để chuyển nó sang List2. Bây giờ chọn phần tử thứ nhất trong List2, và nhấp Command2. Nếu Command2 không thực thi, trở lại môi trường soạn thảo. Kiểm tra lại đoạn mã lệnh trong thủ tục Command2_Click ta vừa chép ở bước trên.</para>
+        <para id="id8033462">Bước 19: Lưu ý rằng các phần tử ở cả 2 ListBox không được sắp thứ tự; nếu muốn sắp thứ tự, ta nhấp List1 và đổi thuộc tính Sorted thành True, tương tự đối với List2.</para>
+        <para id="id8893049">Bước 20: Lưu dự án lại và chạy chương trình. Tất cả các phần tử phải được hiển thị theo thứ tự trong cả 2 ListBox, bất chấp thứ tự chúng được thêm vào trong ListBox.</para>
+      </section>
+      <section id="id-873190353909">
+        <title>Bài tập 1I-2</title>
+        <section id="id-206248560066">
+          <title>THAO TÁC VỚI SPINCONTROL</title>
+          <para id="id7255130">Một SpinControl là sự kết hợp của TextBox và Slider. Slider tạo một miền giá trị số được hiển thị trong TextBox. Các giá trị này có thể được thay đổi bằng cách nhập trực tiếp vào trong TextBox.</para>
+          <para id="id7255147">Bước 1: Tạo thư mục Basic\Bt1-2. Tạo dự án mới trong thư mục trên.</para>
+          <para id="id7255161">Bước 2: Trong Form1, thêm một TextBox và Horizontal Scroll Bar như hình 2. Thiết lập các thuộc tính sau cho mỗi Control:</para>
+          <figure id="id8882309">
+            <media id="id1171909641663" alt=""><image src="../../media/graphics2-e204.png" mime-type="image/png" height="125" width="273"/></media>
+          </figure>
+          <para id="id8882337">Hình I.2: Spin Control</para>
+          <para id="id8861889">Item1: TextBox</para>
+          <para id="id8861898">Name: Text1</para>
+          <para id="id8861904">Text: &lt;blank&gt;</para>
+          <para id="id8861911">Item2: Horizontal Scroll Bar</para>
+          <para id="id8861916">Name: Hscroll1</para>
+          <para id="id8861923">LargeChange: 10</para>
+          <para id="id8861930">Max: 100</para>
+          <para id="id8861936">Bước 3: Nhấp đúp lên scrollbar để nhập mã lệnh, đây là sự kiện Change của Scroll Bar gọi là hàm HScroll1_Change. Thêm đoạn mã sau để hiển thị giá trị hiện thời của scroll bar trong TextBox.</para>
+          <para id="id7538149">Text1.Text = HScroll1.Value</para>
+          <para id="id7538155">Bước 4: Chạy ứng dụng bằng cách chọn Run/Start trên menu. Bây giờ nhấp các mũi tên trái và phải của scroll bar. Giá trị trong TextBox phải thay đổi.</para>
+          <para id="id7538173">Bước 5: Bây giờ thêm mã để thay đổi giá trị bằng cách nhập trực tiếp giá trị trong TextBox. Nhấp đúp vào TextBox và thêm đoạn mã sau để thiết lập giá trị cho scroll bar khi TextBox thay đổi:</para>
+          <para id="id7967710">HScroll1.Value = Text1.Text</para>
+          <para id="id7967716">Bước 6: Chạy chương trình và nhập 50 vào TextBox. Vạch của scroll bar thay đổi theo. Thay đổi vạch của scroll bar, giá trị trong TextBox cũng thay đổi.</para>
+          <para id="id7967733">Bước 7: Trong khi chạy chương trình, nhập ký tự A vào TextBox. Điều gì xảy ra? Nguyên nhân vì scroll bar chỉ nhận các giá trị là số chứ không phải ký tự.</para>
+          <para id="id7239372">Bước 8: Để ngăn chặn những ký tự không mong muốn được nhập vào TextBox, ta sử dụng sự kiện KeyPress. Sự kiện này xảy ra khi có một phím trên bàn phím được nhấn, nhưng trước khi giá trị thực sự được hiển thị trên TextBox. Sự kiện này nhận một giá trị số nguyên của phím được nhấn, gọi là ASCII. Mỗi ký tự trên bàn phím được đại diện bằng một mã ASCII duy nhất. Do đó ta có thể kiểm tra phím nào được nhấn và bỏ qua nó nếu ta thấy không cần thiết.</para>
+          <para id="id7967745">Bước 9: Thêm đoạn mã sau vào sự kiện Text1_KeyPress để ngăn chặn các giá trị không phải là số.</para>
+          <para id="id7239404">' Loai bo ky tu khong can thiet</para>
+          <para id="id7239410">If KeyAscii = vbKeyBack Then Exit Sub</para>
+          <para id="id7239414">If KeyAscii &lt; vbKey0 Or KeyAscii &gt; vbKey9 Then</para>
+          <para id="id8821981">KeyAscii = 0</para>
+          <para id="id8821986">End If</para>
+          <para id="id8821990">Bước 10: Lưu dự án lại và chạy chương trình.</para>
+        </section>
+      </section>
+      <section id="id-0536874915194">
+        <title>Bài tập 1I-3</title>
+        <para id="id8822013">THAO TÁC VỚI DRIVELISTBOX, DIRLISTBOX, FILELISTBOX</para>
+        <para id="id8822019">Trong ví dụ này ta phải tạo 5 đối tượng, trong đó có 4 điều khiển:</para>
+        <list id="id4412885" list-type="bulleted">
+          <item>Một Form.</item>
+          <item>Một điều khiển DriveListBox</item>
+          <item>Một điều khiển DirListBox</item>
+          <item>Một điều khiển FileListBox</item>
+          <item>Một điều khiển ImageBox</item>
+        </list>
+        <para id="id4412918">Bước 1: Tạo giao diện người dùng. Ta chỉ cần nhấp và vẽ đúng vị trí từng điều khiển trên Form.</para>
+        <para id="id7455396"><figure id="id7455407"><media id="id1171915268818" alt=""><image src=".png" mime-type="image/png" height="235" width="437"/></media></figure>1243</para>
+        <para id="id8882260">Hình I.3: Giao diện lựa chọn tập tin hình ảnh để hiển thị</para>
+        <para id="id8882267">1: DriveListBox</para>
+        <para id="id8882277">Name: drvSource</para>
+        <para id="id8882281">2:DirListBox</para>
+        <para id="id8882288">Name: dirSource</para>
+        <para id="id8882294">3:FileListBox</para>
+        <para id="id10724827">Name: filSource</para>
+        <para id="id10724832">Pattern: *.bmp;*.wmf;*.ico;*.jpg</para>
+        <para id="id10724837">4:ImageBox</para>
+        <para id="id10724844">Name: ImgSource</para>
+        <para id="id10724850">Stretch: TRUE</para>
+        <para id="id10724855">Bước 2: Viết mã trao đổi thông tin giữa các đối tượng:</para>
+        <para id="id10724869">Trong cửa sổ thiết kế Form, nhấp đúp vào DriveListBox, cửa sổ Code hiện ra, xử lý sự kiện sau:</para>
+        <para id="id10724879">Private Sub drvSource_Change()</para>
+        <para id="id10724883">dirSource.Path = drvSource.Drive</para>
+        <para id="id11568180">End Sub</para>
+        <para id="id11568184">Tương tự cho DirListBox &amp; FileListBox</para>
+        <para id="id11568190">Private Sub dirSource_Change()</para>
+        <para id="id11568194">filSource.Path = dirSource.Path</para>
+        <para id="id11568202">End Sub</para>
+        <para id="id11568206">Private Sub filSource_Click()</para>
+        <para id="id11568213">imgSource.Picture = LoadPicture(filSource.Path &amp; "\" &amp; filSource.FileName)</para>
+        <para id="id11568219">End Sub</para>
+        <para id="id11568224">Bước 3: Lưu dự án lại vào thư mục Basic\Bt1-3. Chạy chương trình nhờ phím F5.</para>
+        <figure id="id10719851">
+          <media id="id1171915464453" alt=""><image src="../../media/graphics3-a19a.png" mime-type="image/png" height="213" width="364"/></media>
+        </figure>
+        <para id="id10719878"/>
+        <para id="id10719892"> Hình I.4: Kết quả thực thi</para>
+      </section>
+      <section id="id-147483714842">
+        <title>Bài tập 1I-4</title>
+        <para id="id8894061">ĐIỀU KHIỂN OLE</para>
+        <para id="id8894066">Bước 1: Tạo dự án mới, trong đó ta có sử dụng OLE.</para>
+        <para id="id8894080">Hộp thoại Insert Object hiện ra để ta lựa chọn, ở đây chọn kích hoạt Create New, Object Type là Bitmap Image; đánh dấu chọn Display as Icon.</para>
+        <figure id="id8879422">
+          <media id="id1171913847568" alt=""><image src="../../media/graphics4-f715.png" mime-type="image/png" height="356" width="550"/></media>
+        </figure>
+        <para id="id8879451">Hình I.5: Sử dụng OLE Control</para>
+        <para id="id8724545">Bước 2: Nhấp OK, VB sẽ gọi trình ứng dụng Paint &amp; ta vẽ hình trên cửa sổ Paint. Sau đó chọn Exit &amp; Return trong cửa sổ Form, ta được:</para>
+        <para id="id8724572">
+          <figure id="id8724582">
+            <media id="id1171915707146" alt=""><image src=".png" mime-type="image/png" height="325" width="442"/></media>
+          </figure>
+          <figure id="id8819400">
+            <media id="id1171909772894" alt=""><image src=".png" mime-type="image/png" height="251" width="276"/></media>
+          </figure>
+        </para>
+        <para id="id8819424">Hình I.6: Kết quả thực thi ứng dụng</para>
+        <para id="id8696975">Bước 3: Lưu dự án vào thư mục Basic\Bt1I-4 và chạy chương trình; nhấp đúp vào biểu tượng Bitmap Image,VB sẽ khởi động Paint để ta hiệu chỉnh hình vẽ đầu.</para>
+      </section>
+    </section>
+    <section id="id-833209315455">
+      <title>Bài tập tự làm</title>
+      <list id="id8697004" list-type="enumerated">
+        <item>Thiết kế chương trình như sau:</item>
+      </list>
+      <para id="id8697014">Hình I.7 Các phép tính cơ bản<figure id="id8764006"><media id="id1171913624095" alt=""><image src="../../media/graphics5-1bb5.png" mime-type="image/png" height="203" width="353"/></media></figure></para>
+      <para id="id8764030">Nhập vào 2 giá trị A, B; sau đó chọn một phép toán (+,-,*,/). Nhấp chọn nút nhấn Thực hiện, kết quả sẽ hiển thị trong điều khiển nhãn Kết quả.</para>
+      <list id="id7974384" list-type="enumerated">
+        <item>Thiết kế chương trình để nhập vào tọa độ của hai điểm (x1,y1); (x2,y2) và cho phép:</item>
+      </list>
+      <para id="id7974402">a) Tính hệ số góc của đường thẳng đi qua hai điểm đó theo công thức:</para>
+      <para id="id7974412">Hệ số góc = (y2 - y1) /(x2 - x1)</para>
+      <para id="id7974422">b) Tính khoảng cách giữa hai điểm theo công thức:</para>
+      <para id="id7974428">khoảng cách = 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:msqrt><m:mrow><m:mo stretchy="false">(</m:mo><m:mtext>x2 - x1</m:mtext><m:mrow><m:msup><m:mo stretchy="false">)</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup><m:mo stretchy="false">+</m:mo><m:mo stretchy="false">(</m:mo></m:mrow><m:mtext>y2 - y1</m:mtext><m:msup><m:mo stretchy="false">)</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:msqrt></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ sqrt { \( "x2 - x1" \)  rSup { size 8{2} }  + \( "y2 - y1" \)  rSup { size 8{2} } } } {}</m:annotation></m:semantics></m:math></para>
+      <para id="id8685585">Giao diện chương trình có thể như sau:</para>
+      <para id="id8685591">Hình I.8: Tọa độ các điểm<figure id="id8934079"><media id="id1171915155852" alt=""><image src="../../media/graphics6-fc9f.png" mime-type="image/png" height="296" width="369"/></media></figure></para>
+      <para id="id8934103"/>
+      <list id="id8934107" list-type="enumerated">
+        <item>Viết chương trình cho phép nhập vào bán kính r của một hình tròn. Tính chu vi và diện tích của hình tròn theo công thức :</item>
+      </list>
+      <para id="id8934126">Chu vi CV = 2*Pi*r</para>
+      <para id="id8934136">Diện tích Dt = Pi*r*r</para>
+      <para id="id10722906">Hiển thị các kết quả lên màn hình.</para>
+      <para id="id10722912">4) Thiết kế chương trình có giao diện như hình dưới và thực hiện các chức năng sau:</para>
+      <figure id="id10722925">
+        <media id="id1171913601684" alt=""><image src="../../media/graphics7-bf41.png" mime-type="image/png" height="313" width="420"/></media>
+      </figure>
+      <para id="id10722953">Hình I.9: Lựa chọn tên</para>
+      <list id="id8671961" list-type="bulleted">
+        <item>Mỗi khi người sử dụng chương trình nhập thông tin vào 2 ô TextBox, sau đó nhấp chọn nút Thêm, giá trị của ô Mã số được đưa vào ComboBox, còn giá trị của ô Họ và tên được đưa vào ListBox.</item>
+        <item>Mỗi khi họ chọn một mã số nào đó trong ComboBox, giá trị họ và tên tương ứng cũng sẽ được chọn trong ListBox; đồng thời chúng sẽ được hiển thị lên trên các điều khiển TextBox tương ứng (như hình). (Xử lý sự kiện Combo1_Click &amp; List1_Click)</item>
+        <item>Đối với mã số và họ tên của một người, ta có thể sửa đổi giá trị của chúng trong các ô nhập TextBox, sau đó chọn nút Sửa, giá trị của chúng trong ComboBox &amp; ListBox cũng sửa đổi theo.</item>
+        <item>Khi người dùng chọn một mã số (hay họ tên) trên ComboBox (hoặc ListBox), sau đó họ chọn Xóa, các thông tin này được xóa ra khỏi ComboBox &amp; ListBox.</item>
+      </list>
+    </section>
+    <section id="id-136790065697">
+      <title>CÁC CẤU TRÚC LẬP TRÌNH TRONG VB</title>
+      <section id="id-855801894847">
+        <title>Bài tập có hướng dẫn</title>
+        <section id="id-278253275113">
+          <title>Bài tập 1II-1</title>
+          <para id="id8855559">SỬ DỤNG SELECT CASE</para>
+          <para id="id8855564">Tạo thư mục Basic\Bt1II-1. Thiết kế chương trình có giao diện &amp; lưu trong thư mục trên:</para>
+          <figure id="id8855574">
+            <media id="id1171900462319" alt=""><image src="../../media/graphics8-2f9f.png" mime-type="image/png" height="179" width="318"/></media>
+          </figure>
+          <para id="id8855602">Hình I.10: Select Case</para>
+          <para id="id7907334">Ở đây, người sử dụng chương trình nhập vào một tuổi nào đó trong ô nhập tuổi, sau đó họ nhấp nút Nhận xét, một nhận xét sẽ xuất hiện ứng với tuổi mà họ nhập từ bàn phím.</para>
+          <para id="id7907357">Lúc này ta sử dụng toán tử so sánh (=, &lt;, &lt;=, &gt;, &gt;=, &lt;&gt;) cùng với các từ khóa Is và To trong biểu thức.</para>
+          <para id="id8822112">Is: so sánh biến với biểu thức được liệt kê sau từ khóa Is.</para>
+          <para id="id8822138">To: định nghĩa phạm vi của giá trị.</para>
+          <para id="id8822155">Sự kiện Command1_Click():</para>
+          <para id="id8822161">Dim Age As Integer</para>
+          <para id="id10675480">Age = Val(Text1.Text)</para>
+          <para id="id10675488">Select Case Age</para>
+          <para id="id10675493">Case Is &lt; 18</para>
+          <para id="id10675505">Label2.Caption = "Ban con thieu nien, ban phai hoc thoi!"</para>
+          <para id="id10675519">Case 18 To 30</para>
+          <para id="id10675528">Label2.Caption = "Ban da truong thanh, lap gia dinh thoi!"</para>
+          <para id="id10675542">Case 31 To 60</para>
+          <para id="id7198535">Label2.Caption = "Lua tuoi trung nien roi!"</para>
+          <para id="id7198542">Case Else</para>
+          <para id="id7198551">Label2.Caption = "Ban co con chau day dan roi nhe!"</para>
+          <para id="id7198559">End Select </para>
+        </section>
+        <section id="id-559174162117">
+          <title>Bài tập 1II-2</title>
+          <para id="id7198576">
+            <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+          </para>
+        </section>
+        <section id="id-821902611978">
+          <title>BIẾN VÀ CẤU TRÚC</title>
+          <para id="id7198592">Bước 1: Tạo thư mục Basic\Bt1II-2. Tạo dự án mới (VB Standard EXE) trong thư mục trên; thêm một modul vào dự án, trong modul nay thêm vào đoạn mã sau:</para>
+          <para id="id7902921">Public Const tieude As String = "Quan ly hanh chinh"</para>
+          <para id="id7902928">Public Const sohieu As String = "1.0" </para>
+          <para id="id7902939">Thêm đoạn mã sau vào hàm xử lý sự kiện Form_Load của Form1:</para>
+          <para id="id7902953">Form1.Caption = tieude &amp; " phien ban " &amp; sohieu</para>
+          <para id="id7902961">Chạy ứng dụng, ta thấy tiêu đề của Form: “Quan ly hanh chinh phien ban 1.0”.</para>
+          <para id="id8711998">Bây giờ, mở Modul1 và thay Public bằng Private. Chạy chương trình. Điều gì xảy ra?</para>
+          <para id="id8712010">Bước 2: Đổi các khai báo trên thành Public, thêm dòng sau đây vào đầu thủ tục Form_Load:</para>
+          <para id="id8712021">tieude = “Loi xuat hien” &amp; “Hang so khong the thay doi duoc.”</para>
+          <para id="id8712030">Chạy chương trình, điều gì xảy ra?</para>
+          <para id="id8712039">Bước 3: Thêm dòng sau trong hàm xử lý sự kiện Form_Resize:</para>
+          <para id="id8712053">MsgBox “FORM RESIZE”</para>
+          <para id="id8819543">Bước 4: Chạy chương trình, khi Form bắt đầu được hiển thị (sự kiện Form_Load), sự kiện Resize của Form được thực hiện. Chỉ có hàm xử lý sự kiện Resize mới cho biết chắc rằng hàm Form_Load được thực thi. Để kiểm chứng ta tạo một biến trên form và trong hàm Form_Load ta thiết lập giá trị của nó. Sau đó, hàm Form_Resize có thể kiểm tra biến và xử lý trên biến này.</para>
+          <para id="id8819565">Bước 5: Khai báo một biến Private trong Form1 tên sukienLoad:</para>
+          <para id="id8819587">Private sukienLoad As Boolean</para>
+          <para id="id8819593">Trong hàm Form_Load, đặt giá trị True cho biến trên:</para>
+          <para id="id8819604">sukienLoad = True</para>
+          <para id="id10744911">Bây giờ ta kiểm tra giá trị của biến trong hàm Form_Resize. Thêm vào đoạn mã sau trong hàm Form_Resize:</para>
+          <para id="id10744924">If sukienLoad = True Then</para>
+          <para id="id10744930">SukienLoad =False</para>
+          <para id="id10744938">Exit Sub</para>
+          <para id="id10744945">End If</para>
+          <para id="id10744952">MsgBox “Form Resize”</para>
+          <para id="id10744962">Chạy ứng dụng, khi Form bắt đầu được hiển thị, ta không thấy xuất hiện câu thông báo, nhưng khi ta thay đổi kích thước của Form (nhấn các nút _,  của form), câu thông báo lại xuất hiện. Ở đây ta đã sử dụng một biến làm trung gian cho sự giao tiếp giữa sự kiện Form_Load và sự kiện Form_Resize. Bởi vì cả 2 hàm này nằm trong Form1, nên ta có khai báo Private cho chúng, các ứng dụng khác không thể truy xuất đến các biến này.</para>
+        </section>
+        <section id="id-661977829447">
+          <title>CHƯƠNG TRÌNH CON</title>
+          <para id="id8820411">Bước 6: Ta viết một chương trình con để xử lý chuỗi. Đầu vào của chương trình con là một chuỗi, kết quả của chương trình con là chuỗi đó nhưng các từ đều được viết hoa ký tự đầu tiên. Bài tập này giúp ta khai báo (định nghĩa) một chương trình con và gọi thực thi chương trình con đó trong chương trình ứng dụng của mình.</para>
+          <para id="id8820433">Chọn Modul1 trong cửa sổ soạn thảo chương trình, sau đó nhấp chọn Tools\Add Procedure. Định nghĩa một hàm public tên Doihoa() như sau:</para>
+          <para id="id8836863">Public Function Doihoa(s As String) As String</para>
+          <para id="id8836869">Dim s1 As String</para>
+          <para id="id8836876">Dim s2 As String</para>
+          <para id="id8836880">Do While InStr(s, " ") &lt;&gt; 0</para>
+          <para id="id8836893">s1 = Left(s, InStr(s, " "))</para>
+          <para id="id8836903">s = Right(s, Len(s) - InStr(s, " "))</para>
+          <para id="id8836912">' Doi chu hoa</para>
+          <para id="id8836922">s1 = UCase(Left(s1, 1)) &amp; Right(s1, Len(s1) - 1)</para>
+          <para id="id8723404">s2 = s2 &amp; s1</para>
+          <para id="id8723414">Loop</para>
+          <para id="id8723427"> ' Tra ket qua</para>
+          <para id="id8723441">Doihoa = s2 &amp; " " &amp; s</para>
+          <para id="id8723451">End Function</para>
+          <para id="id8723456"> ' Ham nay khong viet hoa tu cuoi cung.</para>
+          <para id="id8723464">Bước 7: Hàm Doihoa có nhiệm vụ nhận vào một chuỗi và đổi ký tự đầu tiên của các từ trong chuỗi thành chữ hoa. Bây giờ ta kiểm tra hàm này như sau: Thêm một TextBox và một nút nhấn (Button) lên Form1. Nhấp vào Button, ta thêm đoạn mã sau vào hàm xử lý sự kiện Command1_Click:</para>
+          <para id="id8763748">Form1.Caption = Doihoa(Text1.Text)</para>
+          <para id="id8763754">Chạy ứng dụng, nhập một chuỗi vào Text1, nhấp Command1. Chuỗi chữ hoa sẽ xuất hiện trên tiêu đề của Form1.</para>
+          <para id="id8763768">Bước 8: Sửa lại sao cho có thể viết hoa ký tự đầu tiên của tất các từ.</para>
+        </section>
+        <section id="id-510105105285">
+          <title>Bài tập 1II-3</title>
+          <para id="id8763783">
+            <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+          </para>
+        </section>
+        <section id="id-388504341801">
+          <title>LỰA CHỌN VỚI LISTBOX</title>
+          <para id="id7907126">Bước 1: Tạo thư mục Basic\Bt1II-3. Tạo dự án mới VB Standard EXE trong thư mục trên, sau đó tạo Form có dạng sau:</para>
+          <figure id="id7907145">
+            <media id="id1171915039750" alt=""><image src="../../media/graphics9-2d8b.png" mime-type="image/png" height="237" width="334"/></media>
+          </figure>
+          <para id="id7907174"/>
+          <para id="id7907179">Hình I.11: Lựa chọn với ListBox</para>
+          <para id="id7943648">Ta có 2 ListBox và các nút nhấn (Button); trong đó:</para>
+          <para id="id7943658">Nút &gt; chuyển một phần tử từ trái sang phải</para>
+          <para id="id7943667">Nút &lt; chuyển một phần tử từ phải sang trái.</para>
+          <para id="id7943675">Nút &gt;&gt; chuyển tất cả các phần tử từ trái sang phải.</para>
+          <para id="id7943684">Nút &lt;&lt; chuyển tất cả các phần tử từ phải sang trái.</para>
+          <para id="id7943694">Thêm 2 ListBox và 4 Button vào Form1. Trong hàm xử lý sự kiện Form_Load thêm vào đoạn mã:</para>
+          <para id="id8688242">List1.AddItem "Thing 1"</para>
+          <para id="id8688251">List1.AddItem "Thing 2"</para>
+          <para id="id8688260">List1.AddItem "Thing 3"</para>
+          <para id="id8688269">List1.AddItem "Thing 4"</para>
+          <para id="id8688278">List1.AddItem "Thing 5"</para>
+          <para id="id8688288">List1.AddItem "Thing 6"</para>
+          <para id="id8688297">Chạy chương trình.</para>
+          <para id="id8835907">Bước 2: Thêm hàm xử lý sự kiện Click cho nút nhấn 1 (&gt;) Command1_Click:</para>
+          <para id="id8835920">' Kiem tra co chon hay khong?</para>
+          <para id="id8835927">If Form1.List1.ListIndex = -1 Then Exit Sub</para>
+          <para id="id8835937"> ' Chep tu trai sang phai</para>
+          <para id="id8835946">Form1.List2.AddItem Form1.List1.List(Form1.List1.ListIndex)</para>
+          <para id="id8835956"> ' Xoa ben trai</para>
+          <para id="id8835966">Form1.List1.RemoveItem Form1.List1.ListIndex</para>
+          <para id="id7906961">Bước 3: Chạy chương trình, chọn phần tử trong List1 và nhấp nút &gt;, phần tử đó chuyển sang List2. Bây giờ ta làm ngược lại: chuyển phần tử được chọn từ List2 sang List1. Trở về cửa sổ soạn thảo; chọn đoạn mã vừa nhập trong List1, chọn Edit\Copy trong menu của VB. Nhấp lên Button &lt;, chọn Edit\Paste. Bây giờ ta sửa lại đoạn mã sau trong hàm xử lý sự kiện Command2_Click:</para>
+          <para id="id7906986">' Kiem tra co chon hay khong?</para>
+          <para id="id7906992">If Form1.List2.ListIndex = -1 Then Exit Sub</para>
+          <para id="id7907001"> ' Chep tu phai sang trai</para>
+          <para id="id7907011">Form1.List1.AddItem Form1.List2.List(Form1.List2.ListIndex)</para>
+          <para id="id7907024">' Xoa ben phai</para>
+          <para id="id8938876">Form1.List2.RemoveItem Form1.List2.ListIndex </para>
+          <para id="id8938886">Bước 4: Lưu dự án và chạy chương trình.</para>
+          <para id="id8938899">Ta nhận thấy 2 đoạn mã lệnh trên (cho Button &lt; và &gt;) là như nhau (chỉ đổi chỗ List1 cho List2 và ngược lại). Do đó ta sẽ viết một chương trình con để chuyển dữ liệu từ ListBox này sang ListBox kia, và trong hàm xử lý sự kiện của 2 Button ta chỉ cần gọi chương trình con này để chuyển dữ liệu.</para>
+          <para id="id8938921">Thêm một Modul mới vào dự án tên Modul1, chọn Tool\Add Procedure để thêm một chương trình con vào tên Chuyendulieu()</para>
+          <para id="id7889679">Vào Modul1, sửa đổi lại thủ tục chuyển dữ liệu như sau:</para>
+          <para id="id7889690">Public Sub Chuyendulieu(L1 As ListBox, L2 As ListBox)</para>
+          <para id="id7889697"> ' Kiem tra co chon hay khong?</para>
+          <para id="id7889708">If L1.ListIndex = -1 Then Exit Sub</para>
+          <para id="id7889718"> ' Chep</para>
+          <para id="id7889728">L2.AddItem L1.List(L1.ListIndex)</para>
+          <para id="id7889739">' Xoa ben trai</para>
+          <para id="id8834436">L1.RemoveItem L1.ListIndex</para>
+          <para id="id8834447">End Sub</para>
+          <para id="id8834451">Bây giờ hàm xử lý sự kiện của Command1 (Command1_Click) ta sửa lại như sau:</para>
+          <para id="id8834459">Call Chuyendulieu(Form1.List1, Form1.List2)</para>
+          <para id="id8834466">Hàm Command2_Click:</para>
+          <para id="id8834472">Call Chuyendulieu(Form1.List2, Form1.List1)</para>
+          <para id="id8834478">Lưu dự án và chạy chương trình. Kiểm tra kết quả.</para>
+        </section>
+        <section id="id-63976634431">
+          <title>Bài tập 1I -4</title>
+          <para id="id8834493">TRUYỀN THEO ĐỊA CHỈ VÀ TRUYỀN THEO GIÁ TRỊ</para>
+          <para id="id8723922">Bước 1: Tham số đưa vào chương trình con được truyền theo một trong 2 cách: theo địa chỉ và theo giá trị. Bây giờ ta tạo dự án mới trong thư mục Basic\Bt2-4 để kiểm tra chúng.</para>
+          <para id="id8723940">Bước 2: Tạo Form1 như sau:</para>
+          <para id="id8723953">Hình I.12: Truyền tham số321<figure id="id5360955"><media id="id1171915870214" alt=""><image src="../../media/graphics10-440a.png" mime-type="image/png" height="250" width="333"/></media></figure></para>
+          <para id="id5360979">Button 1: Name: cmdTTri; Caption: Truyen tri</para>
+          <para id="id5360986">Button 2: Name: cmdTChieu; Caption: Tham chieu</para>
+          <para id="id5360993">TextBox: Name: Text1</para>
+          <para id="id5468622">Label 1: Name: lblTruoc</para>
+          <para id="id5468628">Label 2: Name: lblTrong</para>
+          <para id="id5468634">Label 3: Name: lblSau</para>
+          <para id="id5468640">Bước 3: Thêm 1 Modul vào dự án tên là Modul1, chọn Tools\Add Procedure thêm thủ tục Thamchieu như sau: </para>
+          <para id="id5468656">Name: Thamchieu</para>
+          <para id="id5468663">Type: Sub</para>
+          <para id="id5468669">Scope: Public</para>
+          <para id="id5468676">Bước 4: Thêm đoạn mã sau trong thủ tục Thamchieu</para>
+          <para id="id5468690">Public Sub Thamchieu(so As Integer)</para>
+          <para id="id10723663">so = so + 2</para>
+          <para id="id10723673">Form1.lblTrong.Caption = Str(so)</para>
+          <para id="id10723684">End Sub</para>
+          <para id="id10723688">Bước 5: Chọn Tool\Add Procedure để thêm thủ tục Truyentri như sau:</para>
+          <para id="id10723702">Name: Truyentri</para>
+          <para id="id10723709">Type: Sub</para>
+          <para id="id10723716">Scope: Public</para>
+          <para id="id10723722">Bước 6: Thêm đoạn mã sau trong thủ tục Truyentri</para>
+          <para id="id11568283">Public Sub Truyentri(ByVal so As Integer)</para>
+          <para id="id11568290">so = so + 2</para>
+          <para id="id11568300">Form1.lblTrong.Caption = Str(so)</para>
+          <para id="id11568311">End Sub</para>
+          <para id="id11568315">Bước 7: Sự khác nhau giữa 2 thủ tục trên là từ khóa ByVal trong thủ tục Truyentri. Bây giờ ta thêm thủ tục xử lý biến cố Click của Button cmdTTri. Thêm đoạn mã sau:</para>
+          <para id="id11568342">Private Sub cmdTTri_Click()</para>
+          <para id="id8834632">Dim n As Integer</para>
+          <para id="id8834643">n = Val(Text1.Text)</para>
+          <para id="id8834653">lblTruoc.Caption = Str(n)</para>
+          <para id="id8834664">Call Truyentri(n)</para>
+          <para id="id8834675">lblSau.Caption = Str(n)</para>
+          <para id="id8834685">End Sub</para>
+          <para id="id8834689">Bước 9: Thêm hàm xử lý biến cố cmdTChieu_Click cho Button cmdTChieu:</para>
+          <para id="id8811752">Private Sub cmdTChieu_Click()</para>
+          <para id="id8811756">Dim n As Integer</para>
+          <para id="id8811767">n = Val(Text1.Text)</para>
+          <para id="id8811779">lblTruoc.Caption = Str(n)</para>
+          <para id="id8811791">Call Thamchieu(n)</para>
+          <para id="id8811803">lblSau.Caption = Str(n)</para>
+          <para id="id8811814">End Sub</para>
+          <para id="id8811818">Bước 10: Lưu dự án, chạy chương trình. Nhập số bất kỳ vào ô TextBox rồi nhấp nút Truyen tri, sau đó nhấp nút Tham chieu. Kiểm tra kết quả. Giải thích.</para>
+          <section id="id-5001036586">
+            <title>Bài tập 1II-5</title>
+            <para id="id8819952">
+              <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+            </para>
+          </section>
+        </section>
+      </section>
+      <section id="id-618857452715">
+        <title>THAM SỐ TÙY CHỌN</title>
+        <para id="id8819970">Bước 1: Tạo thư mục tên Basic\Bt1II-5. Tạo dự án mới trong thư mục này.</para>
+        <para id="id8819984">Bước 2: Tạo Form như sau:</para>
+        <figure id="id8820000">
+          <media id="id1171902778712" alt=""><image src="../../media/graphics11-f12b.png" mime-type="image/png" height="225" width="334"/></media>
+        </figure>
+        <para id="id8763826"/>
+        <para id="id8763830">Hình I.13: Lấy thời gian</para>
+        <para id="id8763857">Trong đó:</para>
+        <para id="id8763865">Label: Name: lblTg</para>
+        <para id="id8763872">Button 1: Name: cmdGioPhut</para>
+        <para id="id7980909">Button 2: Name: cmdGioPhutGiay</para>
+        <para id="id7980915">Bước 3: Thêm modul mới vào dự án tên Modul1. Chọn Tool\ Add Procedure tạo thủ tục:</para>
+        <para id="id7980930">Name: Laythoigian</para>
+        <para id="id7980936">Type: Sub</para>
+        <para id="id7980943">Scope: Public</para>
+        <para id="id7980949">Bước 3: Thêm đoạn mã sau vào thủ tục trên:</para>
+        <para id="id7980963">Public Sub Laythoigian(gio As String, phut As String, Optional giay As String)</para>
+        <para id="id7980972">' Tham so thu 3 co tu khoa Optional, nghia la ta</para>
+        <para id="id10750053">' co the goi thu tuc co the co tham so nay hay khong co deu duoc</para>
+        <para id="id10750063">' Ham IsMissing kiem tra xem tham so nay co hay khong</para>
+        <para id="id10750074">If IsMissing(giay) Then giay = ""</para>
+        <para id="id10750083">Dim hientai</para>
+        <para id="id10750092">hientai = Now</para>
+        <para id="id10750102">gio = Format$(hientai, "hh")</para>
+        <para id="id10750112">phut = Format$(hientai, "nn")</para>
+        <para id="id10750121">giay = Format$(hientai, "ss")</para>
+        <para id="id8726888">End Sub</para>
+        <para id="id8726896">Bước 4: Thêm thủ tục xử lý sự kiện cho Button cmdGiophutgiay, trong thủ tục này chèn đoạn mã sau:</para>
+        <para id="id8726912">Private Sub cmdGiophutgiay_Click()</para>
+        <para id="id8726918">Dim gioht As String</para>
+        <para id="id8726929">Dim phutht As String</para>
+        <para id="id8726939">Dim giayht As String</para>
+        <para id="id8726949">Call Laythoigian(gioht, phutht, giayht)</para>
+        <para id="id7465928">lblTg.Caption = gioht &amp; ":" &amp; phutht &amp; ":" &amp; giayht</para>
+        <para id="id7465941">End Sub</para>
+        <para id="id7465945">Bước 5: Thêm thủ tục xử lý sự kiên cho Button cmdGiophut, trong thủ tục này chèn đoạn mã sau:</para>
+        <para id="id7465961">Private Sub cmdGiophut_Click()</para>
+        <para id="id7465965">Dim gioht As String</para>
+        <para id="id7465975">Dim phutht As String</para>
+        <para id="id7465986">' Khong su dung tham so thu ba</para>
+        <para id="id10723258">Call Laythoigian(gioht, phutht)</para>
+        <para id="id10723268">lblTg.Caption = gioht &amp; ":" &amp; phutht</para>
+        <para id="id10723279">End Sub</para>
+        <para id="id10723284">Bước 6: Lưu dự án lại và chạy chương trình. Kiểm tra kết quả.</para>
+        <section id="id-970493598065">
+          <title>Bài tập 1II-6</title>
+          <para id="id10723298">
+            <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+          </para>
+        </section>
+      </section>
+      <section id="id-812921014802">
+        <title>PARAM ARRAY</title>
+        <para id="id10723314">Bước 1: Tạo thư mục Basic\Bt1II-6. Tạo dự án mới trong thư mục này.</para>
+        <para id="id10723329">Bước 2: Tạo Form như hình sau:</para>
+        <figure id="id8685282">
+          <media id="id1171901488310" alt=""><image src="../../media/graphics12-03f3.png" mime-type="image/png" height="250" width="334"/></media>
+        </figure>
+        <para id="id8685311">Hình I.14: Param Array</para>
+        <para id="id8685338">Trong đó:</para>
+        <para id="id8755549">ListBox: Name: lstTen</para>
+        <para id="id8755556">Button: Name: cmdds; Caption: Them vao danh sach</para>
+        <para id="id8755565">Bước 3: Chèn modul mới vào dự án tên Modul1. Sau đó, chọn Tool\Add Procedure để chèn thủ tục sau:</para>
+        <para id="id8755580">Name: Diends</para>
+        <para id="id8755587">Type: Sub</para>
+        <para id="id8755594">Scope: Public</para>
+        <para id="id8755600">Bước 3: Chèn đoạn mã sau vào thủ tục Diends</para>
+        <para id="id8755615">Public Sub Diends(ParamArray Ten() As Variant)</para>
+        <para id="id8811961">' Su dung ParamArray thi mang phai kieu Variant va</para>
+        <para id="id8811972">' mang nay la tham so cuoi cung cua thu tuc</para>
+        <para id="id8811983">Dim hten As Variant</para>
+        <para id="id8811994">For Each hten In Ten()</para>
+        <para id="id8812004">Form1.lstTen.AddItem hten</para>
+        <para id="id8812014">Next</para>
+        <para id="id8812025">End Sub</para>
+        <para id="id8812030">Bước 4: ParamArray cho phép không cần xác định số lượng các đối số trong một chương trình con. Bây giờ, thêm hàm xử lý sự kiện cho nút cmdds: cmdds_Click:</para>
+        <para id="id10715559">Private Sub cmdds_Click()</para>
+        <para id="id10715565"> Call Diends("Huynh Xuan Hiep", "Nguyen Van Linh", "Lam Hoai Bao")</para>
+        <para id="id10715580"> Call Diends</para>
+        <para id="id10715594"> Call Diends("Phan Huy Cuong")</para>
+        <para id="id10715607">End Sub</para>
+        <para id="id10715611">Bước 5: Lưu dự án lại và chạy chương trình. Kiểm tra kết quả (hình bên dưới). Lưu ý đến lời gọi thủ tục trong sự kiện cmdds_Click (số lượng đối số khác nhau)</para>
+        <figure id="id8938711">
+          <media id="id1171901899570" alt=""><image src="../../media/graphics13.png" mime-type="image/png" height="230" width="334"/></media>
+        </figure>
+        <para id="id8938740"/>
+        <para id="id8938744">Hình I.15: Kết quả Param Array</para>
+      </section>
+      <section id="id-470277753249">
+        <title>Bài tập 1II-7</title>
+        <para id="id8723802">XỬ LÝ CHUỖI</para>
+        <para id="id8723807"><figure id="id8723818"><media id="id1171915828735" alt=""><image src=".png" mime-type="image/png" height="206" width="333"/></media></figure>12345Bước 1: Tạo dự án mới trong thư mục Basic\Bt2-7 với giao diện như sau:</para>
+        <para id="id10727150">Hình I.16: Xử lý chuỗi</para>
+        <para id="id10727176">1: Form: Name: frmMain; MinButton: False; MaxButton: False; Font: VNI-Times.</para>
+        <para id="id10727182">2: Label: Name: lblTen.</para>
+        <para id="id10727186">3: TextBox: Name: txtTen.</para>
+        <para id="id10727190">4: CommandButton: Name: cmdTen; Caption: Tách tên.</para>
+        <para id="id7450772">5: CommandButton: Name: cmdCKT; Caption: Cắt khoảng trắng.</para>
+        <para id="id7450777">Bước 2: Tạo một hàm cắt khoảng trắng như sau:</para>
+        <para id="id7450791">Private Function ATrim(ByVal Name As String) As String</para>
+        <para id="id7450796">Name = LTrim(RTrim(Name))</para>
+        <para id="id7450803">Do While InStr(Name, "") &lt;&gt; 0</para>
+        <para id="id7450822">Name = Replace(Name, "", "")</para>
+        <para id="id10715469">Loop</para>
+        <para id="id10715476">ATrim = Name</para>
+        <para id="id10715483">End Function</para>
+        <para id="id10715488">Bước 3: Trong cửa sổ thiết kế Form; nhấp đúp vào Tách tên, ta xử lý đoạn mã cho sự kiện này:</para>
+        <para id="id10715512">Private Sub cmdTen_Click()</para>
+        <para id="id10715516">Dim sName As String, Name As String</para>
+        <para id="id10715524">sName = ATrim(StrConv(txtTen.Text, vbProperCase))</para>
+        <para id="id10715532">Dim i As Long </para>
+        <para id="id7943818">i = InStrRev(sName, "")</para>
+        <para id="id7943837">Name = Right(sName, Len(sName) - i)</para>
+        <para id="id7943844">MsgBox Name &amp; ": " &amp; Str(Len(Name))</para>
+        <para id="id7943853">End Sub</para>
+        <para id="id7943857">Bước 4: Sau đó, trở lại cửa sổ thiết kế, nhấp đúp vào Cắt khoảng trắng, ta xử lý:</para>
+        <para id="id7943881">Private Sub cmdCKT_Click()</para>
+        <para id="id7943885">Dim sName As String</para>
+        <para id="id7943893">sName = ATrim(StrConv(txtTen.Text, vbProperCase))</para>
+        <para id="id8836935">MsgBox sName, , "Kieu du lieu chuoi"</para>
+        <para id="id8836942">End Sub</para>
+        <para id="id8836947">Bước 5: Lưu dự án và chạy chương trình.</para>
+      </section>
+      <section id="id-673966197785">
+        <title>Bài tập 1II-8</title>
+        <section id="id-581492544038">
+          <title>XỬ LÝ LỖI</title>
+          <para id="id8836976">Bước 1: Tạo một dự án mới. Dùng Tools\Add Procedure thêm một thủ tục mới tên GoiThuTuc vào Form1 với nội dung như sau:</para>
+          <para id="id8836992">Public Sub GoiThuTuc()</para>
+          <para id="id8836996">Dim bien As Integer </para>
+          <para id="id8819259"> MsgBox "Truoc khi gan tri cho bien"</para>
+          <para id="id8819269"> bien = "Bien nguyen khong nhan gia tri la chuoi"</para>
+          <para id="id8819280"> MsgBox "Sau khi gan tri cho bien: " &amp; "Bien = " &amp; Format(bien)</para>
+          <para id="id8819292">End Sub</para>
+          <para id="id8819301">Bước 2: Thủ tục xử lý sự kiện Form_Load có nội dung như sau:</para>
+          <para id="id8819315">Private Sub Form_Load() </para>
+          <para id="id8819319">MsgBox "Truoc khi goi thu tuc"</para>
+          <para id="id8819329">Call GoiThuTuc</para>
+          <para id="id8879457">MsgBox "Sau khi goi thu tuc" </para>
+          <para id="id8879469">End Sub</para>
+          <para id="id8879474">Lưu dự án vào thư mục Basic\Bt1II-8:</para>
+          <para id="id8879479">Form: tên là form1</para>
+          <para id="id8879485">Project: Debug</para>
+          <para id="id8879491">Bước 3: Chạy chương trình. VB đưa ra hộp thoại để bắt lỗi (debug) chương trình. Ta chọn End để trở về cửa sổ soạn thảo.</para>
+          <para id="id8879508">Tạo tập tin thực thi tên Debug.exe bằng cách chọn File\Make Debug.exe. Chạy tập tin Debug.exe từ Windows Explorer ta nhận được hộp thoại báo lỗi và chương trình tự động chấm dứt.</para>
+          <para id="id8879524">Nhận xét kết quả khi thực hiện chương trình.</para>
+          <para id="id8879531">Bước 4: Bây giờ ta thêm vào đoạn mã xử lý lỗi trong thủ tục của sự kiện Form_Load:</para>
+          <para id="id8835193">Private Sub Form_Load()</para>
+          <para id="id8835197">On Error GoTo Xulyloi</para>
+          <para id="id8835209">MsgBox "Truoc khi goi thu tuc"</para>
+          <para id="id8835219">Call GoiThuTuc</para>
+          <para id="id8835228">MsgBox "Sau khi goi thu tuc"</para>
+          <para id="id8835241">Thoat:</para>
+          <para id="id8835245">Exit Sub</para>
+          <para id="id8835255">Xulyloi:</para>
+          <para id="id7879240">MsgBox "Su kien Form_Load - Loi xay ra: " &amp; Err.Description</para>
+          <para id="id7879251">Resume Thoat</para>
+          <para id="id7879260">End Sub</para>
+          <para id="id7879265">Bước 5: Lưu dự án và chạy chương trình. Nhận thấy, thay vì ta nhận được câu thông báo lỗi từ VB, một hộp thoại báo lỗi do ta đưa vào xuất hiện. Lưu ý, những lỗi được bắt trong thủ tục Form_Load (chứ không phải trong GoiThuTuc()). Nguyên nhân vì thủ tục GoiThuTuc() được gọi bởi thủ tục xử lý sự kiện Form_Load.</para>
+          <para id="id7879293">Bước 6: Biên dịch lại thành tập tin Debug.exe, chạy nó. Nhận xét kết quả.</para>
+          <para id="id7879308">Bước 7: Các kết quả trên cho ta biết được các lỗi trong sự kiện Form_Load được xử lý bởi các thao tác bắt lỗi trong thủ tục Form_Load. Nhưng nếu thủ tục GoiThuTuc() cũng có các thao tác bắt lỗi chương trình thì sao? Đơn giản giả sử một lỗi xuất hiện trong GoiThuTuc(). Bộ phận xử lý lỗi của GoiThuTuc (do ta thêm vào để bắt lỗi chương trình) sẽ thực thi thay vì đoạn lệnh bắt lỗi của sự kiện Form_Load được thực hiện. Khi GoiThuTuc chấm dứt, quyền xử lý lỗi mới trao lại cho sự kiện Form_Load.</para>
+          <para id="id8784894">Sửa lại thủ tục GoiThuTuc như sau:</para>
+          <para id="id8784900">Public Sub GoiThuTuc()</para>
+          <para id="id8784907">Dim bien As Integer</para>
+          <para id="id8784918">On Error GoTo Xulyloicucbo</para>
+          <para id="id8784928"> MsgBox "Truoc khi gan tri cho bien"</para>
+          <para id="id8784939"> bien = "Bien nguyen khong nhan gia tri la chuoi"</para>
+          <para id="id8723643"> MsgBox "Sau khi gan tri cho bien: " &amp; "Bien = " &amp; Format(bien)</para>
+          <para id="id8723656">Thoatthutuc:</para>
+          <para id="id8723660">Exit Sub</para>
+          <para id="id8723671">Xulyloicucbo:</para>
+          <para id="id8723675">MsgBox "GoiThuTuc() - Loi xay ra: " &amp; Err.Description</para>
+          <para id="id8723687">Resume Thoatthutuc </para>
+          <para id="id8723701">End Sub</para>
+          <para id="id8723705">Bước 8: Lưu dự án và chạy chương trình. Thay đoạn mã Resume Thoatthutuc bằng Resume và chạy chương trình. Một vòng lặp vô tận xảy ra do chương trình sẽ quay lại đoạn mã bị lỗi và cố gắng thực thi nó; để thoát chương trình ta phải bấm tổ hợp phím Ctrl + Break.</para>
+          <para id="id8723718">Bây giờ thay Resume bằng Resume Next và chạy lại chương trình. Nhận xét kết quả. Giải thích.</para>
+        </section>
+      </section>
+      <section id="id-114734872261">
+        <title>Bài tập tự làm</title>
+        <list id="id8698990" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép nhập vào các hệ số a, b của phương trình bậc 1 dạng: ax+b=0; sau đó giải phương trình này. Giao diện chương trình có thể như sau:</item>
+        </list>
+        <para id="id8699008">Hình I.17: Phương trình bậc 1<figure id="id8699036"><media id="id1171901760026" alt=""><image src="../../media/graphics14.png" mime-type="image/png" height="200" width="326"/></media></figure></para>
+        <list id="id8771807" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép nhập vào các hệ số a, b, c của phương trình bậc 2 dạng: ax2 + bx + c=0; sau đó giải phương trình này.</item>
+          <item>Thiết kế chương trình cho phép nhập vào một ký tự, sau đó kiểm tra xem ký tự đó thuộc tập hợp nào trong các tập ký tự sau:</item>
+        </list>
+        <para id="id8771851">Các ký tự chữ hoa: 'A' ...'Z'</para>
+        <para id="id8771857">Các ký tự chữ thường: 'a' ... 'z'</para>
+        <para id="id8771866">Các ký tự chữ số : '0' ... '9'</para>
+        <para id="id8771871">Các ký tự khác.</para>
+        <list id="id10750158" list-type="enumerated">
+          <item>Giải phương trình bậc 1 bằng cách sử dụng cấu trúc Select Case</item>
+          <item>Tạo một chương trình hiển thị một danh sách chọn lựa cho người dùng trong một ListBox, sau đó xử lý với cấu trúc quyết định Select Case.</item>
+        </list>
+        <para id="id10750183">Mục đích của điều khiển sự kiện này là hiển thi một danh sách các quốc gia, sau đó hiển thị một thông điệp chào mừng bằng ngôn ngữ bản xứ khi người dùng chọn quốc gia của họ.</para>
+        <para id="id10750195">
+          <figure id="id10750198">
+            <media id="id1171915455674" alt=""><image src="../../media/graphics15.png" mime-type="image/png" height="176" width="299"/></media>
+          </figure>
+          <figure id="id10750227">
+            <media id="id1171905244792" alt=""><image src="../../media/graphics16.png" mime-type="image/png" height="176" width="283"/></media>
+          </figure>
+        </para>
+        <para id="id8937440">Hình I.18: Lời chào các nước</para>
+        <para id="id8937467">Chẳng hạn: Tiếng Anh: Hello, programmer</para>
+        <para id="id8937477">Tiếng Đức: Hallo, programmierer</para>
+        <para id="id8937485">Tiếng Tây Ban Nha: Hola, programador</para>
+        <para id="id8937494">Tiếng Ý: Ciao, programmatori</para>
+        <list id="id8937503" list-type="enumerated">
+          <item>Sử dụng vòng lặp For.. Next</item>
+        </list>
+        <para id="id8938091">Sử dụng For.. Next để thay đổi độ lớn ký tự trên một Form bằng cách thay đổi thuộc tính FontSize của Form.</para>
+        <para id="id8938100">Thiết kế Form có giao diện:</para>
+        <para id="id8938105">
+          <figure id="id8938108">
+            <media id="id1171914108771" alt=""><image src="../../media/graphics17.png" mime-type="image/png" height="198" width="299"/></media>
+          </figure>
+          <figure id="id8938137">
+            <media id="id1171915863318" alt=""><image src="../../media/graphics18.png" mime-type="image/png" height="198" width="291"/></media>
+          </figure>
+        </para>
+        <para id="id7251220">Hình I.19: For…Next</para>
+        <para id="id7251246">Sự kiện Command1_Click()</para>
+        <para id="id7251252">Dim i As Integer</para>
+        <para id="id7251256">For i = 1 To 10</para>
+        <para id="id7251265">Form1.FontSize = 10 + i</para>
+        <para id="id7251273">Print "Line "; i</para>
+        <para id="id7251282">Next</para>
+        <para id="id7251290">Chạy chương trình. </para>
+        <list id="id7251296" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép tính N! (N! = 1*2*3*…*N). Giao diện đề nghị:</item>
+        </list>
+        <figure id="id8880102">
+          <media id="id1171915091220" alt=""><image src="../../media/graphics19.png" mime-type="image/png" height="138" width="271"/></media>
+        </figure>
+        <para id="id8880131">Hình I.20: Tính N!</para>
+        <list id="id8880157" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép nhập vào một số nguyên N; sau đó tính các tổng sau:</item>
+        </list>
+        <para id="id10725091">a. S=1 + 2 + ... + n</para>
+        <para id="id10725100">b. S=1/2 + 2/3 + ... +n/(n+1)</para>
+        <para id="id10725108">c. S= - 1 +2 - 3 +4 - ... + (-1)nn</para>
+        <list id="id10725128" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép nhập vào số nguyên dương N; sau đó tìm số nguyên dương k nhỏ nhất sao cho 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mrow><m:mfrac><m:mn>2</m:mn><m:mrow><m:mn>1</m:mn><m:mo stretchy="false">∗</m:mo><m:mn>3</m:mn></m:mrow></m:mfrac><m:mo stretchy="false">+</m:mo><m:mfrac><m:mn>3</m:mn><m:mrow><m:mn>2</m:mn><m:mo stretchy="false">∗</m:mo><m:mn>4</m:mn></m:mrow></m:mfrac></m:mrow><m:mo stretchy="false">+</m:mo><m:mtext>.</m:mtext></m:mrow><m:mtext>.</m:mtext><m:mrow><m:mrow><m:mtext>.</m:mtext><m:mo stretchy="false">+</m:mo><m:mfrac><m:mi>k</m:mi><m:mrow><m:mo stretchy="false">(</m:mo><m:mrow><m:mi>k</m:mi><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:mrow><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">∗</m:mo><m:mo stretchy="false">(</m:mo></m:mrow><m:mrow><m:mi>k</m:mi><m:mo stretchy="false">+</m:mo><m:mn>1</m:mn></m:mrow><m:mo stretchy="false">)</m:mo></m:mrow></m:mfrac></m:mrow><m:mo stretchy="false">≥</m:mo><m:mrow/></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ {  {2}  over  {1*3} } + {  {3}  over  {2*4} } + "."  "."  "." + {  {k}  over  { \( k - 1 \) * \( k+1 \) } }  &gt;= {}} {}</m:annotation></m:semantics></m:math>N.</item>
+          <item>Thiết kế chương trình cho phép nhập vào 2 số nguyên A, B; sau đó tìm UCLN và BCNN của hai số a và b theo thuật toán sau ( Ký hiệu UCLN của a, b là (a,b) còn BCNN là [a,b])</item>
+        </list>
+        <para id="id8851611">- Nếu a chia hết cho b thì (a,b) = b</para>
+        <para id="id8851616">- Nếu a = b*q + r thì (a,b) = (b,r)</para>
+        <para id="id8851622">- [a,b] = a*b/(b,r)</para>
+        <list id="id8851626" list-type="enumerated">
+          <item>Thiết kế chương trình cho phép nhập vào số nguyên N; sau đó viết 1 hàm tính N!; cuối cùng hiển thị kết quả giá trị N!.</item>
+          <item>Thiết kế chương trình cho phép nhập vào 2 số nguyên N, K; sử dụng hàm tính N! ở trên, viết một hàm tính giá trị tổ hợp chập K của N phần tử theo công thức 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:msubsup><m:mi>C</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mi>N</m:mi></m:mrow></m:mstyle><m:mstyle fontsize="8pt"><m:mrow><m:mi>K</m:mi></m:mrow></m:mstyle></m:msubsup><m:mo stretchy="false">=</m:mo><m:mfrac><m:mrow><m:mi>N</m:mi><m:mi>!</m:mi></m:mrow><m:mrow><m:mi>K</m:mi><m:mtext>!*</m:mtext><m:mo stretchy="false">(</m:mo><m:mrow><m:mi>N</m:mi><m:mo stretchy="false">−</m:mo><m:mi>K</m:mi></m:mrow><m:mo stretchy="false">)</m:mo><m:mi>!</m:mi></m:mrow></m:mfrac></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{C rSub { size 8{N} }  rSup { size 8{K} } = {  {N!}  over  {K"!*" \( N - K \) !} } } {}</m:annotation></m:semantics></m:math>.</item>
+          <item>Thiết kế chương trình cho phép nhập vào số thực X và số nguyên N; sau đó viết các hàm tính các tổng sau rồi hiển thị kết quả:</item>
+        </list>
+        <para id="id7195868">- S= 1 + x +x2 + x3 + ... + xn</para>
+        <para id="id7250910">- S= 1 - x +x2 - x3 + ... (-1)n xn</para>
+        <para id="id7250947">- S= 1 + x/1! +x2/2! + x3/3! + ... + xn/n!</para>
+        <list id="id7250980" list-type="enumerated">
+          <item>Sử dụng vòng lặp Do While … Loop thiết kế chương trình cho phép nhập vào một số nguyên, sau đó thông báo kết quả xem số đó có phải là số nguyên tố hay không?</item>
+        </list>
+        <para id="id8782144">Đoạn chương trình kiểm tra số nguyên N có nguyên tố hay không:</para>
+        <para id="id8782150">i = 2</para>
+        <para id="id8782154">Do While (i &lt; N) And (N Mod i &lt;&gt; 0)</para>
+        <para id="id8782161">i = i + 1</para>
+        <para id="id8782168">Loop</para>
+        <para id="id8782172">If i = N Then N là số nguyên tố</para>
+        <para id="id8782184">Else N không là nguyên tố</para>
+        <list id="id8782193" list-type="enumerated">
+          <item>Làm lại bài tập 11 (tính N!) nhưng sử dụng vòng lặp Do While … Loop.</item>
+          <item>Làm lại bài tập 15 (kiểm tra số nguyên tố) nhưng bằng cách sử dụng Do Until … Loop.</item>
+          <item>Làm lại bài tập 11 (tính N!) nhưng sử dụng vòng lặp Do Until … Loop.</item>
+          <item>Thiết kế chương trình cho phép nhập vào một số nguyên N; sau đó phân tích số nguyên này ra thừa số nguyên tố. Giao diện chương trình có thể như sau:</item>
+        </list>
+        <figure id="id8799497">
+          <media id="id1171901450642" alt=""><image src="../../media/graphics20.png" mime-type="image/png" height="168" width="272"/></media>
+        </figure>
+        <para id="id8799520">Hình I.21: Thừa số nguyên tố</para>
+        <list id="id8799547" list-type="enumerated">
+          <item>Sử dụng điều khiển định thời (Timer).</item>
+        </list>
+        <para id="id7254362">Tạo một chương trình cho phép người dùng 15 giây để nhập mật khẩu trong một TextBox.</para>
+        <para id="id7254370">Nếu người dùng không nhập mật khẩu đúng trong thời gian nói trên, chương trình hiển thị thông báo “Time Expired” (Hết thời gian) và đóng chương trình.</para>
+        <para id="id7254391">Thời gian làm bài tập: 30 phút.</para>
+        <para id="id7254396">Giao diện đề nghị:</para>
+        <figure id="id7254404">
+          <media id="id1171913351730" alt=""><image src="../../media/graphics21.png" mime-type="image/png" height="124" width="277"/></media>
+        </figure>
+        <para id="id7254433">Hình I.22: Giao diện</para>
+        <list id="id8726648" list-type="bulleted">
+          <item>Nhập vào mật khẩu cần thiết (giả sử mật khẩu là: Secret)</item>
+          <item>Nếu nhập đúng mật khẩu, rồi nhầp nút Nhập, một hộp thông báo xuất hiện với nội dụng: Ban dang nhap thanh cong.</item>
+        </list>
+        <figure id="id8726703">
+          <media id="id1171912886356" alt=""><image src="../../media/graphics22.png" mime-type="image/png" height="104" width="165"/></media>
+        </figure>
+        <para id="id8682672">Hình I.23: Lỗi đăng nhập</para>
+        <list id="id8682699" list-type="bulleted">
+          <item>Nếu nhập mật khẩu sai, rồi nhấp nút Nhập, một thông báo xuất hiện với nội dung: Xin loi, chung toi khong biet ban!</item>
+        </list>
+        <figure id="id8682730">
+          <media id="id1171913493953" alt=""><image src="../../media/graphics23.png" mime-type="image/png" height="104" width="188"/></media>
+        </figure>
+        <para id="id8741046">Hình I.24: Lỗi đăng nhập</para>
+        <para id="id8741073">Sau đó nhấp nút OK trên hộp thông báo này thì chương trình cho bạn nhập lại mật khẩu.</para>
+        <list id="id8741082" list-type="bulleted">
+          <item>Nếu thời gian quá 15 giây mà người dùng chưa nhập đúng mật khẩu thì một thông báo sẽ hiện lên Xin loi, thoi gian da het; sau đó chương trình sẽ kết thúc.</item>
+        </list>
+        <figure id="id8741111">
+          <media id="id1171909719006" alt=""><image src="../../media/graphics24.png" mime-type="image/png" height="104" width="143"/></media>
+        </figure>
+        <para id="id8880409">Hình I.25: Báo hết giờ</para>
+        <list id="id8880435" list-type="enumerated">
+          <item>Thiết kế chương trình tương tự như ứng dụng Canculator của Windows.</item>
+        </list>
+      </section>
+    </section>
+  </content>
+</document>

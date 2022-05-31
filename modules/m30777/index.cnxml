@@ -1,0 +1,289 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>ODBC vằ các đối tượng dữ liệu từ xa</title>
+  <metadata>
+  <md:content-id>m30777</md:content-id><md:title>ODBC vằ các đối tượng dữ liệu từ xa</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về thư viện đối tượng Remote Data Objects, cách thức được sử dụng để truy cập các đối tượng dữ liệu từ xa.</md:abstract>
+  <md:uuid>d624cd2d-11e7-4dba-b5af-6d65b61ee037</md:uuid>
+</metadata>
+
+<content>
+    <para id="id12969541">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id12969555">- Khái niệm Open Database Connectivity (ODBC).</para>
+    <para id="id12969561">- Sử dụng điều khiển dữ liệu từ xa (Remote Data Control) để truy cập dữ liệu.</para>
+    <para id="id12969568">- Cây phân cấp của mô hình đối tượng RDO.</para>
+    <para id="id12969578">- Sử dụng thư viện đối tượng RDO để tương tác với cơ sở dữ liệu trong VB.</para>
+    <para id="id12969588">Kiến thức có liên quan:</para>
+    <para id="id12969601">- Các cấu trúc lập trình trong VB.</para>
+    <para id="id12969606">- Câu lệnh truy vấn dữ liệu trong cơ sở dữ liệu.</para>
+    <para id="id12969616">- Nắm bắt được các mô hình DAO là một lợi thế vì lúc đó việc tiếp thu mô hình ADO được nhanh hơn.</para>
+    <para id="id10458756">Tài liệu tham khảo:</para>
+    <para id="id10458765">- Microsoft Visual Basic 6.0 &amp; Lập trình cơ sở dữ liệu – Chương 23, trang 735 - Nguyễn Thị Ngọc Mai (chủ biên), Nhà xuất bản Giáo dục - 2000.</para>
+    <para id="id10458814">- Tự học Lập trình cơ sở dữ liệu với Visual Basic 6 trong 21 ngày (T2) – Chương 17, trang 227 - Nguyễn Đình Tê (chủ biên), Nhà xuất bản Giáo dục - 2001.</para>
+    <para id="id12652888"/>
+    <para id="id12652892">Open Database Connectivity (ODBC)</para>
+    <section id="id-0618049710327">
+      <title>Khái niệm</title>
+      <para id="id12652904">ODBC là công nghệ Windows cho phép ứng dụng Client nối với cơ sở dữ liệu từ xa. Nằm trên máy Client, ODBC làm cho nguồn dữ liệu quan hệ trở nên trong suốt đối với ứng dụng Client. Vì thế ứng dụng Client không cần quan tâm đến kiểu cơ sở dữ liệu là gì.</para>
+      <para id="id12652920">ODBC gồm 3 phần:</para>
+      <para id="id12652926">- Trình quản lý điều khiển (driver manager).</para>
+      <para id="id12652939">- Một hay nhiều trình điều khiển (driver).</para>
+      <para id="id12652945">- Một hay nhiều nguồn dữ liệu (data source).</para>
+    </section>
+    <section id="id-263028917087">
+      <title>Kiến trúc</title>
+      <para id="id12652959">Kiến trúc ODBC chứa kết nối giữa ứng dụng Client và cơ sở dữ liệu Server thông qua trình quản lý điều khiển ODBC.</para>
+      <para id="id12652969">Ứng dụng ClientNguồn dữ liệu ODBCTrình quản lý điều khiển ODBCTrình điều khiển ODBCDBHình 10.1: Kiến trúc ODBC trình bày kết nối giữa ứng dụng Client và CSDL Server thông qua trình quản lý điều khiển ODBC</para>
+    </section>
+    <section id="id-408801827275">
+      <title>Tạo nguồn dữ liệu ODBC</title>
+      <para id="id11611469">Để một ứng dụng Client nối với cơ sở dữ liệu Client/Server dùng ODBC; trước hết, ta phải cung cấp thông tin về nguồn dữ liệu ODBC trên Client. Mỗi Server yêu cầu những gói thông tin khác nhau để nối với Client. ODBC cung cấp cho thông tin này một tên đơn giản để ta có thể tham chiếu đến nó, thay vì phải thiết lập gói thông tin từ đầu mỗi lần ta cần đến nó.</para>
+      <para id="id11611490">Ứng dụng Client có thể tham chiếu một cách dễ dàng đến tổ hợp của một điều khiển, một cơ sở dữ liệu và có thể thêm một người sử dụng và mật khẩu. Tên này chính là tên nguồn dữ liệu hay Data Source Name (DSN).</para>
+      <para id="id11611500">Để tạo một tên nguồn dữ liệu ODBC trên máy Client, ta làm như sau:</para>
+      <list id="id11611507" list-type="bulleted">
+        <item>Mở Control Panel.</item>
+        <item>Chọn Administrative Tools\Data Source (ODBC), hộp thoại quản trị nguồn dữ liệu xuất hiện:</item>
+      </list>
+      <para id="id11577980">Hình 10.2: Hộp thoại quản trị nguồn dữ liệu ODBC<figure id="id11578018"><media id="id1166752730367" alt=""><image src=".png" mime-type="image/png" height="322" width="450"/></media></figure></para>
+      <list id="id11578043" list-type="bulleted">
+        <item>Ta có thể tạo một trong ba kiểu nguồn dữ liệu ODBC:<list id="id11578054" list-type="bulleted"><item>User DSN: chỉ có người dùng tạo ra nó mới có thể sử dụng (trên máy đang dùng).</item><item>System DSN: bất kỳ ai sử dụng máy này đều có thể dùng được. Đây cũng là kiểu nguồn dữ liệu mà ta cần tạo khi cài đặt ứng dụng cơ sở dữ liệu Web.</item><item>File DSN: có thể được copy và sử dụng bởi máy khác.</item></list></item>
+        <item>Khi hộp thoại ODBC đã mở ra, chọn lớp UserDSN (hay System DSN), Tạo một kết nối mới, nhấn nút Add, màn hình sẽ hiện ra như sau:</item>
+      </list>
+      <para id="id12820714"><figure id="id12820725"><media id="id1166758617976" alt=""><image src=".png" mime-type="image/png" height="350" width="463"/></media></figure>Hình 10.3: Lựa chọn loại cơ sở dữ liệu cần thiết để tạo kết nối</para>
+      <para id="id12820778"/>
+      <list id="id12820782" list-type="bulleted">
+        <item>Chọn loại CSDL mà ta muốn thao tác (Access, Foxpro, SQL Server,…), nhấn Finish. Sau khi nhấn Finish, một màn hình sẽ hiện ra cho phép ta nhập vào Data Source Name, đây là tên của kết nối CSDL. Tên của kết nối không cần phải giống với tên của cơ sở dữ liệu. Phần Description dùng để gõ các thông tin mô tả về kết nối. Ngoài ra ta còn phải chọn đường dẫn đến tập tin CSDL tương ứng.</item>
+      </list>
+    </section>
+    <section id="id-654550714654">
+      <title>Truy cập nguồn dữ liệu với điều khiển DAO Data và ODBC Direct</title>
+      <para id="id12003716">DAO tự động nạp bộ máy cơ sở dữ liệu Jet mỗi khi nó truy cập dữ liệu Client/Server, thậm chí khi ta không thực sự sử dụng cơ sở dữ liêu Jet/Access.</para>
+      <para id="id12003728">Ngoài ra ta còn có thêm tùy chọn sử dụng ODBCDIRECT để truy cập dữ liệu Client/Server. Đây là một chuyển đổi để truy cập cơ sở dữ liệu server trực tiếp thông qua DAO mà không cần nạp bộ máy cơ sở dữ liệu Jet. Tùy chọn này thích hợp khi ta phải dùng DAO để truy cập dữ liệu Client/Server mà không cần bận tâm về tính linh hoạt, khả năng sử dụng lại và tính dễ bảo trì của chương trình.</para>
+      <para id="id12003743">Ví dụ: Tạo một Form có sử dụng ODBCDirect và DAO Data Control.</para>
+      <list id="id12003755" list-type="bulleted">
+        <item>Tạo dự án mới.</item>
+        <item>Tham chiếu đến điều khiển lưới Microsoft Data Bound Grid Control trong mục Project\Components.</item>
+        <item>Tạo Form có dạng sau:</item>
+      </list>
+      <para id="id12003930"><figure id="id12003944"><media id="id1166755686688" alt=""><image src=".png" mime-type="image/png" height="250" width="408"/></media></figure>12Hình 10.4: Ví dụ về ODBC Direct</para>
+      <para id="id12649496">1: DBGrid. Name: dbGrid1.</para>
+      <para id="id12649502">2: Data Control. Name: Data1.</para>
+      <list id="id12649507" list-type="bulleted">
+        <item>Đổi thuộc tính DefaultType của DataControl là 1 – Use ODBC. Điều này làm cho chương trình thực hiên nhanh hơn.</item>
+        <item>Thuộc tính Connect của Data1 là: ODBC;DSN=DBHH</item>
+        <item>Đặt thuộc tính Record Source của Data Control:</item>
+      </list>
+      <para id="id12649537">Select * From THANGHOA</para>
+      <para id="id12649544">Đặt thuộc tính Data Source của DBGrid1 là: Data1.</para>
+      <para id="id12649552">Lưu dự án và thực thi chương trình.</para>
+      <para id="id12649558">Truy cập dữ liệu dùng điều khiển dữ liệu từ xa</para>
+      <para id="id12482351">Điều khiển dữ liệu từ xa (Remote Data Control - RDC) là một cách khác truy cập dữ liệu từ xa trong các ứng dụng Visual Basic. Điều khiển này dùng một giao diện lập trình tương tự như điều khiển ADO Data hay DAO Data.</para>
+      <para id="id12482361">Ví dụ: Sử dụng RDC để hiển thị dữ liệu trên lưới:</para>
+      <list id="id12482373" list-type="bulleted">
+        <item>Ở đây ta có sử dụng Remote Data Control và lưới hiển thị dữ liệu, do đó ta tham chiếu đến các thành phần này bằng cách chọn Project\Components…, thiết lập tham chiếu đến Microsoft Remote Data Control và Microsoft Data Bound Grid Control. Nhấp OK.</item>
+        <item>Thiết kế Form có dạng sau:</item>
+      </list>
+      <para id="id12482396"><figure id="id12482409"><media id="id7121259" alt=""><image src=".png" mime-type="image/png" height="343" width="393"/></media></figure>11Hình 10.5: Ví dụ về Remote Data Control</para>
+      <para id="id11874903">1: RemoteDataControl. Name: rdcHangHoa</para>
+      <para id="id11874909">2: DBGrid. Name: dbgHangHoa.</para>
+      <list id="id11874914" list-type="bulleted">
+        <item>Đặt thuộc tính DataSourceName của điều khiển rdcHangHoa là DBHH (DSN đã tạo trước đây).</item>
+        <item>Định thuộc tính SQL của điều khiển rdcHangHoa là:</item>
+      </list>
+      <para id="id11952567">Select * From THANGHOA</para>
+      <list id="id11952571" list-type="bulleted">
+        <item>Chỉ định thuộc tính DataSource của điều khiển dbgHangHoa là rdcHangHoa.</item>
+        <item>Thực thi chương trình.</item>
+      </list>
+      <para id="id11952592">Remote Data Object (RDO)</para>
+      <para id="id11952596">Đối tượng dữ liệu từ xa (Remote Data Objects - RDO) được mô tả dạng hình cây tương tự như DAO. Tuy nhiên mô hình đối tượng RDO đơn giản hơn DAO.</para>
+      <para id="id11952605">Dù vậy ta không thể dùng RDO để tạo đối tượng cơ sở dữ liệu như bảng, view, thủ tục chứa sẵn… </para>
+      <para id="id11952614">Để tham chiếu đến RDO ta vào Project\References…\Microsoft Remote Data Object 2.0.</para>
+      <para id="id11952621">Mô hình đối tượng RDO:</para>
+      <figure id="id11952631">
+        <media id="id4763291" alt=""><image src="../../media/graphics1-9966.png" mime-type="image/png" height="440" width="261"/></media>
+      </figure>
+    </section>
+    <section id="id-814453201333">
+      <title>Đối tượng RDOEngine</title>
+      <para id="id11952662">Đây là đối tượng ở cấp cao nhất trong mô hình RDO, giới thiệu về các thành phần của mô hình. Ta không cần phải khởi tạo đối tượng này cách tường minh bởi vì nó được khởi tạo tự động.</para>
+      <para id="id12564506">Đối tượng rdoEngine cho phép ta truy cập toàn bộ các đối tượng khác trong mô hình RDO. Ngoài ra, nó còn được sử dụng để tạo mới một Data Source Name (DSN) nhờ vào phương thức rdoRegisterDataSource. Đoạn mã lệnh dưới đây cho phép đăng ký một nguồn dữ liệu mới cho cơ sở dữ liệu Pubs (của SQL Server):</para>
+      <para id="id12564524">Dim strTemp As String</para>
+      <para id="id12564541">strTemp = “Description=Test DSN” &amp; Chr(13) &amp; _</para>
+      <para id="id12564551">“SERVER=(local)” &amp; Chr(13) &amp; “Database=Pubs”</para>
+      <para id="id12564557">rdoEngine.rdoRegisterDataSource “MyTestPubs”, “SQL Server”, _</para>
+      <para id="id12564565">True, strTemp</para>
+    </section>
+    <section id="id-437625106731">
+      <title>Đối tượng RDOError</title>
+      <para id="id12564586">Đối tượng lỗi xác định thao tác nào trên một nguồn dữ liệu gây ra lỗi. Đây không phải là các lỗi của Visual Basic vì nó xảy ra đối với cơ sở dữ liệu. Vì thế, ta không cần phải bẫy lỗi cho các lỗi này. Thay vào đó, tập hợp rdoErrors sẽ xác định thao tác của ta là thành công hay thất bại. Chẳng hạn như đoạn mã lệnh sau:</para>
+      <para id="id12564606">Dim objError As RDO.rdoError</para>
+      <para id="id10382774">Dim strError As String</para>
+      <para id="id10382790">For Each objError In rdoEngine.rdoErrors</para>
+      <para id="id10382810">strError = strError &amp; objError.Description &amp; vbCrLf</para>
+      <para id="id10382816">Next</para>
+      <para id="id10382824">' Display Errors</para>
+      <para id="id10382831">MsgBox "The following errors occurred: " &amp; strError</para>
+    </section>
+    <section id="id-509766203093">
+      <title>Đối tượng RDOEnvironment</title>
+      <para id="id10382855">Đối tượng này chỉ ra cách thức bảo mật của cơ sở dữ liệu. Ta sử dụng đối tượng này để xác định định danh người dùng cùng mật khẩu hay thi hành một phiên giao dịch (Transation) trên cơ sở dữ liệu.</para>
+      <para id="id10382865">Đối tượng này không được khởi tạo trực tiếp, chúng được tạo ra tự động.</para>
+    </section>
+    <section id="id-819403816398">
+      <title>Đối tượng RDOConnection</title>
+      <para id="id10382880">Phần lớn các chức năng của RDO bắt đầu với đối tượng rdoConnection; đối tượng này cho phép thiết lập một nối kết đến một nguồn dữ liệu ODBC. Khi nguồn dữ liệu đã được định nghĩa, các thuộc tính cùng các phương thức của đối tượng này được sử dụng để giao tiếp với nguồn dữ liệu ấy.</para>
+      <para id="id12967721">Đoạn mã lệnh đơn giản dưới đây cho phép tạo một nối kết đến nguồn dữ liệu có tên là Biblio.</para>
+      <para id="id12967729">Set m_Connection = New RDO.rdoConnection</para>
+      <para id="id12967744">m_Connection.Connect = “DSN=Biblio”</para>
+      <para id="id12967751">m_Connection.EstablishConnection</para>
+      <section id="id-368429576169">
+        <title>Đối tượng RDOQuery</title>
+        <para id="id12967763">Đối tượng này được sử dụng để thực thi các câu truy vấn trên nguồn dữ liệu ODBC. Các câu truy vấn này có thể là các câu SQL hay là lời gọi thực thi các thủ tục lưu trữ sẵn trong cơ sở dữ liệu. Nếu là lời gọi các thủ tục lưu trữ sẵn thì tham số của các thủ tục này được xác định nhờ đối tượng rdoParameter.</para>
+        <para id="id12967785">Hai yếu tố then chốt để xác định một đối tượng rdoQuery là nối kết nào cần truy vấn và câu lệnh SQL để truy vấn dữ liệu.</para>
+        <para id="id12967800">Ví dụ: Giả sử ta có đoạn mã lệnh bên trên để tạo nối kết đến nguồn dữ liệu Biblio. Đoạn mã lệnh dưới đây thực thi câu lệnh SQL lấy về thông tin về tất cả các nhà xuất bản:</para>
+        <para id="id12967817">‘ Tạo câu SQL</para>
+        <para id="id12967822">Dim strSQL As String</para>
+        <para id="id12325653">strSQL = “SELECT * FROM Publishers”</para>
+        <para id="id12325658">‘ Tạo đối tượng Query</para>
+        <para id="id12325662">Dim m_Query As RDO.rdoQuery</para>
+        <para id="id12325674">Set m_Query = New RDO.rdoQuery</para>
+        <para id="id12325686">Set m_Query.ActiveConnection = m_Connection</para>
+        <para id="id12325697">m_Query.SQL = strSQL</para>
+        <para id="id12325702">m_Query.Excute</para>
+      </section>
+      <section id="id-142329931735">
+        <title>Đối tượng RDOResultset</title>
+        <para id="id12325714">Đối tượng này quản lý các mẩu tin được trả về từ một nối kết qua ODBC. Tập các mẩu tin có thể được trả về thông qua đối tượng rdoQuery hay nhờ phương thức OpenResultset của một đối tượng rdoConnection. Trong một số trường hợp, tập các mẩu tin được truy xuất nhờ vào thuộc tính LastQueryResults của đối tượng rdoConnection:</para>
+        <para id="id12325733">Set m_Resultset = m_Connection.LastQueryResults</para>
+        <para id="id12325747">Khi đối tượng rdoResultset được tạo ra, ta có thể di chuyển đến mẩu tin xác định bằng các phương thức MoveFirst, MoveLast, MoveNext, MovePrevious.</para>
+      </section>
+      <section id="id-310649216183">
+        <title>Đối tượng RDOTable</title>
+        <para id="id12029205">Đối tượng này xác định một bảng trong một nguồn dữ liệu ODBC. Đối tượng này không được sử dụng cho các thao tác truy xuất dữ liệu mà nó chỉ được sử dụng khi ta cần xác định cấu trúc các bảng của cơ sở dữ liệu của ta.</para>
+      </section>
+      <section id="id-79280302108">
+        <title>Đối tượng RDOParameter</title>
+        <para id="id12029223">Đối tượng này xác định các tham số đầu vào hay các kết quả nhận được từ các thủ tục lưu trữ sẵn trong cơ sở dữ liệu.</para>
+      </section>
+    </section>
+    <section id="id-249747151388">
+      <title>Sử dụng RDO trong chương trình</title>
+      <section id="id-559859950647">
+        <title>Thiết lập kết nối đến nguồn dữ liệu</title>
+        <list id="id12029247" list-type="bulleted">
+          <item>Trước tiên ta phải tham chiếu đến mô hình đối tượng RDO.</item>
+          <item>Nối kết đến nguồn dữ liệu nhờ đối tượng rdoConnection.</item>
+        </list>
+        <para id="id12029265">- Khai báo một biến đối tượng rdoConnection.</para>
+        <para id="id12029271">- Khởi tao đối tượng, sau đó thiết lập các thuộc tính và các phương thức thích hợp để hoàn tất kết nối; trong đó có hai thuộc tính cần quan tâm là chuỗi kết nối (ConnectionString) và loại con trỏ (Cursor Driver).</para>
+        <list id="id12029285" list-type="bulleted">
+          <item>Thiết lập nối kết nhờ phương thức EstablishConnection của đối tượng rdoConnection.</item>
+        </list>
+      </section>
+      <section id="id-84080485641">
+        <title>Chuỗi kết nối (ODBC Connect String)</title>
+        <para id="id12029307">Chuỗi kết nối được sử dụng khi thiết lập nối kết đến nguồn dữ liệu. Đây là một chuỗi (String) xác định các thông tin quan trọng gởi đến trình điều khiển ODBC để truy cập dữ liệu. Các thông tin cần quan tâm: tên nguồn dữ liệu (DSN Name), User ID, Password.</para>
+        <para id="id10485514">Các tham số của chuỗi kết nối ODBC:</para>
+        <table id="id10485521" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Tham số</entry>
+                <entry>Ý nghĩa</entry>
+              </row>
+              <row>
+                <entry>DSN</entry>
+                <entry>Tên nguồn dữ liệu ODBC</entry>
+              </row>
+              <row>
+                <entry>UID</entry>
+                <entry>Tên người dùng cơ sở dữ liệu</entry>
+              </row>
+              <row>
+                <entry>PWD</entry>
+                <entry>Mật khẩu truy cập</entry>
+              </row>
+              <row>
+                <entry>DRIVER</entry>
+                <entry>Trình điều khiển DBC</entry>
+              </row>
+              <row>
+                <entry>DATABASE</entry>
+                <entry>Tên của cơ sở dữ liệu được nối kết</entry>
+              </row>
+              <row>
+                <entry>SERVER</entry>
+                <entry>Tên máy chứa cơ sở dữ liệu phục vụ (database server)</entry>
+              </row>
+              <row>
+                <entry>WSID</entry>
+                <entry>Tên máy chứa cơ sở dữ liệu khách (database client)</entry>
+              </row>
+              <row>
+                <entry>APP</entry>
+                <entry>Tên của tập tin chương trình (*.exe)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id12566935"/>
+        <para id="id12566939">Chuỗi kết nối được xác lập nhờ thuộc tính Connect của đối tượng rdoConnection. </para>
+        <para id="id12566947"/>
+        <para id="id12566951">Ví dụ: Chuỗi nối kết đến 1 DSN của cơ sở dữ liệu Access Biblio:</para>
+        <para id="id12566962">Set m_Connection = New RDO.rdoConnection</para>
+        <para id="id12566974">m_Connection.Connect = "DSN=Biblo"</para>
+        <para id="id12566978">m_Connection.EstablishConnection</para>
+        <para id="id12566982">Chuỗi nối kết đến DSN Publications của cơ sở dữ liệu SQL Server:</para>
+        <para id="id12566991">Set m_Connection = New RDO.rdoConnection</para>
+        <para id="id12567003">m_Connection.Connect = "DSN=Biblo;UID=sa;PWD=;"</para>
+        <para id="id12567008">m_Connection.EstablishConnection</para>
+        <para id="id12567012">Bên cạnh nối kết chuẩn thông qua ODBC, RDO cũng hỗ trợ loại nối kết DSN cấp thấp (DSN-less connection). Đối với loại này, ta không cần định nghĩa tên nguồn dữ liệu (DSN) trong bộ quản trị ODBC của Windows. Lúc này tất cả các thông tin về cơ sở dữ liệu được cung cấp đầy đủ trong chuỗi nối kết.</para>
+        <para id="id12567027">Ví dụ: Chuỗi nối kết cấp thấp đến cơ sở dữ liệu SQL Server Pubs:</para>
+        <para id="id12567040">Set m_Connection = New RDO.rdoConnection</para>
+        <para id="id10569118">m_Connection.Connect ="DRIVER={SQL Server};” &amp; _</para>
+        <para id="id10569124">“SERVER=(local);DATABASE=Pubs;UID=admin;PWD=;DSN=;"</para>
+        <para id="id10569132">m_Connection.EstablishConnection</para>
+      </section>
+      <section id="id-473083373227">
+        <title>Trình điều khiển con trỏ (Cursor Drivers)</title>
+        <para id="id10569145">Trình điều khiển con trỏ xác định cách thức tập các mẩu tin trả về từ cơ sở dữ liệu được lưu trữ như thế nào, có thể chúng được lưu trữ tại máy chủ (server) hay máy trạm (client).</para>
+        <para id="id10569159">Trình điều khiển con trỏ được thiết lập nhờ thuộc tính CursorDriver của đối tượng Connection (trước khi gọi thực thi phương thức EstablishConnection) và các giá trị sau có thể đề cử cho nó:</para>
+        <table id="id10569172" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Giá trị</entry>
+                <entry>Ý nghĩa</entry>
+              </row>
+              <row>
+                <entry>rdUseIfNeeded</entry>
+                <entry>Trình điều khiển ODBC tự động xác định loại con trỏ (được lưu phía server hay client). Nếu có thể, con trỏ loại được lưu phía server được đề cử.</entry>
+              </row>
+              <row>
+                <entry>rdUseODBC</entry>
+                <entry>Xác định loại con trỏ của ODBC chuẩn, nghĩa là tập tất cả các mẩu tin được lưu ở máy client.</entry>
+              </row>
+              <row>
+                <entry>rdUseServer</entry>
+                <entry>Tập các mẩu tin được lưu phia server. Tuy nhiên loại con trỏ này không thích hợp lắm trong môi trường đa người dùng.</entry>
+              </row>
+              <row>
+                <entry>rdUseClientBatch</entry>
+                <entry>Giống như rdUseODBC nhưng có thể được cập nhật đồng thời.</entry>
+              </row>
+              <row>
+                <entry>rdUseNone</entry>
+                <entry>Không sử dụng con trỏ, tập các mẩu tin được trả về một lần duy nhất lúc chúng được yêu cầu. Ta chỉ có thể di chuyển tới trong tập các mẩu tin kết quả.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+  </content>
+</document>

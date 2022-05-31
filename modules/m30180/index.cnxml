@@ -1,0 +1,16 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Lập trình xử lý giao diện &amp; đồ họa</title>
+  <metadata>
+  <md:content-id>m30180</md:content-id><md:title>Lập trình xử lý giao diện &amp; đồ họa</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về cách tạo menu cũng như một số hàm xử lý đồ họa, những thành phần quan trọng trong các ứng dụng chạy trên Windows.</md:abstract>
+  <md:uuid>8d4e6205-decb-485a-9459-c0a9823b2d84</md:uuid>
+</metadata>
+
+<content>
+    <para id="delete_me">
+       <!-- Insert module text here -->
+    </para>   
+  </content>
+  
+</document>

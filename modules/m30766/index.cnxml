@@ -1,0 +1,94 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Tổng quan về Visual Basic 6.0</title>
+  <metadata>
+  <md:content-id>m30766</md:content-id><md:title>Tổng quan về Visual Basic 6.0</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về môi trường phát triển tích hợp (IDE) Microsoft Visual Basic 6.0; cũng như giúp sinh viên có cái nhìn tổng quan về Visual Basic.</md:abstract>
+  <md:uuid>80b56630-c3c3-44b5-af40-0d930ba10732</md:uuid>
+</metadata>
+
+<content>
+    <para id="id9448801">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id9448815">- Sử dụng môi trường phát triển tích hợp VB 6.0 để phát triển ứng dụng.</para>
+    <para id="id9448826">- Cách tạo dự án mới (New Project) trong VB 6.0.</para>
+    <para id="id9448832">Kiến thức có liên quan:</para>
+    <para id="id9448844">- Sử dụng hệ điều hành Windows.</para>
+    <para id="id9448851">Tài liệu tham khảo:</para>
+    <para id="id9448970">- Visual Basic 6 Certification Exam Guide - Chapter 1, Page 1 - Dan Mezick &amp; Scot Hillier - McGraw-Hill - 1998.</para>
+    <para id="id9449007">Giới thiệu về Visual Basic 6.0</para>
+    <para id="id9449013">Visual Basic 6.0 (VB6) là một phiên bản của bộ công cụ lập trình Visual Basic (VB), cho phép người dùng tiếp cận nhanh cách thức lập trình trên môi trường Windows. Những ai đã từng quen thuộc với VB thì tìm thấy ở VB6 những tính năng trợ giúp mới và các công cụ lập trình hiệu quả. Người dùng mới làm quen với VB cũng có thể làm chủ VB6 một cách dễ dàng.</para>
+    <para id="id9712490">Với VB6, chúng ta có thể :</para>
+    <list id="id9449025" list-type="bulleted">
+      <item>Khai thác thế mạnh của các điều khiển mở rộng.</item>
+      <item>Làm việc với các điều khiển mới (ngày tháng với điều khiển MonthView và DataTimePicker, các thanh công cụ có thể di chuyển được CoolBar, sử dụng đồ họa với ImageCombo, thanh cuộn FlatScrollBar,…).</item>
+      <item>Làm việc với các tính năng ngôn ngữ mới.</item>
+      <item>Làm việc với DHTML.</item>
+      <item>Làm việc với cơ sở dữ liệu.</item>
+      <item>Các bổ sung về lập trình hướng đối tượng.</item>
+    </list>
+    <para id="id9645891">Cài đặt Visual Basic 6.0</para>
+    <para id="id9645896">Sử dụng chương trình Setup, người dùng có thể cài đặt VB6 lên máy tính của mình. Chương trình Setup này còn cài đặt các tập tin cần thiết để xem tài liệu trên đĩa CD MSDN (Microsoft Developer Network). Nếu cần, người dùng có thể cài đặt riêng phần tài liệu và ví dụ mẫu của Visual Basic lên máy tính.</para>
+    <para id="id9645914">Để cài đặt VB6, người dùng nên kiểm tra máy tính của mình đảm bảo được cấu hình tối thiểu. Các yêu cầu hệ thống tối thiểu :</para>
+    <para id="id9645924">- Microsoft Windows 95 trở lên hoặc là Microsoft Windows NT Workstation 4.0 trở lên.</para>
+    <para id="id9645931">- Tốc độ CPU 66 MHz trở lên.</para>
+    <para id="id9645937">- Màn hình VGA hoặc màn hình có độ phân giải cao được hỗ trợ bởi Microsoft Windows. </para>
+    <para id="id9646456">- 16 MB RAM cho Microsoft Windows 95 hoặc 32MB RAM cho Microsoft Windows NT Workstation. </para>
+    <para id="id9646469">Làm quen với VB6</para>
+    <para id="id9646474">Bắt đầu một dự án mới với VB6</para>
+    <para id="id9646480">Từ menu Start chọn Programs, Microsoft Visual Basic 6.0. Khi đó bạn sẽ thấy màn hình đầu tiên như hình I.1 dưới đây. </para>
+    <para id="id9646514">Hình I.1 Cửa sổ khi kích hoạt VB6</para>
+    <figure id="id10372713">
+      <media id="id1168172976128" alt=""><image src="../../media/graphics1-ea96.png" mime-type="image/png" height="434" width="578"/></media>
+    </figure>
+    <para id="id9633721"><figure id="id9633731"><media id="id5448180" alt=""><image src=".png" mime-type="image/png" height="195" width="204"/></media></figure>Chọn</para>
+    <para id="id9646079">Ở đây, người dùng có thể chọn tạo mới một dự án thực thi được bằng cách chọn Standard EXE rồi nhấp Open (Hình I.2). </para>
+    <para id="id9648098">Tiếp theo là cửa sổ làm việc chính của VB6, gọi tắt là IDE (Integrated Development Environment) sẽ được giới thiệu chi tiết trong phần sau.</para>
+    <para id="id9648117">Tìm hiểu các thành phần của IDE</para>
+    <para id="id9648123">IDE là tên tắt của môi trường phát triển tích hợp (Integrated Development Environment), đây là nơi tạo ra các chương trình Visual Basic.</para>
+    <para id="id9648136">IDE của Visual Basic là nơi tập trung các menu, thanh công cụ và cửa sổ để tạo ra chương trình. Mỗi một thành phần của IDE có các tính năng ảnh hưởng đến các hoạt động lập trình khác nhau.</para>
+    <para id="id9648167"><figure id="id9766301"><media id="id1168169477272" alt=""><image src=".png" mime-type="image/png" height="464" width="624"/></media></figure>Hình I.3 Cửa sổ IDE của VB6</para>
+    <para id="id9507752">Thanh menu cho phép bạn tác động cũng như quản lý trực tiếp trên toàn bộ ứng dụng. Bên cạnh đó thanh công cụ cho phép truy cập các chức năng của thanh menu thông qua các nút trên thanh công cụ.</para>
+    <para id="id10372892">Các biểu mẫu (Form) - khối xây dựng chương trình chính của VB - xuất hiện trong cửa sổ Form. Hộp công cụ để thêm các điều khiển vào các biểu mẫu của đề án. Cửa sổ Project Explorer hiển thị các đề án khác nhau mà người dùng đang làm cũng như các phần của đề án. Người dùng duyệt và cài đặt các thuộc tính của điều khiển, biểu mẫu và module trong cửa sổ Properties. Sau cùng, người dùng sẽ xem xét và bố trí một hoặc nhiều biểu mẫu trên màn hình thông qua cửa sổ Form Layout.</para>
+    <para id="id10372915">Sử dụng thanh công cụ trong IDE của VB</para>
+    <para id="id10372921">Thanh công cụ là tập hợp các nút bấm mang biểu tượng thường đặt dưới thanh menu. Các nút này đảm nhận các chức năng thông dụng của thanh menu (New, Open, Save ...).</para>
+    <para id="id10372939"><figure id="id10372949"><media id="id1168169472504" alt=""><image src=".png" mime-type="image/png" height="37" width="650"/></media></figure>Hình I.4 Thanh công cụ ở dạng standard</para>
+    <para id="id9661214">Hơn nữa, người dùng có thể kéo rê thanh công cụ trên IDE đến vị trí bất kỳ nào đó thuận tiện cho việc sử dụng.</para>
+    <para id="id9661227"><figure id="id9661237"><media id="id1168169477608" alt=""><image src=".png" mime-type="image/png" height="160" width="148"/></media></figure>Hình I.5 Popup menu thêm, xóa công cụNgười dùng có thể thêm hay xóa thanh công cụ trên IDE:</para>
+    <para id="id10370431">* Chọn Toolbars từ menu View hoặc ấn chuột phải vào điểm bất kỳ nào trên thanh menu, một popup menu bật ra.</para>
+    <para id="id10370440">* Chọn loại thanh công cụ mà ta muốn thêm vào hoặc xóa đi. Nếu có đánh dấu check ở bên trái thì loại công cụ đó đang được chọn. </para>
+    <para id="id10370453"/>
+    <para id="id9761967">Sử dụng thanh công cụ gỡ rối (debug)</para>
+    <para id="id9761972"><figure id="id9761982"><media id="id8032718" alt=""><image src=".png" mime-type="image/png" height="64" width="328"/></media></figure>Hình I.6 Thanh công cụ gỡ rốiVới thanh công cụ gỡ rối, người dùng có thể thực thi, tạm ngưng hoặc dừng một đề án. Với thanh công cụ Debug, người dùng có thể kiểm tra chương trình và giải quyết các lỗi có thể xảy ra. Khi gỡ rối chương trình, người dùng có thể chạy từng dòng lệnh, kiểm tra giá trị các biến, dừng chương trình tại một điểm nào đó hoặc với một điều kiện nào đó.</para>
+    <para id="id9762041">Sử dụng thanh công cụ Edit</para>
+    <para id="id10369872"><figure id="id10369882"><media id="id1168169470894" alt=""><image src=".png" mime-type="image/png" height="55" width="348"/></media></figure>Hình I.7 Thanh công cụ EditThanh công cụ Edit được dùng để viết chương trình trong cửa sổ Code, thanh công cụ Edit có đầy đủ các tính năng của menu Edit. Ngoài ra người sử dụng có thể sử dụng chức năng viết chương trình tự động như là Quick Info.</para>
+    <para id="id10369934">Thanh công cụ Edit của VB6 có tính năng lý thú đó là tự hoàn tất các từ khóa. Tính năng này rất hữu dụng giúp cho người dùng tránh các lỗi mắc phải do gõ sai từ khóa.</para>
+    <para id="id10370516">Sử dụng thanh công cụ Form Editor</para>
+    <para id="id10370528"/>
+    <para id="id10370533"><figure id="id10370543"><media id="id1168169470949" alt=""><image src=".png" mime-type="image/png" height="65" width="255"/></media></figure>Hình I.8 Thanh công cụ thiết kế biểu mẫu</para>
+    <para id="id9648284">Thanh công cụ Form Editor có chức năng giống như menu Format dùng để di chuyển và sắp xếp các điều khiển trên biểu mẫu.</para>
+    <para id="id9648297">Trong quá trình thiết kế biểu mẫu, đôi khi chúng ta phải sử dụng thuộc tính ZOrder để cho phép một điều khiển có thể thay thế một điều khiển khác hay không hoặc là xuất hiện bên trên một điều khiển khác hay không.</para>
+    <para id="id9648313"><figure id="id9648338"><media id="id1168169477060" alt=""><image src="../../media/graphics2-1a40.png" mime-type="image/png" height="344" width="86"/></media></figure>Sử dụng hộp công cụ (Toolbox)</para>
+    <para id="id9336113">Hộp công cụ là nơi chứa các điều khiển được dùng trong quá trình thiết kế biểu mẫu. Các điều khiển được chia làm hai loại: Điều khiển có sẵn trong VB và các điều khiển được chứa trong tập tin với phần mở rộng là .OCX.</para>
+    <para id="id9336130">Đối với các điều khiển có sẵn trong VB thì ta không thể gỡ bỏ khỏi hộp công cụ, trong khi đó đối với điều khiển nằm ngoài ta có thêm hoặc xóa bỏ khỏi hộp công cụ.</para>
+    <para id="id9336139">Một điều khiển có thể được đưa vào biểu mẫu bằng cách chọn điều khiển đó và đưa vào biểu mẫu. Chúng ta sẽ trở lại phần này trong chương tiếp theo khi thiết kế các biểu mẫu.</para>
+    <para id="id9336155">Hình I.9 Hộp công cụ của Visual Basic</para>
+    <para id="id9475213">Quản lý ứng dụng với Project Explorer</para>
+    <para id="id9475219">Project Explorer trong VB6 giúp quản lý và định hướng nhiều đề án.VB cho phép nhóm nhiều đề án trong cùng một nhóm. Người dùng có thể lưu tập hợp các đề án trong VB thành một tập tin nhóm đề án với phần mở rộng .vbp.</para>
+    <para id="id9475244"><figure id="id9475255"><media id="id1168169533422" alt=""><image src=".png" mime-type="image/png" height="174" width="234"/></media></figure>Hình I.10 Cửa sổ Project ExplorerProject Explorer có cấu trúc cây phân cấp như cây thư mục trong cửa sổ Explorer của hệ điều hành. Các đề án có thể được coi là gốc của cây, các thành phần của đề án như biểu mẫu, module ... là các nút của cây. Khi muốn làm việc với thành phần nào thì ta có thể nhấn đúp lên thành phần đó trên cửa sổ Project Explorer để vào cửa sổ viết code cho thành phần đó.</para>
+    <para id="id9660998"><figure id="id9661009"><media id="id5448239" alt=""><image src=".png" mime-type="image/png" height="275" width="241"/></media></figure>Hình I.11 Cửa sổ PropertiesKhi làm việc với một dự án lớn, chúng ta sẽ thấy Project Explorer cực kỳ hữu ích cho việc tổ chức và quản lý một dự án lớn.</para>
+    <para id="id9566341">Cửa sổ Properties</para>
+    <para id="id9566346">Mỗi một thành phần, điều khiển điều có nhiều thuộc tính. Mỗi một thuộc tính lại có một hoặc nhiều giá trị.</para>
+    <para id="id9566355">Cửa sổ Properties cho phép người dùng xem, sửa đổi giá trị các thuộc tính của điều khiển nhằm giúp điều khiển hoạt động theo đúng ý đồ của người sử dụng.</para>
+    <para id="id9566369">Cửa sổ Form Layout</para>
+    <para id="id9566374">Đây chính là cửa sổ trình bày biểu mẫu cho phép định vị trí của một hoặc nhiều biểu mẫu trên màn hình khi chương trình ứng dụng được thi hành.</para>
+    <para id="id9566385">Ta ñònh vò moät bieåu maãu treân maøn hình baèng caùch duøng chuoät di chuyeån bieåu maãu trong cöûa soå Form Layout.</para>
+    <para id="id9566394"><figure id="id9566404"><media id="id1168169570294" alt=""><image src=".png" mime-type="image/png" height="147" width="199"/></media></figure>Hình I.12 Cửa sổ Form LayoutSử dụng cửa sổ Form Layout không đơn giản như các cửa sổ khác vì nó không được kích hoạt sẵn, người dùng cần phải chạy ứng dụng sau đó mới có thể bố trí được các biểu mẫu thông qua Form Layout. </para>
+    <para id="id10370989">Nếu ta không định vị các biểu mẫu thì vị trí của biểu mẫu trên màn hình lúc thiết kế cũng là vị trí khởi động của biểu mẫu khi thực thi. </para>
+    <para id="id10371008">Biên dịch đề án thành tập tin thực thi</para>
+    <para id="id9764988">Sau khi đề án đã hoàn thành, người dùng có thể biên dịch thành tập tin thực thi được. Cách tiến hành như sau:</para>
+    <para id="id9765002">- Trước tiên ta cần chỉ cho VB6 biết phần chương trình nào sẽ được thực thi trước bằng cách chọn Project Properties từ menu Project. Chọn tab General, chú ý phần Startup Object, đây là nơi quy định điểm khởi đầu của chương trình sau khi biên dịch kết thúc.</para>
+    <para id="id9765019">- Từ menu File, chọn Make ... EXE... Một hộp thoại xuất hiện cho phép bạn nhập vào tên của tập tin thực thi. Bạn chỉ cần gõ tên tập tin, VB sẽ tự động thêm phần mở rộng .EXE.</para>
+    <para id="id9765031">- Nhấn vào nút Options để mở hộp thoại Project Properties và điền tên của ứng dụng vào ô Title, ta có thể ghi chú thông tin cho từng phiên bản trong phần Version Information. Ta có thể chọn Auto Increment để VB tự động tăng số Revision mỗi lần ta tạo lại tập tin EXE cho dự án.</para>
+    <para id="id9765045">- Cuối cùng, nhấn OK để trở về hộp thoại Make Project.   </para>
+  </content>
+</document>

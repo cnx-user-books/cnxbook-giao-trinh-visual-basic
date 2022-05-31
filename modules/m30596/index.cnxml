@@ -1,0 +1,552 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Đối tượng dữ liệu ActiveX</title>
+  <metadata>
+  <md:content-id>m30596</md:content-id><md:title>Đối tượng dữ liệu ActiveX</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về thư viện ActiveX Data Object (ADO), thư viện đối tượng được sử dụng nhiều nhất trong các ứng dụng truy cập cơ sở dữ liệu dạng khách/chủ (Client/Server) hiện nay.</md:abstract>
+  <md:uuid>59de612d-813f-4f90-bcbe-3ae1dc267c9e</md:uuid>
+</metadata>
+
+<content>
+    <para id="id10486045">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id10486059">- Kiến trúc OLEDB/ADO.</para>
+    <para id="id10486064">- Cây phân cấp của mô hình đối tượng ADO.</para>
+    <para id="id10486073">- Sử dụng thư viện đối tượng ADO để tương tác với cơ sở dữ liệu trong VB.</para>
+    <para id="id10486084">Kiến thức có liên quan:</para>
+    <para id="id10486096">- Các cấu trúc lập trình trong VB.</para>
+    <para id="id10486103">- Câu lệnh truy vấn dữ liệu trong cơ sở dữ liệu.</para>
+    <para id="id10486114">- Nắm bắt được các mô hình DAO, RDO là một lợi thế vì lúc đó việc tiếp thu mô hình ADO được nhanh hơn.</para>
+    <para id="id10486126">Tài liệu tham khảo:</para>
+    <para id="id10486139">- Microsoft Visual Basic 6.0 &amp; Lập trình cơ sở dữ liệu - Chương 27, trang 877 - Nguyễn Thị Ngọc Mai (chủ biên) – Nhà xuất bản Giáo dục - 2000.</para>
+    <para id="id11572630">- Tự học Lập trình cơ sở dữ liệu với Visual Basic 6 trong 21 ngày (T2) – Chương 18, trang 277 - Nguyễn Đình Tê (chủ biên) - Nhà xuất bản Giáo dục - 2001.</para>
+    <para id="id11572677"/>
+    <para id="id11572681">ADO (ActiveX Data Objects) là công nghệ truy cập cơ sở dữ liệu hướng đối tượng tương tự như DAO. Hiện nay, ADO được Microsoft xem kỹ thuật chính để truy cập dữ liệu từ Web Server.</para>
+    <section id="id-304349022841">
+      <title>Kiến trúc OLE DB/ADO</title>
+      <para id="id11572701">ADO sử dụng OLEDB như là trình cung cấp dữ liệu cơ sở. Trình cung cấp OLE DB cho phép người lập trình có thể truy xuất dữ liệu từ cả hai nguồn: quan hệ và phi quan hệ. VB6.0 đã hỗ trợ các trình cung cấp cục bộ cho SQL Server, Oracle và Microsoft Jet/Access.</para>
+      <figure id="id11572719">
+        <media id="id1169910461335" alt=""><image src="../../media/graphics1-fe88.png" mime-type="image/png" height="502" width="501"/></media>
+      </figure>
+      <para id="id11572742">Ta chỉ cần lập trình với phần giao diện người sử dụng ở phía Client. Việc truy cập cơ sở dữ liệu trên trình duyệt Web hay ứng dụng VB được thực hiện nhờ ADO. Cấu trúc này cho phép ta lập trình một cách nhất quán trên Web cũng như trên ứng dụng.</para>
+      <figure id="id11572760">
+        <media id="id1169908442922" alt=""><image src="../../media/graphics2-fabb.png" mime-type="image/png" height="339" width="600"/></media>
+      </figure>
+      <para id="id12856820">Mô hình ADO</para>
+      <para id="id12856825">Mô hình ADO được trình bày theo dạng phân cấp (tương tự DAO và RDO).</para>
+      <para id="id12856832">Để có thể lập trình với thư viện ADO, ta phải tham chiếu đến thư viện này bằng cách chọn Project\References…\Microsoft ActiveX Data Object 2.0.</para>
+      <para id="id12856839"><figure id="id12856850"><media id="id8004033" alt=""><image src=".png" mime-type="image/png" height="391" width="363"/></media></figure>Hình 11.3: Mô hình ADO</para>
+      <para id="id12856900">Mô hình ADO có 3 đối tượng cốt lõi:</para>
+      <list id="id12856906" list-type="bulleted">
+        <item>Connection: kết nối CSDL thật sự.</item>
+        <item>Command: thực thi các câu truy vấn dựa vào kết nối dữ liệu.</item>
+        <item>RecordSet: là tập các mẩu tin được chọn từ câu truy vấn thông qua đối tượng Command.</item>
+      </list>
+      <para id="id12856933">Các đối tượng trong mô hình ADO</para>
+      <section id="id-184077537659">
+        <title>Đối tượng Connection</title>
+        <para id="id12856945">Dùng phương thức Open của đối tượng Connection để thiết lập kết nối với nguồn dữ liệu. Để thực hiện điều này ta cần phải thông báo với ADO thông tin kết nối với dạng chuỗi theo kiểu chuỗi kết nối của ODBC. Thuộc tính ConnectionString thực hiện điều này. Ngoài ra ta còn có thể chọn trình cung cấp bằng cách quy định giá trị của thuộc tính Provider của đối tượng.</para>
+        <para id="id12856950">Để nối kết với dữ liệu, ta cần xác định trình cung cấp OLE DB và chuỗi kết nối. Nếu không xác định được hai yếu tố này, ta sẽ sử dụng trình cung cấp mặc định là ODBC: MSDASQL.</para>
+        <para id="id12663889">Một số trình cung cấp có sẵn:</para>
+        <list id="id12663896" list-type="bulleted">
+          <item>Microsoft OLEDB cho các trình điều khiển ODBC.</item>
+          <item>Microsoft OLEDB cho Oracle.</item>
+          <item>Microsoft Jet 3.51 OLEDB (Access).</item>
+          <item>Microsoft Jet 4.0 OLEDB (Access)</item>
+          <item>Microsoft OLEDB cho SQL Server.</item>
+          <item>Microsoft OLEDB cho các dịch vụ thư mục.</item>
+        </list>
+        <para id="id12663932">Ví dụ:</para>
+        <para id="id12663937">Đối với trình cung cấp ODBC, thuộc tính ConnectionString có thể là một DSN hay là một kết nối không có DSN (DSN cấp thấp).</para>
+        <para id="id12663944">Dim cn As ADODB.Connection</para>
+        <para id="id12663965">Set cn = New ADODB.Connection</para>
+        <para id="id12663989">cn.Provider = "MSDASQL"</para>
+        <para id="id12663999">cn.ConnectionString = "DSN=Baigiang"</para>
+        <para id="id12664009">cn.Open</para>
+        <para id="id12664015">Kết nối DSN cấp thấp:</para>
+        <para id="id12664020">Dim cn As ADODB.Connection</para>
+        <para id="id10480239">Set cn = New ADODB.Connection</para>
+        <para id="id10480264">cn.Provider = "MSDASQL"</para>
+        <para id="id10480269">cn.ConnectionString = "DRIVER={SQL Server};” &amp; _</para>
+        <para id="id10480276"> “DATABASE=Baigiang;UID=myuser;PWD=mypassword;"</para>
+        <para id="id10480286">cn.Open</para>
+        <para id="id10480292">Trong trường hợp này việc kết nối với cơ sở dữ liệu Server được thực hiện nhanh hơn vì chương trình không cần đọc thông tin về các DSN trên máy Client, tuy nhiên thông tin về nguồn cơ sở dữ liệu lại kết chặt với chương trình đã biên dịch.</para>
+        <para id="id10480307">Để kết nối với cơ sở dữ liệu Access, ta dùng trình cung cấp Jet với chuỗi kết nối là đường dẫn đến tập tin .mdb</para>
+        <para id="id10480313">Dim cn As ADODB.Connection</para>
+        <para id="id10480335">Set cn = New ADODB.Connection</para>
+        <para id="id10480355">cn.Provider = "MicroSoft.Jet.OLEDB.4.0"</para>
+        <para id="id10480359">cn.ConnectionString = "d:\data\baigiang.mdb"</para>
+        <para id="id10480364">cn.Open</para>
+        <para id="id10480369">Đối với cơ sở dữ liệu SQL Server, ta có thể dùng trình cung cấp SQLOLEDB.1, trong trường hợp này, chuỗi kết nối tương tự như trường hợp kết nối dùng trình cung cấp ODBC không có DSN, tuy nhiên ta không cần xác định giá trị của DRIVER:</para>
+        <para id="id10480378">Dim cn as ADODB.Connection</para>
+        <para id="id10480382">Set cn = New ADODB.Connection</para>
+        <para id="id10480387">cn.Provider = “SQLOLEDB.1”</para>
+        <para id="id10480392">cn.ConnectionString = “DATABASE=DBHH;” &amp; _</para>
+        <para id="id12028237">“SERVER=www;UID=user;PWD=user”</para>
+        <para id="id12028243">cn.Open</para>
+        <para id="id12028248">Mở và đóng nối kết nguồn dữ liệu</para>
+        <para id="id12028254">Để phát các yêu cầu đến nguồn dữ liệu sử dụng ADO, ta cần mở kết nối đến nguồn dữ liệu đó bằng phương thức Open của đối tượng Connection. Cú pháp đầy đủ như sau:</para>
+        <para id="id12028263">connection.Open [connect], [userid], [password]</para>
+        <para id="id12028284">Tất cả các tham số của phương thức Open đều là tùy chọn, nếu như các thông số này đã được xác định thông qua các thuộc tính khác của đối tượng Connection thì ta không cần mô tả chúng ở đây.</para>
+        <para id="id12028297">Khi đã hoàn thành tất cả các thao tác liên quan đến nối kết này, ta cần phải đóng nối kết một cách tường minh thông qua phương thức Close của đối tượng Connection.</para>
+        <para id="id12028310">connection.Close</para>
+        <para id="id12028319">Đóng nối kết một cách tường minh sẽ đảm bảo rằng tất cả các tài nguyên liên quan đến nối kết này trên Server cũng như Client đều được giải phóng một cách hợp lý.</para>
+        <para id="id12028328">Xác định vị trí con trỏ</para>
+        <para id="id12028334">Con trỏ (Cursor): một tập các mẩu tin được trả về cho chương trình. Vị trí con trỏ được xác định nhờ thuộc tính CursorLocation (có ở cả đối tượng Recordset). Có 2 giá trị có thể chỉ định:</para>
+        <list id="id12028347" list-type="bulleted">
+          <item>adUseClient: con trỏ phía Client.</item>
+          <item>adUseServer: con trỏ phía Server (mặc định).</item>
+        </list>
+        <para id="id12028362">Thực thi các câu truy vấn hành động</para>
+        <para id="id12028368">Các câu truy vấn hành động (Insert, Update, Delete) được thực hiện nhờ phương thức Execute của đối tượng Connection; ngoài ra phương thức này cũng có thể được sử dụng để thực thi các thủ tục lưu trữ sẵn trong cơ sở dữ liệu hay các câu SELECT. Cú pháp phương thức này như sau:</para>
+        <para id="id12028383">Nếu không có kết quả trả về:</para>
+        <para id="id12028390">connection.Execute CommandText, RecordsAffected, Options</para>
+        <para id="id10383247">Có kết quả trả về:</para>
+        <para id="id10383253"> Set recordset = connection.Execute (CommandText, RecordsAffected, Options)</para>
+        <para id="id10383268">Trong đó:</para>
+        <para id="id10383274">- connection: Đối tượng Connection.</para>
+        <para id="id10383281">- recordset: Đối tượng Recordset là kết quả trả về của phương thức Execute, tuy nhiên, người ta thường ít khi sử dụng cách này. Thay vào đó, người ta thường sử dụng phương thức Open của đối tượng Recordset.</para>
+        <para id="id10383295">- CommandText: là một chuỗi xác định câu truy vấn hành động, SELECT, thủ tục lưu trữ sẵn hay tên một bảng trong cơ sở dữ liệu.</para>
+        <para id="id10383306">- RecordEffected: Tùy chọn, là một số nguyên dài (Long) xác định trình cung cấp trả về bao nhiêu mẩu tin thỏa điều kiện.</para>
+        <para id="id10383316">- Options: Tùy chọn, là một số nguyên dài (Long) xác định trình cung cấp sẽ đánh giá các đối số của CommandText như thế nào.</para>
+        <para id="id10383327">Thuộc tính Mode: Xác định trình cung cấp có thể hạn chế truy cập đến cơ sở dữ liệu khi có một recordset đang mở. Các giá trị có thể là:</para>
+        <para id="id10383342"/>
+        <table id="id10383346" summary="">
+          <tgroup cols="3">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <tbody>
+              <row>
+                <entry>Hằng số</entry>
+                <entry>Giá trị</entry>
+                <entry>Ý nghĩa</entry>
+              </row>
+              <row>
+                <entry>adModeUnknown</entry>
+                <entry>0</entry>
+                <entry>Mặc định, chỉ định quyền hạn chưa thiết lập hay không thể xác định</entry>
+              </row>
+              <row>
+                <entry>adModeRead</entry>
+                <entry>1</entry>
+                <entry>Mở Recordset với quyền chỉ đọc</entry>
+              </row>
+              <row>
+                <entry>adModeWrite</entry>
+                <entry>2</entry>
+                <entry>Mở Recordset với quyền chỉ ghi</entry>
+              </row>
+              <row>
+                <entry>adModeReadWrite</entry>
+                <entry>3</entry>
+                <entry>Mở Recordset với quyền đọc/ghi</entry>
+              </row>
+              <row>
+                <entry>adModeShareDenyRead</entry>
+                <entry>4</entry>
+                <entry>Ngăn người khác mở kết nối với quyền chỉ đọc</entry>
+              </row>
+              <row>
+                <entry>adModeShareDenyWrite</entry>
+                <entry>8</entry>
+                <entry>Ngăn người khác mở kết nối với quyền chỉ ghi</entry>
+              </row>
+              <row>
+                <entry>adModeShareExclusive</entry>
+                <entry>12</entry>
+                <entry>Ngăn người khác mở kết nối</entry>
+              </row>
+              <row>
+                <entry>adModeShareDenyNone</entry>
+                <entry>16</entry>
+                <entry>Ngăn người khác mở kết nối với bất cứ quyền nào</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section id="id-181005079537">
+        <title>Đối tượng Recordset</title>
+        <para id="id12644946">Để có thể khởi tạo một đối tượng Recordset ta có thể thực hiện một trong hai cách:</para>
+        <list id="id12644957" list-type="bulleted">
+          <item>Phương thức Execute của đối tượng Connection. Tuy nhiên cách này ta chỉ tạo được các Recordset chỉ đọc và chỉ có thể di chuyển tới.</item>
+          <item>Xác lập các thông số thích hợp cho đối tượng Recordset rồi thực thi phuơng thức Open của đối tượng Recordset. Điều này được thực hiện nhờ các bước:<list id="id12644983" list-type="bulleted"><item>Sau khi khởi tạo đối tượng Connection, chỉ định Recordset là của đối tượng Connection trên.</item><item>Thiết lập các thuộc tính thích hợp của Recordset (Source, LockType…).</item><item>Thực thi câu truy vấn nối kết nhờ phương thức Open.</item></list></item>
+        </list>
+        <section id="id-099929585064">
+          <title>Thuộc tính CursorType (loại con trỏ)</title>
+          <para id="id12664892">Xác định loại con trỏ được trả về từ cơ sở dữ liệu. Các giá trị có thể nhận:</para>
+          <table id="id12664901" summary="">
+            <tgroup cols="3">
+              <colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <tbody>
+                <row>
+                  <entry>Hằng</entry>
+                  <entry>Giá trị</entry>
+                  <entry>Mô tả</entry>
+                </row>
+                <row>
+                  <entry>adOpenForwardOnly</entry>
+                  <entry>0</entry>
+                  <entry>Chỉ có thể di chuyển phía trước</entry>
+                </row>
+                <row>
+                  <entry>adOpenKeyset</entry>
+                  <entry>1</entry>
+                  <entry>Không thể thấy các mẩu tin do người dùng khác thêm vào nhưng khi họ xóa hay sửa đổi mẩu tin sẽ làm ảnh hưởng đến các mẩu tin ta đang làm việc.</entry>
+                </row>
+                <row>
+                  <entry>adOpenDynamic</entry>
+                  <entry>2</entry>
+                  <entry>Có thể thấy toàn bộ sự thay đổi do người dùng khác tác động.</entry>
+                </row>
+                <row>
+                  <entry>adOpenStatic</entry>
+                  <entry>3</entry>
+                  <entry>Bản sao tĩnh của tập mẩu tin. Mọi sự thay đổi của người dùng khác ta không thấy được</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </section>
+        <section id="id-486626865422">
+          <title>Thuộc tính LockType (khóa mẩu tin)</title>
+          <para id="id12325884">Xác định cách thức khóa mẩu tin trong Recordset. Dùng tính năng này khi muốn kiểm soát cách thức cập nhật mẩu tin với nhiều người dùng trong cơ sở dữ liệu.</para>
+          <table id="id12325895" summary="">
+            <tgroup cols="3">
+              <colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <tbody>
+                <row>
+                  <entry>Hằng</entry>
+                  <entry>Giá trị</entry>
+                  <entry>Mô tả</entry>
+                </row>
+                <row>
+                  <entry>adLockReadOnly</entry>
+                  <entry>1</entry>
+                  <entry>Mặc định - Chỉ đọc.</entry>
+                </row>
+                <row>
+                  <entry>adLockPessimistic</entry>
+                  <entry>2</entry>
+                  <entry>Khóa trang bi quan. Mẩu tin trong RecordSet bị khóa khi bắt đầu sửa đổi &amp; tiếp tục khóa cho đến khi thi hành phương thức Update hay di chuyển sang mẩu tin khác.</entry>
+                </row>
+                <row>
+                  <entry>adLockOptimistic</entry>
+                  <entry>3</entry>
+                  <entry>Khóa trang lạc quan. Mẩu tin chỉ bị khóa ngay lúc thi hành phương thức Update hay di chuyển sang mẩu tin khác.</entry>
+                </row>
+                <row>
+                  <entry>adLockBatchOptimistic</entry>
+                  <entry>4</entry>
+                  <entry>Khóa trang lạc quan hàng loạt. Hỗ trợ cập nhật nhiều mẩu tin cùng một lúc.</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </section>
+        <section id="id-804035053171">
+          <title>Thuộc tính Source</title>
+          <para id="id11999454">Đây là một chuỗi xác định câu truy vấn để lấy dữ liệu, có thể là tên của bảng hay tên của thủ tục lưu trữ sẵn.</para>
+        </section>
+        <section id="id-889064507621">
+          <title>Thuộc tính ActiveConnection</title>
+          <para id="id11999474">Đây là một thuộc tính đối tượng xác định Recordset là của nối kết nào trong chương trình.</para>
+        </section>
+        <section id="id-500655484307">
+          <title>Ví dụ sử dụng đối tượng Recordset trong chương trình</title>
+          <para id="id11939823">Đối tượng Recordset có thể được sử dụng là đối tượng nguồn dữ liệu (DataSource) của điều khiển lưới: Microsoft DataGrid Control 6.0 (OLEDB). Nhờ điều khiển lưới này ta có thể hiển thị dữ liệu từ một Recordset theo dạng hàng và cột.</para>
+          <para id="id11939845">Chẳng hạn ta có thể hiển thị trên lưới thông tin về các mặt hàng cùng với mã loại hàng của nó:</para>
+          <para id="id11939854">Dim cn As ADODB.Connection</para>
+          <para id="id11939874">Dim rs As ADODB.Recordset</para>
+          <para id="id11939894">Private Sub Form_Load()</para>
+          <para id="id11939906">Set cn = New ADODB.Connection</para>
+          <para id="id11939924">cn.Provider = "Microsoft.Jet.OLEDB.3.51"</para>
+          <para id="id11939932">cn.ConnectionString = "F:\Data\DBHH.mdb"</para>
+          <para id="id11939939">cn.Open</para>
+          <section id="id-241891218421">
+            <title>Set rs = New ADODB.Recordset</title>
+            <para id="id11939967">rs.Source = "SELECT MaHang, TenHang, DVTinh” &amp; _</para>
+            <para id="id11939976">“TenLoai FROM THangHoa, TLoaiHang WHERE “ &amp; _</para>
+            <para id="id11999147">“THangHoa.MaLoai = TLoaiHang.MaLoai"</para>
+            <para id="id11999151">Set rs.ActiveConnection = cn</para>
+            <para id="id11999166">rs.CursorLocation = adUseClient</para>
+            <para id="id11999173">rs.Open</para>
+            <para id="id11999181">Set grdHH.DataSource = rs</para>
+            <para id="id11999199">End Sub</para>
+            <para id="id11999212">Kết quả thực thi của chương trình này như sau:</para>
+            <para id="id11999218"><figure id="id11999228"><media id="id1169915506054" alt=""><image src=".png" mime-type="image/png" height="281" width="429"/></media></figure>Hình 11.4: Sử dụng Datagrid để hiển thị dữ liêu từ Recordset*</para>
+            <para id="id12644623">*: Microsoft DataGrid Control 6.0 (OLEDB): Name: grdHH.</para>
+          </section>
+        </section>
+        <section id="id-0242206614817">
+          <title>Cập nhật và thêm mới mẩu tin</title>
+          <para id="id12644640">Thêm mới mẩu tin</para>
+          <para id="id12644645">-Mở Recordset</para>
+          <para id="id12644652">-Thi hành phương thức AddNew</para>
+          <para id="id12644659">-Gán giá trị cho các trường trong mẩu tin của Recordset</para>
+          <para id="id12644668">-Lưu lại mẩu tin bằng cách thi hành phương thức Update (hay UpdateBatch).</para>
+          <para id="id12644677">Cập nhật mẩu tin</para>
+          <para id="id12644682">-Mở Recordset</para>
+          <para id="id12644689">-Thực hiện câu lệnh truy vấn để nhận về các mẩu tin thích hợp.</para>
+          <para id="id12644698">-Di chuyển đến mẩu tin cần cập nhật lại giá trị.</para>
+          <para id="id12644707">-Gán lại giá trị cho các trường.</para>
+          <para id="id12644715">- Thi hành phương thức Update (hay UpdateBatch tùy thuộc vào LockType).</para>
+          <para id="id12644726">Lưu ý:Chế độ khóa mẩu tin mặc định trong ADO là chỉ đọc, vì vậy ta phải đổi thuộc tính LockType của đối tượng Recordset sang chế độ soạn thảo trước khi thi hành cập nhật hay thêm mới mẩu tin.</para>
+        </section>
+        <section id="id-785817856572">
+          <title>Thuộc tính CursorLocation</title>
+          <para id="id12690188">Xác định tập mẩu tin trả về từ cơ sở dữ liệu được lưu ở đâu (Server hay Client, Server là mặc định). Thuộc tính cũng giống thuộc tính CursorLocation của đối tượng Connection.</para>
+        </section>
+        <section id="id-429543136024">
+          <title>Recordset ngắt kết nối</title>
+          <para id="id12690210">Khi chúng ta dùng con trỏ phía Client, ta có khả năng ngắt kết nối với Server cơ sở dữ liệu mà vẫn tiếp tục làm việc với dữ liệu. Cách này cho phép ứng dụng trở nên linh hoạt hơn bởi vì nhiều người dùng có thể làm việc với cùng một dữ liệu tại một thời điểm nếu như họ không có nối kết với server.</para>
+          <para id="id12690224">Để ngắt nối kết với Server, ta quy định thuộc tính ActiveConnection của đối tượng Recordset là Nothing.</para>
+          <para id="id12690230">Ví dụ:</para>
+          <para id="id12690239">Dim cn As ADODB.Connection</para>
+          <para id="id12690259">Private Sub Form_Load()</para>
+          <para id="id12690271">Set cn = New ADODB.Connection</para>
+          <para id="id12690289">cn.Provider = "Microsoft.Jet.OLEDB.3.51"</para>
+          <para id="id12690296">cn.ConnectionString = "F:\Data\GiangDay.mdb"</para>
+          <para id="id12690304">cn.Open</para>
+          <para id="id12690312">End Sub</para>
+          <para id="id12690324">Public Function GetList (strState As String) _</para>
+          <para id="id12690336">As ADODB.Recordset</para>
+          <para id="id12073406">Dim rs As ADODB.Recordset</para>
+          <para id="id12073431">Set rs = New ADODB.Recordset</para>
+          <para id="id12073456">Set rs.ActiveConnection = cn</para>
+          <para id="id12073472"/>
+          <para id="id12073477">rs.CursorLocation = adUseClient</para>
+          <para id="id12073482">rs.LockType = adLockBatchOptimistic</para>
+          <para id="id12073488">rs.CursorType = adOpenKeyset</para>
+          <para id="id12073494">rs.Open strState</para>
+          <para id="id12073499">Set rs.ActiveConnection = Nothing</para>
+          <para id="id12073520">Set GetList = rs</para>
+          <para id="id12073538">Set rs = Nothing</para>
+          <para id="id12073558">End Function</para>
+          <para id="id12073562">Để thi hành cùng một hành động trên một mẩu tin, ta sửa đổi lại các thuộc tính của đối tượng Recordset.</para>
+          <para id="id12146285">rs.LockType = adLockBatchOptimistic</para>
+          <para id="id12146290">rs.CursorType = adOpenKeyset</para>
+          <para id="id12146294">Chúng ta thiết lập giá trị các thuộc tính lại như trên để xác nhận rằng Recordset có thể nối kết lại để cập nhật về sau.</para>
+          <para id="id12146304">Sau đó, ta sẽ thiết lập một hàm nhận Recordset ngắt kết nối làm tham biến để tạo một đối tượng Recordset khác cập nhật dữ liệu.</para>
+          <para id="id12146314">Public Sub WriteData(rsDis As ADODB.Recordset)</para>
+          <para id="id12146326">Dim rs As ADODB.Recordset</para>
+          <para id="id12146352">Set rs = New ADODB.Recordset</para>
+          <para id="id12146378">Set rs.ActiveConnection = cn</para>
+          <para id="id12146399">rs.Open rsDis, cn</para>
+          <para id="id12146407">rs.UpdateBatch</para>
+          <para id="id12146414">End Sub</para>
+          <para id="id12146419">Gọi thực thi thủ tục WriteData:</para>
+          <para id="id12146425">Private Sub cmdWrite_Click()</para>
+          <para id="id12146438"> WriteData GetList("Select * From THanghoa")</para>
+          <para id="id12146452">End Sub</para>
+        </section>
+      </section>
+      <section id="id-148056658647">
+        <title>Đối tượng Command</title>
+        <para id="id12050444">Đây là đối tượng được người lập trình sử dụng khi muốn thi hành các thủ tục lưu trữ sẵn hay những câu truy vấn có tham số.</para>
+        <para id="id12050451">Với đối tượng Command ta có thể thi hành một số công việc như sau:</para>
+        <para id="id12050458">- Sử dụng thuộc tính CommandText để định nghĩa các đoạn Text thi hành được. Thông thường thuộc tính này dùng để thiết lập một câu lệnh SQL hoặc một lời gọi thủ tục lưu trữ sẵn, hay những dạng khác mà trình cung cấp hỗ trợ</para>
+        <para id="id12050472">- Xây dựng chuỗi các đối số của câu truy vấn cũng như các tham số của các thủ tục lưu trữ sẵn thông qua đối tượng Parameter hoặc tập hợp Parameters.</para>
+        <para id="id12050483">- Thực hiện một câu truy vấn và trả về đối tượng Recordset thông qua phương thức Execute.</para>
+        <para id="id12050491">- Xác định kiểu của đối tượng Command để nâng cao hiệu quả thông qua thuộc tính CommandType.</para>
+        <para id="id12050500">- Xác định số giây mà trình cung cấp phải chờ khi thi hành một đối tượng Command thông qua thuộc tính CommandTimeOut.</para>
+        <para id="id12050509">Các kiểu của đối tượng Command được trình bày trong bảng dưới đây:</para>
+        <table id="id12050519" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Hằng</entry>
+                <entry>Ý nghĩa</entry>
+              </row>
+              <row>
+                <entry>adCmdText</entry>
+                <entry>Định giá thuộc tính CommandText dưới dạng Text của một câu lệnh hoặc một lời gọi thủ tục lưu trữ sẵn.</entry>
+              </row>
+              <row>
+                <entry>adCmdTable</entry>
+                <entry>Định giá thuộc tính CommandText như là tên của một bảng khi tất cả các trường của bảng đó sẽ được trả về bởi câu lệnh truy vấn nội tại. </entry>
+              </row>
+              <row>
+                <entry>adCmdTableDirect</entry>
+                <entry>Định giá thuộc tính CommandText như là tên của một bảng khi mà tất cả các trường của bảng đó sẽ được trả về. </entry>
+              </row>
+              <row>
+                <entry>adCmdStoredProc</entry>
+                <entry>Định giá thuộc tính CommandText như là tên của một thủ tục lưu trữ sẵn. </entry>
+              </row>
+              <row>
+                <entry>adExecuteNoRecords</entry>
+                <entry>Chỉ định rằng thuộc tính CommandText là một câu lệnh hoặc một thủ tục lưu trữ sẵn không trả về bất kỳ dòng nào (ví dụ như lệnh thêm mới dữ liệu …). Cấu trúc này luôn bao hàm adCmdText, adCmdStoredProc. </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id12144059">Thuộc tính Parameter được xác lập thông qua hai phương thức CreateParameter và Append</para>
+        <para id="id12144070">Set parameter = command.CreateParameter (Name, Type, _</para>
+        <para id="id12144075">Direction, Size, Value)</para>
+        <list id="id12144080" list-type="bulleted">
+          <item>Name: tùy chọn, chuỗi xác định tên của đối tượng Parameter.</item>
+          <item>Type, Direction: giá trị xác địn kiểu của đối tượng Parameter</item>
+          <item>Size: giá trị xác định độ dài tối đa của giá trị đối tượng Parameter bằng ký tự hoặc Byte.</item>
+          <item>Value: biến xác định giá trị của Parameter truyền.</item>
+        </list>
+        <para id="id12144116">Những giá trị có thể của thuộc tính Direction:</para>
+        <table id="id12144124" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Hằng</entry>
+                <entry>Mô tả</entry>
+              </row>
+              <row>
+                <entry>adParamUnknown</entry>
+                <entry>Không biết chiều của Parameter.</entry>
+              </row>
+              <row>
+                <entry>adParamInput</entry>
+                <entry>Mặc định, xác định đây là tham số đầu vào.</entry>
+              </row>
+              <row>
+                <entry>adParamOutput</entry>
+                <entry>Tham số đầu ra.</entry>
+              </row>
+              <row>
+                <entry>adParamInputOutput</entry>
+                <entry>Vừa là tham số đầu vào vừa là tham số đầu ra.</entry>
+              </row>
+              <row>
+                <entry>adParamReturnValue</entry>
+                <entry>Đây là giá trị trả về.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id10485432">Phương thức Append dùng để đưa đối tượng Parameter vừa tạo vào tập hợp. Chúng ta sẽ xét qua ví dụ dau đây:</para>
+        <para id="id10485441">Public Sub ActiveConnectionX()</para>
+        <para id="id10485453">Dim cnn1 As ADODB.Connection</para>
+        <para id="id12855278">Dim cmdByRoyalty As ADODB.Command</para>
+        <para id="id12855309">Dim prmByRoyalty As ADODB.Parameter</para>
+        <para id="id12855340">Dim rstByRoyalty As ADODB.Recordset</para>
+        <para id="id12855371">Dim rstAuthors As ADODB.Recordset</para>
+        <para id="id12855401">Dim intRoyalty As Integer</para>
+        <para id="id12855436">Dim strAuthorID As String</para>
+        <para id="id10608278">Dim strCnn As String</para>
+        <para id="id10608304">' Định nghĩa 1 đối tượng command cho một thủ tục lưu trữ sẵn</para>
+        <para id="id10608317">Set cnn1 = New ADODB.Connection</para>
+        <para id="id10608347">cnn1.Provider = "SQLOLEDB.1"</para>
+        <para id="id10608357">cnn1.ConnectionString = "DATABASE=Pubs;" &amp; _</para>
+        <para id="id10608368">"SERVER=(local);UID=user;PWD=user;"</para>
+        <para id="id10608378">cnn1.Open</para>
+        <para id="id10608387">Set cmdByRoyalty = New ADODB.Command</para>
+        <para id="id10608416">Set cmdByRoyalty.ActiveConnection = cnn1</para>
+        <para id="id12335942">cmdByRoyalty.CommandText = "byroyalty"</para>
+        <para id="id12335951">cmdByRoyalty.CommandType = adCmdStoredProc</para>
+        <para id="id12335960">cmdByRoyalty.CommandTimeout = 15</para>
+        <para id="id12335973">' Định nghĩa đối số đầu vào cho thủ tục lưu trữ</para>
+        <para id="id12335983">intRoyalty = Trim(InputBox( "Enter royalty:"))</para>
+        <para id="id12335995">Set prmByRoyalty = New ADODB.Parameter</para>
+        <para id="id12336026">prmByRoyalty.Type = adInteger</para>
+        <para id="id12336036">prmByRoyalty.Size = 3</para>
+        <para id="id12336046">prmByRoyalty.Direction = adParamInput</para>
+        <para id="id12336055">prmByRoyalty.Value = intRoyalty</para>
+        <para id="id12336065">cmdByRoyalty.Parameters.Append prmByRoyalty</para>
+        <para id="id12336078">' Tạo một recordset bằng cách thi hành đối tượng Command.</para>
+        <para id="id12336090">Set rstByRoyalty = cmdByRoyalty.Execute()</para>
+        <para id="id12829013">' Mở bảng Authors để lấy tên hiển thị</para>
+        <para id="id12829022">Set rstAuthors = New ADODB.Recordset</para>
+        <para id="id12829047">rstAuthors.Open "authors", cnn1, , , adCmdTable </para>
+        <para id="id12829057">Debug.Print "Authors with " &amp; intRoyalty &amp; _</para>
+        <para id="id12829068">" percent royalty"</para>
+        <para id="id12829072">Do While Not rstByRoyalty.EOF</para>
+        <para id="id12829094">strAuthorID = rstByRoyalty!au_id</para>
+        <para id="id12829106">Debug.Print , rstByRoyalty!au_id &amp; ", ";</para>
+        <para id="id12829117">rstAuthors.Filter = "au_id = '" &amp; _</para>
+        <para id="id12829129">strAuthorID &amp; "'"</para>
+        <para id="id12829134">Debug.Print rstAuthors!au_fname &amp; “ - “ &amp; _</para>
+        <para id="id12829145">rstAuthors!au_lname</para>
+        <para id="id12829150">rstByRoyalty.MoveNext</para>
+        <para id="id12829160">Loop</para>
+        <para id="id12829176">rstByRoyalty.Close</para>
+        <para id="id12332127">rstAuthors.Close</para>
+        <para id="id12332137">cnn1.Close</para>
+        <para id="id12332146">End Sub</para>
+      </section>
+      <section id="id-357308252291">
+        <title>Đối tượng Field</title>
+        <para id="id12332169">Dùng đối tượng Field và tập hợp Fields khi ta muốn truy cập giá trị của một trường của một Recordset nào đó, kỹ thuật này tương tự như đối với DAO.</para>
+        <para id="id12332179">Dịch vụ dữ liệu từ xa của ADO </para>
+        <para id="id12332185">Đây là kỹ thuật sử dụng thư viện Remote Data Service (RDS) để vận chuyển ADO Recordset từ server đến máy tính client Recordset kết quả được lưu ở máy client và chúng được ngắt kết nối đến server. </para>
+        <para id="id12332194">RDS là một phần của Microsoft Data Access Components (MDAC). Các thông tin về RDS có thể tìm thấy ở trang <link url="http://www.microsoft.com/data/">http://www.microsoft.com/data/</link>. RDS gồm 2 phần chính:</para>
+        <para id="id12332222">- RDS 1.5 server: đi kèm khi cài đặt Internet Information Server (IIS) 4.0.</para>
+        <para id="id12332230">- RDS 1.5 client đi kèm khi cài đặt Internet Explorer (IE) 4.0.</para>
+        <para id="id12332241">Thư viện ADODB gồm các thành phần hoạt động chủ yếu phía server (server side) như các đối tượng Connection, Command, Error, Parameters ... Sẽ thật hiệu quả nếu sử dụng các thành phần này giao tiếp với cơ sở dữ liệu. Tuy nhiên trong trường hợp sử dụng các chức năng cần phải có ở phía client thì ta cần phải phân phối kèm theo một số tập tin và sử dụng ODBC cho mỗi máy client. Đối tượng ADODB Recordset không thể phân phối với các thành phần của RDS Client. Thay vào đó thư viện đối tượng Microsoft ActiveX Data Objects RecordSet (ADOR) được sử dụng. Thư viện này gồm các thành phần hoàn toàn nằm ở phía client và cho phép ta có các thao tác trên một recordset thật sự phía client. ADOR không có các đối tượng Connection, Command, Error, hay Parameters. ADOR có các chức năng cho phép phân phối recordset với các thành phần RDS client.</para>
+        <para id="id12332280">Một ADO Recordset không thể vận chuyển thông qua giao thức http. Thay vào đó RDS được sử dụng để nhận và tương tác dữ liệu từ xa thông qua http. Một proxy RDS được sử dụng để kiểm soát từ xa một ADOR Recordset ngắt kết nối truyền thông qua giao thức http. Như vậy RDS là vật chứa (container) cho phép lưu trữ và truy cập từ xa các ADOR Recordset.</para>
+        <para id="id12332296">Ta có thể dùng đối tượng DataControl của RDS để nhận về đối tượng Recordset của ADO từ Internet.</para>
+        <para id="id12831727">Để có thể sử dụng kỹ thuật này, ta cần tham khảo các thuộc tính chủ yếu của đối tượng DataControl.</para>
+        <para id="id12831734">- Thuộc tính Connect:</para>
+        <para id="id12332302">DataControl.Connect = "DSN=DSNName;UID=usr;PWD=pw;"</para>
+        <para id="id12831746">- Thuộc tính Server: Xác định máy chủ Web chứa nguồn dữ liệu bao gồm tên và giao thức nối kết.</para>
+        <para id="id12831760">- Thuộc tính SQL: Là câu lệnh truy vấn để nhận về đối tượng Recordset</para>
+        <para id="id12831772">DataControl.SQL = "QueryString"</para>
+        <para id="id12831782">- Thuộc tính ExecuteOptions: xác định việc thi hành các câu lệnh truy vấn một cách đồng bộ hay không, các giá trị là một trong hai giá trị sau đây:</para>
+        <table id="id12831797" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Hằng</entry>
+                <entry>Mô tả</entry>
+              </row>
+              <row>
+                <entry>adcExecSync</entry>
+                <entry>Thi hành đồng bộ</entry>
+              </row>
+              <row>
+                <entry>adcExecAsync</entry>
+                <entry>Mặc định, Thi hành không đồng bộ. </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id12831882">- Thuộc tính ReadyState: Xác định trạng thái của điều khiển.</para>
+        <table id="id12831895" summary="">
+          <tgroup cols="2">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <tbody>
+              <row>
+                <entry>Giá trị</entry>
+                <entry>Mô tả</entry>
+              </row>
+              <row>
+                <entry>adcReadyStateLoaded</entry>
+                <entry>Câu truy vấn hiện hành vẫn đang còn thực hiện và chưa có một dòng nào được trả về. Đối tượng Recordset của RDS.DataControl chưa thể sử dụng. </entry>
+              </row>
+              <row>
+                <entry>adcReadyStateInteractive</entry>
+                <entry>Tập hợp dòng ban đầu đã được trả về và chứa trong đối tượng Recordset, các dòng tiếp theo vẫn đang được trả về. </entry>
+              </row>
+              <row>
+                <entry>adcReadyStateComplete</entry>
+                <entry>Tất cả các dòng đều đã được chứa trong đối tượng Recordset.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id12011377">- Phương thức Refresh: thi hành câu truy vấn.</para>
+        <para id="id12011389">- Thuộc tính Recordset: trả về Recordset kết quả.</para>
+        <para id="id12011402">Recordset = DataControl.Recordset </para>
+        <para id="id12011411">- Phương thức DoEvents: Đây là hàm của VB, nó sẽ trả điều khiển cho hệ điều hành thực hiện các quá trình khác.</para>
+      </section>
+    </section>
+  </content>
+</document>

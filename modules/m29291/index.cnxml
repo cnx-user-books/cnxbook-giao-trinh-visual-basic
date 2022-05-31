@@ -1,0 +1,269 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Biểu mẫu và một số điều khiển thông dụng</title>
+  <metadata>
+  <md:content-id>m29291</md:content-id><md:title>Biểu mẫu và một số điều khiển thông dụng</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về một số điều khiển cơ bản để tạo nên giao diện cho các ứng dụng cũng như một số khái niệm trong lập trình với VB; những yêu cầu tối thiểu cần có trong việc “lập trình sự kiện” với VB.</md:abstract>
+  <md:uuid>148c40bf-6da6-4263-a9ad-cd0fb4d555e3</md:uuid>
+</metadata>
+
+<content>
+    <para id="id9643625">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id9643639">- Khái niệm về điều khiển, thuộc tính, phương thức, sự kiện.</para>
+    <para id="id9643649">- Quy tắc đặt tên danh biểu trong VB.</para>
+    <para id="id9643655">- Sử dụng biểu mẫu trong thiết kế giao diện.</para>
+    <para id="id9643661">- Sử dụng điều khiển ô nhập liệu, nút nhấn, nhãn, khung.</para>
+    <para id="id9643668">Kiến thức có liên quan:</para>
+    <para id="id9643680">- Cách thức sử dụng môi trường phát triển VB.</para>
+    <para id="id9643691">Tài liệu tham khảo:</para>
+    <para id="id9643703">- Microsoft Visual Basic 6.0 và Lập trình Cơ sở dữ liệu - Chương 2, trang 26; Chương 3, trang 29 - Nguyễn Thị Ngọc Mai (chủ biên), Nhà xuất bản Giáo dục - 2000.</para>
+    <para id="id9643751">Các khái niệm</para>
+    <list id="id9643755" list-type="bulleted">
+      <item>Điều khiển: Các thành phần có sẵn để người lập trình tạo giao diện tương tác với người dùng.</item>
+    </list>
+    <para id="id9643775">Mỗi điều khiển thực chất là một đối tượng, do vậy nó sẽ có một số điểm đặc trưng cho đối tượng, chẳng hạn như các thuộc tính, các phương thức &amp; các sự kiện.</para>
+    <list id="id9643786" list-type="bulleted">
+      <item>Thuộc tính: Các đặc trưng của một điều khiển tạo nên dáng vẻ của điều khiển đó.</item>
+      <item>Phương thức: Các điều khiển có thể thực thi một số tác vụ nào đó, các tác vụ này được định nghĩa sẵn bên trong các phương thức (còn gọi là chương trình con: hàm &amp; thủ tục), người lập trình có thể gọi thực thi các phương thức này nếu cần. </item>
+      <item>Sự kiện: là hành động của người dùng tác động lên ứng dụng đang thực thi.</item>
+    </list>
+    <para id="id9643843">Thí dụ:- Nhấn phím bất kỳ trên bàn phím.</para>
+    <para id="id9643851">- Nhấp chuột.</para>
+    <para id="id9643858">Các thành phần giao diện có khả năng đáp ứng lại sự kiện. Chẳng hạn khi chúng ta nhấp chuột vào button, lúc đó button nhận biết được sự kiện này; hay như textbox nhận biết được sự kiện bàn phím tác động lên nó.</para>
+    <para id="id9643874">Một ứng dụng trên Windows thường được thực hiện nhờ vào việc đáp ứng lại các sự kiện của người dùng.</para>
+    <list id="id9643883" list-type="bulleted">
+      <item>Lập trình sự kiện:</item>
+    </list>
+    <para id="id9643900">Các thành phần giao diện có khả năng nhận biết được các sự kiện từ phía người dùng. Tuy nhiên khả năng đáp ứng lại các sự kiện được thực hiện bởi người lập trình.</para>
+    <para id="id9643911">Khi một thành phần giao diện được sử dụng, người lập trình phải xác định chính xác hành động của thành phần giao diện đó để đáp ứng lại một sự kiện cụ thể. Lúc đó người lập trình phải viết đoạn mã lệnh mà đoạn mã lệnh này sẽ được thực thi khi sự kiện xảy ra.</para>
+    <para id="id9643926">Chẳng hạn, trong ứng dụng Paint của Windows; khi người sử dụng nhấp chuột vào nút vẽ hình elip sau đó dùng chuột vẽ nó trên cửa sổ vẽ, một hình elip được vẽ ra.</para>
+    <para id="id9643944">Trong lập trình sự kiện, một ứng dụng được xây dựng là một chuỗi các đáp ứng lại sự kiện. Tất cả các hành động của ứng dụng là đáp ứng lại các sự kiện. Do vậy người lập trình cần phải xác định các hành động cần thiết của ứng dụng; phân loại chúng; sau đó viết các đoạn mã lệnh tương ứng.</para>
+    <para id="id9643959">Thí dụ về đáp ứng lại sự kiện:</para>
+    <para id="id9643972"><figure id="id9643986"><media id="id10625813" alt=""><image src=".png" mime-type="image/png" height="163" width="263"/></media></figure>Mã lệnh- Mã lệnh cho sự kiện Click của Ghi đĩa.----------------------------------------------------------------------------------------------------- Mã lệnh cho sự kiện Click của In giấy----------------------------------------------------------------------------------------------------Hình II.1: Thí dụ về đáp ứng sự kiện</para>
+    <para id="id9644154">- Khi người dùng không tác động vào ứng dụng, ứng dụng không làm gì cả.</para>
+    <para id="id9644163">- Khi người dùng nhập dữ liệu vào các ô nhập Họ và tên, Địa chỉ; sự kiện bàn phím xảy ra trên các ô nhập. Tuy nhiên, ứng dụng vẫn không làm gì cả vì không có đoạn mã lệnh nào đáp ứng các sự kiện này.</para>
+    <para id="id9644177">- Khi người dùng nhấp nút chọn Ghi đĩa, ứng dụng tìm kiếm trong mã lệnh của mình thấy có đoạn mã lệnh đáp ứng lại sự kiện này; lúc đó đoạn mã lệnh được thực thi.</para>
+    <para id="id9644190">- Tương tự như vậy đối với nút chọn In giấy.</para>
+    <list id="id9644197" list-type="bulleted">
+      <item>Cách xác lập các thuộc tính &amp; các phương thức trong chương trình</item>
+    </list>
+    <para id="id9644210">&lt;Thuộc tính Name của điều khiển&gt;.&lt;Tên thuộc tính&gt;</para>
+    <para id="id9644228">&lt;Thuộc tính Name của điều khiển&gt;.&lt;Tên phương thức&gt;[(&lt;Các tham số&gt;)]</para>
+    <list id="id9644264" list-type="bulleted">
+      <item>Tên điều khiển (thuộc tính Name)</item>
+    </list>
+    <para id="id9644274">Đây là thuộc tính xác định tên của điều khiển trong ứng dụng. Tên này được đặt theo quy tắc:</para>
+    <list id="id9644280" list-type="bulleted">
+      <item>Tên có thể dài từ 1 - 40 ký tự.</item>
+      <item>Tên phải bắt đầu với ký tự chữ, có thể chữ hoa hay thường.</item>
+      <item>Sau ký tự đầu tiên, tên có thể chứa ký tự, số hay dấu gạch dưới.</item>
+    </list>
+    <para id="id9644304">Ví dụ: Num, StudentCode, Class12A2 là những tên hợp lệ. 345, 7yu là nhữg tên không hợp lệ.</para>
+    <section id="id-917406598104">
+      <title>Biểu mẫu (Form)</title>
+      <section id="id-941548797115">
+        <title>Khái niệm: </title>
+        <para id="id9644339">Chương trình ứng dụng giao tiếp với người dùng thông qua các biểu mẫu (hay còn gọi là cửa sổ, xuất phát từ chữ Form hay Windows); các điều khiển (Control) được đặt lên bên trên giúp cho biểu mẫu thực hiện được công việc đó.</para>
+        <para id="id9644356">Biểu mẫu là các cửa số được lập trình nhằm hiển thị dữ liệu và nhận thông tin từ phía người dùng.</para>
+      </section>
+      <section id="id-0638018211451">
+        <title>Thuộc tính</title>
+        <list id="id9644377" list-type="bulleted">
+          <item>Name: thuộc tính này như là một định danh nhằm xác định tên của biểu mẫu là gì? Ta sẽ sử dụng thuộc tính này để truy xuất đến các thuộc tính khác cùng với phương thức có thể thao tác được trên biểu mẫu.</item>
+          <item>Caption: chuỗi hiển thị trên thanh tiêu đề của biểu mẫu.</item>
+          <item>Icon: hình icon được dùng trong thanh tiêu đề của biểu mẫu, nhất là khi biểu mẫu thu nhỏ lại.</item>
+          <item>WindowState: xác định biểu mẫu sẽ có kích thước bình thường (Normal=0), hay Minimized (=1), Maximized =(2).</item>
+          <item>Font: xác lập Font cho biểu mẫu. Thuộc tính này sẽ được các điều khiển nằm trên nó thừa kế. Tức là khi ta đặt một điều khiển lên biểu mẫu, thuộc tính Font của điều khiển ấy sẽ tự động trở nên giống y của biểu mẫu.</item>
+          <item>BorderStyle: xác định dạng của biểu mẫu.</item>
+        </list>
+      </section>
+      <section id="id-832930309231">
+        <title>Phương thức</title>
+        <list id="id9644495" list-type="bulleted">
+          <item>Move: di chuyển biểu mẫu đến tọa độ X,Y: Move X, Y.</item>
+        </list>
+      </section>
+      <section id="id-0817476155938">
+        <title>Sự kiện</title>
+        <list id="id9644538" list-type="bulleted">
+          <item>Form_Initialize: Sự kiện này xảy ra trước nhất và chỉ một lần thôi khi ta tạo ra thể hiện đầu tiên của biểu mẫu. Ta dùng sự kiện Form_Initialize để thực hiện những gì cần phải làm chung cho tất cả các thể hiện của biểu mẫu này.</item>
+          <item>Form_Load: Sự kiện này xảy ra mỗi lần ta gọi thể hiện một biểu mẫu. Nếu ta chỉ dùng một thể hiện duy nhất của một biểu mẫu trong chương trình thì Form_Load coi như tương đương với Form_Initialize.</item>
+        </list>
+        <para id="id9644585">Ta dùng sự kiện Form_Load để khởi tạo các biến, điều khiển cho các thể hiện của biểu mẫu này.</para>
+        <list id="id9644605" list-type="bulleted">
+          <item>Form_Activate: Mỗi lần một biểu mẫu được kích hoạt (active) thì một sự kiện Activate phát sinh. Ta thường dùng sự kiện này để cập nhật lại giá trị các điều khiển trên biểu mẫu.</item>
+          <item>Form_QueryUnload: Khi người sử dụng chương trình nhấp chuột vào nút X phía trên bên phải để đóng biểu mẫu thì một sự kiện QueryUnload được sinh ra. Đoạn chương trình con dưới đây mô tả thủ tục xử lý sự kiện QueryUnload.</item>
+        </list>
+        <para id="id9644661">Private Sub Form_QueryUnload(Cancel As Integer, _ </para>
+        <para id="id9644692">UnloadMode As Integer) </para>
+        <para id="id9644712">End Sub </para>
+        <para id="id9644734">Sự kiện này cho ta khả năng hủy bỏ hành động đóng biểu mẫu bằng cách đặt lại Cancel là 1.</para>
+        <list id="id9644743" list-type="bulleted">
+          <item>Form_Resize: Sự kiện này xảy ra mỗi khi biểu mẫu thay đổi kích thước.</item>
+        </list>
+      </section>
+    </section>
+    <section id="id-686917232095">
+      <title>Nhãn (Label)</title>
+      <section id="id-0358822462936">
+        <title>Khái niệm: </title>
+        <para id="id9644782"><figure id="id9644807"><media id="id10619480" alt=""><image src="../../media/graphics1-92e7.png" mime-type="image/png" height="27" width="29"/></media></figure>Nhãn là điều khiển dạng đồ họa cho phép người sử dụng hiển thị chuỗi ký tự trên biểu mẫu nhưng họ không thể thay đổi chuỗi ký tự đó một cách trực tiếp.</para>
+      </section>
+      <section id="id-548968647551">
+        <title>Biểu tượng (shortcut) trên hộp công cụ: </title>
+        <section id="id-826408342997">
+          <title>Thuộc tính:</title>
+          <list id="id9644859" list-type="bulleted">
+            <item>Name: Đây là một tên xác định một định danh, người lập trình có thể thay đổi tên này theo cách của mình để tiện sử dụng.</item>
+            <item>Caption: Thuộc tính quy định chuỗi ký tự hiển thị khi ta tạo một điều khiển nhãn. Khi ta tạo mới một điều khiển thì thuộc tính Caption có giá trị mặc nhiên là “Label…”.</item>
+          </list>
+          <para id="id9644909">Ví dụ: Ta muốn tạo một nhãn là “Chào mừng bạn đến với Visual Basic”, ta thay đổi giá trị của thuộc tính Caption thành “Chào mừng bạn đến với Visual Basic”.</para>
+          <para id="id9644933">Ta có thể thay đổi giá trị của thuôc tính Caption tại thời điểm ứng dụng đang chạy nhờ vào đoạn mã lệnh đơn giản như sau:</para>
+          <para id="id9644948">L1.Caption = "Đã đổi giá trị Caption" với L1 là tên của điều khiển nhãn mà ta muốn đổi.</para>
+          <list id="id9644971" list-type="bulleted">
+            <item>Font, Fore Color: Quy định kiểu chữ, kích thước, màu hiển thị.</item>
+            <item>BackStyle, BackColor: BackStyle quy định là nhãn trong suốt hay không. BackColor quy định màu nền của nhãn trong trường hợp không trong suốt.</item>
+          </list>
+        </section>
+        <section id="id-500018820941">
+          <title>Phương thức:</title>
+          <list id="id9645016" list-type="bulleted">
+            <item>Move: di chuyển nhãn đến tọa độ X,Y: Move X, Y.</item>
+          </list>
+        </section>
+        <section id="id-337481920999">
+          <title>Sự kiện:</title>
+          <list id="id9645059" list-type="bulleted">
+            <item>Change: Xảy ra mỗi khi nhãn thay đổi giá trị.</item>
+            <item>Click: Mỗi khi nhãn được chuột nhấp lên, sự kiện này xảy ra.</item>
+            <item>DblClick: Xảy ra khi người sử dụng nhấp đúp chuột lên điều khiển nhãn.</item>
+          </list>
+          <para id="id9645108">Khung (Frame)</para>
+        </section>
+      </section>
+      <section id="id-364593062047">
+        <title>Khái niệm:</title>
+        <para id="id9645121">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      Khung là một điều khiển dùng trong việc bố trí giao diện của biểu mẫu một cách trong sáng và rõ nét. Thông thường các điều khiển cùng phục vụ cho một công việc nào đó sẽ được đặt trong một khung nhằm làm nổi bật vai trò của chúng.</para>
+        <para id="id9645184">Biểu tượng (shortcut) trên hộp công cụ: </para>
+        <para id="id9645194">Khi chúng ta tạo mới một khung để chứa các điều khiển khác, ta có hai cách thực hiện:</para>
+        <para id="id9645202">- Tạo khung chứa trước, sau đó đưa các điều khiển vào trong khung chứa. Đây là cách đơn giản nhất.</para>
+        <para id="id9645213">- Tạo khung chứa sau khi đã tạo mới các điều khiển, khi đó khung chứa sẽ che mất các điều khiển, vì vậy ta cần phải đưa khung chứa ra sau các điều khiển bằng cách nhấp chuột phải và chọn Send to Back. Nhưng đối với cách này, các điều khiển khác không nằm trên khung chứa. Do vậy ta có thể giải quyết bằng cách cắt (Cut) các điều khiển này đi, sau đó dán (Paste) vào trong khung chứa.</para>
+        <para id="id9645270">Hình II.2 Ví dụ về khung chứa (Frame)<figure id="id9645304"><media id="id10659437" alt=""><image src=".png" mime-type="image/png" height="218" width="297"/></media></figure></para>
+      </section>
+      <section id="id-00331476306701">
+        <title>Thuộc tính: Khung cũng có các thuộc tính thông dụng như của điều khiển nhãn chẳng hạn như: Name, Caption,...</title>
+        <para id="id9645329">
+          <!--Empty sections are illegal in CNXML 0.5.  This empty paragraph is a place holder that added as a byproduct of the word importer.-->
+        </para>
+      </section>
+      <section id="id-816998185391">
+        <title>Phương thức: </title>
+        <list id="id9645350" list-type="bulleted">
+          <item>Move: di chuyển khung đến tọa độ X,Y: Move X, Y.</item>
+        </list>
+      </section>
+      <section id="id-470198277539">
+        <title>Sự kiện:</title>
+        <list id="id9645392" list-type="bulleted">
+          <item>Click, DblClick: xảy ra khi khung nhận được một thao tác nhấp (nhấp đúp) chuột.</item>
+        </list>
+        <para id="id9645411">Nút lệnh (Command Button)</para>
+      </section>
+      <section id="id-438514435278">
+        <title>Khái niệm:</title>
+        <para id="id9645426">Nút lệnh là một điều khiển dùng để bắt đầu, ngắt hoặc kết thúc một quá trình. Khi nút lệnh được chọn thì nó trông như được nhấn xuống, do đó nút lệnh còn được gọi là nút nhấn (Push Button). Người sử dụng luôn có thể chọn một nút lệnh nào đó bằng cách nhấn chuột trên nút lệnh đó.</para>
+        <para id="id9645443">Biểu tượng (shortcut) trên hộp công cụ:<figure id="id9645474"><media id="id10659656" alt=""><image src="../../media/graphics2-6d7e.png" mime-type="image/png" height="28" width="40"/></media></figure></para>
+      </section>
+      <section id="id-373504299247">
+        <title>Thuộc tính:</title>
+        <list id="id9648911" list-type="bulleted">
+          <item>Name: sử dụng như một định danh nhằm xác định tên của nút lệnh.</item>
+          <item>Caption: Dùng để hiển thị một chuỗi nào đó trên nút lệnh.</item>
+          <item>Default: Nếu giá trị của thuộc tính này là True thì ta có thể chọn nút lệnh bằng cách nhấn phím Enter.</item>
+          <item>Cancel: Nếu giá trị của thuộc tính này là True thì ta có thể chọn nút lệnh nào đó bằng cách nhấn phím ESC.</item>
+          <item>Enabled: Trong một biểu mẫu, có thể có nhiều nút lệnh để thực hiện nhiều công việc khác nhau và tại một thời điểm nào đó ta chỉ được phép thực hiện một số công việc. Nếu giá trị thuộc tính Enabled là False thì nút lệnh đó không có tác dụng. Giá trị mặc định của thuộc tính này là True. Ta có thể thay đổi giá trị của thuộc tính tại thời điểm chạy ứng dụng.</item>
+          <item>ToolTipText: cho phép hiển thị một đoạn văn bản chú thích công dụng của nút lệnh khi người sử dụng dùng chuột rê trên nút nhấn. </item>
+          <item>Font, Fore Color: Quy định kiểu chữ, kích thước, màu hiển thị.</item>
+        </list>
+      </section>
+      <section id="id-239279132726">
+        <title>Phương thức</title>
+        <list id="id9649043" list-type="bulleted">
+          <item>Move: di chuyển nút lệnh đến tọa độ X,Y: Move X, Y.</item>
+        </list>
+      </section>
+      <section id="id-579868496181">
+        <title>Phương thức</title>
+        <list id="id9649086" list-type="bulleted">
+          <item>Click: đây là sự kiện thường xảy ra với nút lệnh. Mỗi khi một nút lệnh được chọn, sự kiện này được kích hoạt. Do đó, người sử dụng sẽ viết mã các lệnh để đáp ứng lại sự kiện này.</item>
+        </list>
+        <para id="id9649111">Ví dụ: Tạo một biểu mẫu có một ô nhập liệu với nhãn là họ tên và một nút lệnh cho phép đưa ra câu chào người dùng đó.</para>
+        <para id="id9649128">Private Sub Command1_Click()</para>
+        <para id="id9649132">MsgBox "Chao mung ban " &amp; Text1.Text &amp; _</para>
+        <para id="id9649137">" lam quen voi Visual Basic"</para>
+        <para id="id9649141">End Sub</para>
+        <para id="id9649145"><figure id="id9649159"><media id="id10681163" alt=""><image src=".png" mime-type="image/png" height="198" width="270"/></media></figure><figure id="id9649183"><media id="id10681192" alt=""><image src=".png" mime-type="image/png" height="97" width="297"/></media></figure>Click hereHình II.3 Sử dụng nút lệnh</para>
+        <para id="id9649557">Ô nhập liệu (TextBox)</para>
+        <para id="id9649562">Khái niệm:</para>
+        <para id="id9649567">Ô nhập liệu là một điều khiển cho phép nhận thông tin do người dùng nhập vào. Đối với ô nhập liệu ta cũng có thể dùng để hiển thị thông tin, thông tin này được đưa vào tại thời điểm thiết kế hay thậm chí ở thời điểm thực thi ứng dụng. Còn thao tác nhận thông tin do người dùng nhập vào dĩ nhiên là được thực hiện tại thời điểm chạy ứng dụng.</para>
+        <para id="id9649590">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      Biểu tượng (shortcut) trên hộp công cụ </para>
+      </section>
+      <section id="id-448693328715">
+        <title>Thuộc tính:</title>
+        <list id="id9649652" list-type="bulleted">
+          <item>Name: Đây là tên của ô nhập liệu, được sử dụng như một định danh.</item>
+          <item>MaxLength: Thuộc tính quy định số ký tự tối đa có thể nhập vào ô nhập liệu. Nếu số ký tự nhập vào vượt quá số ký tự tối đa thì chỉ có đúng số ký tự tối đa được ghi nhận vào trong thuộc tính Text.</item>
+          <item>Text: Dùng để nhập vào thông tin cần hiển thị trong Textbox tại thời điểm thiết kế hoặc nhận giá trị do người dùng nhập vào tại thời điểm chạy ứng dụng.</item>
+        </list>
+        <para id="id9649712">Ví dụ:</para>
+        <para id="id9649717">MsgBox Text1.Text </para>
+        <para id="id9649729">Đoạn mã này viết trong sự kiện Click của nút lệnh OK. Cho phép hộp thông báo hiển thị nội dung do người dùng nhập vào ô nhập liệu.</para>
+        <para id="id9649739">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id9649787">Hình II.3 Ví dụ về điều khiển ô nhập liệu</para>
+        <list id="id9649815" list-type="bulleted">
+          <item>Locked: Thuộc tính cho phép người dùng thay đổi nội dung của ô nhập liệu được hay không? Thuộc tính này có thể nhận 2 giá trị True hoặc False. Nếu False thì người dùng có thể thay đổi nội dung của ô nhập liệu &amp; mặc định thì thuộc tính này có giá trị là False.</item>
+          <item>PasswordChar: Thuộc tính này quy định cách hiển thị thông tin do người dùng nhập vào. Chẳng hạn, nếu ta nhập vào giá trị thuộc tính này là * thì các ký tự nhập vào điều hiển thị bởi dấu * . Thuộc tính này thường được dùng trong trường hợp thông tin nhập vào cần được che giấu (Ví dụ mật khẩu đăng nhập một chương trình ứng dụng nào đó mà trong đó các người dùng khác nhau thì có các quyền khác nhau).</item>
+          <item>Multiline: Thuộc tính quy định ô nhập liệu có được hiển thị thông tin dưới dạng nhiều hàng hay không, nếu là TRUE thì ô nhập liệu cho phép nhiều hàng. </item>
+          <item>Font, Fore Color: Quy định kiểu chữ, kích thước, màu hiển thị.</item>
+          <item>SelLength:Cho phép trả về hoặc đặt trước số lượng ký tự được chọn trong ô nhập liệu.</item>
+          <item>SelStart: Trả về hoặc xác định điểm bắt đầu của chuỗi được chọn. Đây là vị trí bắt đầu chèn một chuỗi mới trong trường hợp không có đánh dấu chọn chuỗi.</item>
+          <item>SelText: Trả về hoặc xác định chuỗi ký tự được đánh dấu chọn, chỗi trả về sẽ là rỗng nếu như không đánh dấu chọn chuỗi nào.</item>
+        </list>
+        <para id="id9649962">Ba thuộc tính SelLength, SelStart, SelText chỉ có tác dụng tại thời điểm chạy ứng dụng.</para>
+      </section>
+      <section id="id-484271292372">
+        <title>Phương thức</title>
+        <list id="id9649980" list-type="bulleted">
+          <item>Move: Di chuyển ô nhập liệu đến tọa độ X, Y: Move X, Y.</item>
+          <item>SetFocus: Phương thức này nhằm mục đích thiết lập cho điều khiển ô nhập liệu nhận được Focus, nghĩa là nó sẵn sàng được tương tác bởi người sử dụng.</item>
+        </list>
+      </section>
+      <section id="id-714356480071">
+        <title>Sự kiện:</title>
+        <list id="id9650038" list-type="bulleted">
+          <item>KeyPress: xảy ra khi người sử dụng chương trình nhấn một phím. Đối với điều khiển TextBox, ta thường dùng nó để lọc (filter out) các phím không chấp nhận. Sự kiện KeyPress cho ta một mã Ascii, một số có giá trị từ 0 đến 255, của phím vừa nhấn. Trong ví dụ dưới đây, TextBox Text1 sẽ chỉ nhận biết các phím là số (0 - 9), không nhận biết các phím khác: </item>
+        </list>
+        <para id="id9650069">Private Sub Text1_KeyPress(KeyAscii As Integer) </para>
+        <para id="id9650090"> If KeyAscii &lt; 48 Or KeyAscii &gt; 57 Then ‘ Mã Ascii của 0 là 48, của 9 là 57</para>
+        <para id="id9650112">KeyAscii = 0</para>
+        <para id="id9650122"> End If </para>
+        <para id="id9650135">End Sub </para>
+        <list id="id9650150" list-type="bulleted">
+          <item>KeyDown, KeyUp: mỗi sự kiện KeyPress lại cho ta một cặp sự kiện KeyDown/KeyUp. Sự kiện KeyDown/KeyUp có 2 tham số là KeyCode và Shift. Sự kiện này cho phép ta nhận biết được các phím đặc biệt trên bàn phím. Trong ví dụ dưới đây, ta hiển thị tên các phím chức năng mà người sử dụng chương trình nhấn vào:</item>
+        </list>
+        <para id="id9650176">Private Sub Text3_KeyDown(KeyCode As Integer, Shift As Integer) </para>
+        <para id="id9650203">If (KeyCode &gt;= 112) And (KeyCode &lt;= 123) Then </para>
+        <para id="id9650224">MsgBox "Ban vua nhan phim chuc nang: F" &amp; _</para>
+        <para id="id9650236">Trim(Str(KeyCode - 111)) </para>
+        <para id="id9650246">End If </para>
+        <para id="id9650265">End Sub </para>
+      </section>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,199 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Khái niệm cơ bản về cơ sở dữ liệu</title>
+  <metadata>
+  <md:content-id>m30548</md:content-id><md:title>Khái niệm cơ bản về cơ sở dữ liệu</md:title>
+  <md:abstract>Mục tiêu:
+Chương này giới thiệu về một số khái niệm trong lập trình cơ sở dữ liệu với VB, những vấn đề cần thiết khi thiết kế các ứng dụng truy cập cơ sở dữ liệu.</md:abstract>
+  <md:uuid>c1eec123-c14d-4ab2-ba46-faa18624abca</md:uuid>
+</metadata>
+
+<content>
+    <para id="id12166456">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id12044690">- Một số khái niệm khi lập trình cơ sở dữ liệu trong VB.</para>
+    <para id="id12643070">- Phân biệt DAO, RDO, ADO.</para>
+    <para id="id12044698">- Sử dụng môi trường phát triển VB để tương tác với cơ sở dữ liệu.</para>
+    <para id="id12643084">Kiến thức có liên quan:</para>
+    <para id="id10517004">- Câu lệnh SQL để truy vấn dữ liệu.</para>
+    <para id="id10517010">Tài liệu tham khảo:</para>
+    <para id="id12866369">- Microsoft Visual Basic 6.0 và Lập trình Cơ sở dữ liệu - Chương 18, trang 447 - Nguyễn Thị Ngọc Mai (chủ biên), Nhà xuất bản Giáo dục – 2000.</para>
+    <para id="id10380596">Cơ sở dữ liệu</para>
+    <section id="id-767246567032">
+      <title>Khái niệm</title>
+      <para id="id11968905">Cơ sở dữ liệu là một kho chứa thông tin. Có nhiều loại cơ sở dữ liệu, nhưng trong khuôn khổ bài giảng này ta chỉ quan tâm đến các ứng dụng lập trình liên quan đến cơ sở dữ liệu quan hệ.</para>
+      <para id="id11968919">Một cơ sở dữ liệu quan hệ:</para>
+      <list id="id12519921" list-type="bulleted">
+        <item>Chứa dữ liệu trong các bảng, được cấu tạo bởi các dòng còn gọi là các mẩu tin, và cột còn gọi là các trường.</item>
+        <item>Cho phép lấy về (hay truy vấn) các tập hợp dữ liệu con từ các bảng.</item>
+        <item>Cho phép nối các bảng với nhau cho mục đích truy cập các mẩu tin liên quan với nhau chứa trong các bảng khác nhau.</item>
+      </list>
+    </section>
+    <section id="id-453367284862">
+      <title>Bộ máy (Engine) cơ sở dữ liệu</title>
+      <para id="id12691278">Chức năng cơ bản của một cơ sở dữ liệu được cung cấp bởi một bộ máy cơ sở dữ liệu, là hệ thống chương trình quản lý cách thức chứa và trả về dữ liệu.</para>
+      <para id="id12691290">Chẳng hạn Microsoft Jet là bộ máy cơ sở dữ liệu được sử dụng khi truy cập dữ liệu Access.</para>
+    </section>
+    <section id="id-620059328503">
+      <title>Bảng (Table) và trường (Field)</title>
+      <para id="id12144211">Các cơ sở dữ liệu được cấu thành từ các bảng dùng thể hiện các phân nhóm dữ liệu. Chẳng hạn, nếu ta tạo một cơ sở dữ liệu để quản lý các tài khoản trong công việc kinh doanh, ta phải tạo một bảng cho Khách hàng, một bảng cho Hóa đơn và một bảng cho Nhân viên. Bảng có cấu trúc định nghĩa sẵn và chứa dữ liệu phù hợp với cấu trúc này.</para>
+      <list id="id12556736" list-type="bulleted">
+        <item>Bảng: chứa các mẩu tin là các mẩu dữ liệu riêng rẽ bên trong phân nhóm dữ liệu.</item>
+        <item>Mẩu tin: chứa các trường. Mỗi trường thể hiện một bộ phận dữ liệu trong một mẩu tin. Ví dụ như mỗi mẩu tin thể hiện một mục trong danh bạ địa chỉ chứa các trường tên và họ, địa chỉ, thành phố, số điện thoại…</item>
+      </list>
+      <para id="id11848964">Ta có thể dùng chương trình Visual Basic để tham chiếu và thao tác với cơ sở dữ liệu, bảng, mẩu tin và các trường.</para>
+    </section>
+    <section id="id-274738601344">
+      <title>Tập mẩu tin (Recordset)</title>
+      <para id="id12558009">Recordset là một cấu trúc dữ liệu thể hiện một tập hợp con các mẩu tin lấy về từ cơ sở dữ liệu. Về khái niệm, nó tương tự như một bảng nhưng có thêm một vài thuộc tính riêng biệt quan trọng.</para>
+      <para id="id12556745">Các Recordset được thể hiện như các đối tượng. Cũng như các đối tượng khác trong Visual Basic, các đối tượng recordset có các thuộc tính và phương thức riêng.</para>
+      <para id="id10573279">Truy xuất cơ sở dữ liệu trong Visual Basic 6.0</para>
+      <para id="id10573283">Visual Basic cung cấp kèm theo nó một bộ máy cơ sở dữ liệu có thể hiểu được dữ liệu của Microsoft Access gọi là Joint Engine Technology (JET). JET là một bộ máy truy cập cơ sở dữ liệu hướng đối tượng và nó là một phần không thể thiếu được của Visual Basic. Phiên bản của JET đi kèm với VB 6.0 là miễn phí nghĩa là VB có thể truy xuất trực tiếp cơ sở dữ liệu của Microsoft Access. Giao diện để VB truy xuất JET có tên là Data Access Objects (DAO).</para>
+      <para id="id10599050">JET là một bộ máy cơ sở dữ liệu tuyệt vời cho các ứng dụng văn phòng chạy trên máy đơn, nhưng hiệu suất của nó giảm đáng kể khi số lượng người dùng tăng lên và cơ sở dữ liệu được mở rộng. Vì điều này JET không phải là một giải pháp tối ưu cho các ứng dụng cơ sở dữ liệu nhiều người dùng. Cho đến nay người ta chưa có một thống kê chính xác được kích thước dữ liệu tối đa hay số lượng người dùng tối đa của JET nhưng nhìn chung JET bị giới hạn nhiều hơn so với các giải pháp khác trong môi trường đa người dùng. Tuy vậy, JET là điểm khởi đầu tốt nhất cho người lập trình VB bởi vì sự đơn giản của nó.</para>
+      <para id="id12519195">Khi kích thước dữ liệu tăng lên, người lập trình bao giờ cũng muốn xây dựng một ứng dụng Khách/Chủ (Client/Server) có khả năng bảo mật cao và linh hoạt. Vì lẽ đó, Microsoft hỗ trợ trong VB để truy cập các cơ sở dữ liệu quan hệ được thông dịch bởi chuẩn Open Database Connectivity (ODBC). ODBC là một kỹ thuật cho phép truy cập các cơ sở dữ liệu quan hệ cao cấp như SQL SERVER hay ORACLE. Tuy nhiên, ODBC cũng có thể được sử dụng để truy cập các cơ sở dữ liệu nhỏ tổ chức bằng Microsoft Access hay Foxpro, thậm chí các cơ sở dữ liệu máy chủ như IBM DB2. Visual Basic sử dụng giao diện đối tượng Remote Data Objects (RDO) để truy cập ODBC.</para>
+      <para id="id12331012">DAO và RDO là những kỹ thuật hỗ trợ việc truy xuất đến các cơ sở dữ liệu quan hệ. Tuy nhiên, Microsoft lại cung cấp một công cụ hữu ích hơn để truy cập dữ liệu goi là OLEDB. OLEDB là kỹ thuật cho phép dữ liệu được truy xuất từ cả 2 nguồn cơ sở dữ liệu: quan hệ và không quan hệ. Điều đó có nghĩa là gồm các cơ sở dữ liệu của Microsoft Access, Oracle, SQL SERVER và cả các nguồn dữ liệu không quan hệ như Excel, Microsoft Index Server, Microsoft Exchange, Active Directory… Visual Basic sử dụng giao diện đối tượng ActiveX Data Objects (ADO) để truy cập OLEDB.</para>
+      <para id="id11868096">Visual Basic cung cấp cho ta nhiều công cụ để truy cập dữ liệu như DAO, RDO, ADO. Câu hỏi thường đặt ra là: Kỹ thuật nào được sử dụng lúc nào ở đâu? Nhiều người cho rằng DAO &amp; RDO đã lỗi thời và người ta hiếm sử dụng chúng. Thật ra DAO &amp; RDO là các điển hình cho một vài khả năng tiêu biểu của ADO. Hiện nay, vẫn còn khá nhiều ứng dụng sử dụng DAO &amp; RDO và thật sự chúng bị giới hạn trong chừng mực nào đó. OLEDB thực sự cung cấp một khả năng rộng lớn để truy cập các cơ sở dữ liệu từ nhiều nguồn khác nhau. Tuy vậy, trong một số trường hợp một giải pháp dùng RDO lại hữu dụng hơn ADO.</para>
+      <para id="id12517428"/>
+    </section>
+    <section id="id-192259347245">
+      <title>Dùng Visual Basic để tạo một cơ sở dữ liệu</title>
+      <para id="id12517442">Thông thường chúng ta sẽ sử dụng các hệ quản trị cơ sở dữ liệu để tạo nên một cơ sở dữ liệu, nhưng trong phần này ta sẽ xét qua tính năng tạo cơ sở dữ liệu bằng Visual Basic 6.0. Ta có thể áp dụng phương pháp này cho những cơ sở dữ liệu nhỏ và tương thích với Microsoft Access.</para>
+      <section id="id-95377438161">
+        <title>Sử dụng cửa sổ cơ sở dữ liệu</title>
+        <list id="id12131156" list-type="bulleted">
+          <item>Từ Menu của VB6, chọn mục Add-Ins, Visual Data Manager. Cửa sổ Visual Data Manager sẽ xuất hiện.</item>
+          <item>Chọn mục File -&gt; New -&gt; MicroSoft Access -&gt; Version 7.0 MDB.</item>
+          <item>Chọn thư mục ta muốn lưu cơ sở dữ liệu và tên của cơ sở dữ liệu.</item>
+        </list>
+        <para id="id12534757"><figure id="id12534768"><media id="id8653876" alt=""><image src=".png" mime-type="image/png" height="269" width="362"/></media></figure>Hình VIII.1 Cửa sổ Visual Data Manager</para>
+        <para id="id10380164">Tạo bảng</para>
+        <list id="id10380168" list-type="bulleted">
+          <item>Để tạo mới một bảng, ta chọn Properties trong cửa sổ Databases, nhấp chuột phải, chọn New Table, đặt tên cho Table tại ô Table Name, ấn Add Field để tạo mới các trường cho bảng.</item>
+        </list>
+        <para id="id12866429"><figure id="id12643576"><media id="id4192330" alt=""><image src=".png" mime-type="image/png" height="340" width="437"/></media></figure>Hình VIII.2 Cửa sổ tạo Table</para>
+        <list id="id12044710" list-type="bulleted">
+          <item>Ta sẽ nhập tên trường tại ô Name, chọn kiểu của trường tại Combo Type, tùy chọn FixedField và VariableField xác định độ dài của trường là cố định hay thay đổi.</item>
+          <item>Sau khi xác định đầy đủ các thuộc tính của trường, ấn OK và tiếp tục thêm vào các trường khác cho bảng. Nếu đã thêm mới đầy đủ các trường của bảng, ấn Close để quay về cửa sổ Table Structure.</item>
+          <item>Sau khi quay về cửa sổ Table Structure, ta sẽ xác lập các chỉ mục cũng như khóa chính của bảng.</item>
+        </list>
+        <para id="id12517864"><figure id="id12517874"><media id="id4954592" alt=""><image src=".png" mime-type="image/png" height="179" width="259"/></media></figure>Hình VIII.3 Cửa sổ tạo khóa chính và chỉ mục</para>
+        <list id="id10537391" list-type="bulleted">
+          <item>Tại ô Name, ta sẽ nhập vào tên của chỉ mục, rồi chọn các trường tham gia vào chỉ mục đó. Nếu ta chọn Primary thì đó chính là các trường cấu thành khóa chính của bảng. Chọn Unique tức là giá trị của chỉ mục đó sẽ không có sự trùng lặp.</item>
+          <item>Ấn Close xác nhận rằng ta đã xây dựng xong tập các chỉ mục của bảng.</item>
+          <item>Sau khi đã hoàn thành tất cả các thao tác trên, để tạo bảng ta ấn Build the Table.</item>
+        </list>
+        <para id="id10515466">Tuy rằng đây là một tính năng mới của VB6, tuy nhiên chúng ta cũng sẽ gặp phải rất nhiều bất tiện khi phải thiết kế một cơ sở dữ liệu hoàn chỉnh cũng như trong quá trình bảo trì và sử dụng (khó khăn trong việc thay đổi các thuộc tính đã xác lập, không tạo liên kết giữa các bảng được …). Một phương cách tốt nhất đó là nên dùng các hệ quản trị cơ sở dữ liệu chuyên dùng để thực hiện công việc nêu trên.</para>
+        <para id="id12174436"><figure id="id11868424"><media id="id1782541" alt=""><image src=".png" mime-type="image/png" height="341" width="512"/></media></figure>Hình VIII.4 Tạo bảng cho cơ sở dữ liệu</para>
+      </section>
+      <section id="id-769057205894">
+        <title>Dùng Visual Data Manager để tạo giao diện</title>
+        <para id="id12131244">Ta có thể thiết kế một Form nhập liệu đơn giản cho một Table từ Visual Data Manager. Các bước tiến hành như sau:</para>
+        <list id="id12131260" list-type="bulleted">
+          <item>Từ Visual Data Manager chọn Cơ sở dữ liệu cần thao tác.</item>
+          <item>Chọn Data Form Design từ mục Utility.</item>
+          <item>Chọn Table cần cho việc tạo Form và các trường hiển thị trên Form (thông thường chúng ta sẽ cho hiển thị tất cả các trường).</item>
+          <item>Chọn Build the Form, biểu mẫu mới đã được tạo trong đề án của chúng ta.</item>
+        </list>
+        <para id="id12346271"><figure id="id10599511"><media id="id8695981" alt=""><image src=".png" mime-type="image/png" height="275" width="475"/></media></figure>Hình VIII.5 Thiết lập các thuộc tính cho Form</para>
+        <para id="id11733464">Kết quả sau khi chúng ta xây dựng Form bằng Visual Data Manager:</para>
+        <para id="id11733472">
+          <figure id="id12044837">
+            <media id="id5338330" alt=""><image src="../../media/graphics1-ea27.png" mime-type="image/png" height="193" width="454"/></media>
+          </figure>
+        </para>
+        <para id="id12015310">Sử dụng cửa sổ xem dữ liệu (Data View)</para>
+        <para id="id11664950">VB6 còn hỗ trợ cho người lập trình khả năng làm việc với cơ sở dữ liệu mà không phải thông qua công cụ quản trị cơ sở dữ liệu hoặc các công cụ trong Add-In. Công cụ này chính là cửa sổ Data View.</para>
+        <list id="id11664964" list-type="bulleted">
+          <item>Từ Menu của VB chọn Data View hoặc nhấn nút Data View trên thanh công cụ.</item>
+          <item>Cửa sổ Data View xuất hiện cho ta hai lựa chọn: Data Links và Data Environment Connections.</item>
+        </list>
+        <para id="id10455492"><figure id="id11983918"><media id="id8476351" alt=""><image src=".png" mime-type="image/png" height="169" width="285"/></media></figure>Hình VIII.6 Cửa sổ Data View</para>
+        <para id="id12534579">Liên kết dữ liệu (Data Link) là một cách kết nối môi trường phát triển của VB6 với một cơ sở dữ liệu nào đó. Một kết nối môi trường dữ liệu (Data Environment Connection) là cách thức sử dụng cơ sở dữ liệu trong một đề án cụ thể. Điểm khác biệt giữa hai thành phần này là sự liên quan giữa cơ sở dữ liệu với đề án cụ thể.</para>
+        <para id="id12534594">Để sử dụng cơ sở dữ liệu theo kiểu Data Link, ta tiến hành như sau:</para>
+        <list id="id10565577" list-type="bulleted">
+          <item>Chọn Data Links, ấn chuột phải -&gt; Add a Data Link hoặc ấn nút Data Link trên thanh công cụ của cửa sổ.</item>
+          <item>Cửa sổ Data Link Properties xuất hiện.</item>
+        </list>
+        <para id="id11847350"><figure id="id11847361"><media id="id8698840" alt=""><image src=".png" mime-type="image/png" height="355" width="347"/></media></figure>Hình VIII.7 Hộp thoại Data Link Properties</para>
+        <list id="id10516838" list-type="bulleted">
+          <item>Chọn trình cung cấp Microsoft Jet, chọn Next.</item>
+          <item>Chọn cơ sở dữ liệu muốn nối kết đến, nhấn OK.</item>
+        </list>
+        <para id="id12029924">Liên kết dữ liệu cung cấp một cách nhìn tóm lược về nguồn dữ liệu. Mỗi lần ta tạo một liên kết dữ liệu, ta có thể duyệt bằng cách mở rộng phần tử trong danh sách tóm lược. Thực hiện điều này bằng cách nhấn vào dấu cộng bên trái mỗi phần tử (hình VIII.8).</para>
+        <para id="id12029938"><figure id="id12517407"><media id="id6726972" alt=""><image src=".png" mime-type="image/png" height="259" width="239"/></media></figure>Hình VIII.8 Cửa số Data View</para>
+        <para id="id11968842">Sử dụng điều khiển dữ liệu để tạo giao diện người sử dụng</para>
+        <para id="id11968849">Điều khiển dữ liệu giúp cho người sử dụng liên kết biểu mẫu của mình đến nguồn cơ sở dữ liệu. Điều khiển dữ liệu cung cấp cho người sử dụng những tính năng xử lý dữ liệu cơ bản như duyệt qua các mẩu tin, thêm mới, cập nhật. </para>
+        <para id="id11968855">Đối với phiên bản VB6 cung cấp cho chúng ta 3 trình điều khiển dữ liệu: DAO (Data Access Object), RDO (Remote Data Object) và ADO (ActiveX Data Object). </para>
+      </section>
+      <section id="id-256575767283">
+        <title>Kết nối với cơ sở dữ liệu và làm việc với các mẩu tin thông qua điều khiển ADO Data</title>
+        <section id="id-373778537012">
+          <title>Hiển thị dữ liệu</title>
+          <para id="id10455397">Nếu như chúng ta xây dựng một biểu mẫu chỉ để hiển thị các mẩu tin của một bảng, điều này rất đơn giản và ta không cần phải lập trình gì cả. </para>
+          <para id="id12321649">Để sử dụng điều khiển ADO Data, ta cần đánh dấu Microsoft ADO Data Control 6.0 (OLEDB) trong hộp thoại Components.</para>
+          <para id="id12572274"><figure id="id12572284"><media id="id6042375" alt=""><image src=".png" mime-type="image/png" height="336" width="387"/></media></figure>Hình VIII.9 Hộp thoại Components</para>
+          <para id="id11958637">Chọn điều khiển ADO Data từ hộp công cụ đưa vào biểu mẫu, liên kết đến nguồn dữ liệu thông qua hai thuộc tính ConnectionString và RecordSource.</para>
+          <list id="id10535082" list-type="bulleted">
+            <item>ConnectionString: Xác định nguồn dữ liệu cần nối kết, đó chính là chuỗi nối kết chỉ đến cơ sở dữ liệu mà ta thao tác.</item>
+            <item>RecordSource: Xác định xem nối kết của ta đang thao tác trên bảng nào.</item>
+          </list>
+          <para id="id12642677">Ví dụ:Tạo một nối kết đến cơ sở dữ liệu "C:\Program Files\Microsoft Visual Studio\VB98\Biblio.mdb".</para>
+          <list id="id12345881" list-type="bulleted">
+            <item>Chọn Use Connection String, ấn Build.</item>
+            <item>Chọn Microsoft Jet 4.0 OLE DB Provider.</item>
+            <item>Chọn cơ sở dữ liệu như ví dụ.</item>
+            <item>Ấn OK.</item>
+            <item>Quay về cửa sổ Property Pages, chọn Tab RecordSource, xác định các tùy chọn như hình vẽ.</item>
+            <item>Ấn Close.</item>
+          </list>
+          <para id="id10538080"><figure id="id10538091"><media id="id8708457" alt=""><image src=".png" mime-type="image/png" height="286" width="387"/></media></figure>Hình VIII.10 Tùy chọn RecordSource</para>
+          <para id="id12131288">Sau khi đã xác định được nối kết, ta vẫn không thấy được sự hoạt động của điều khiển dữ liệu, nguyên nhân do chúng ta không có điều khiển để hiển thị nội dung, cách giải quyết vấn đề là dùng điều khiển TextBox hiển thị dữ liệu.</para>
+          <para id="id12131292">Để dùng điều khiển Textbox hiển thị dữ liệu, ta xác định hai thuộc tính sau đây của điều khiển: DataSource, DataField. Các thuộc tính này xác định nguồn dữ liệu và tên trường, đối với ví dụ này đó là Adodc1 (tên của ADO Data) và Au_Id.</para>
+          <list id="id12131297" list-type="bulleted">
+            <item>Thực thi đề án, ta được kết quả sau:</item>
+          </list>
+          <para id="id10528763"><figure id="id10528773"><media id="id7985008" alt=""><image src=".png" mime-type="image/png" height="276" width="375"/></media></figure>Hình VIII.11 Ví dụ dùng ADO Data</para>
+        </section>
+        <section id="id-974973822154">
+          <title>Cập nhật dữ liệu</title>
+          <para id="id10534341">Thao tác cập nhật dữ liệu cũng khá đơn giản, điều khiển ADO Data sẽ tự động cập nhật lại giá trị của mẩu tin hiện hành mỗi khi ta duyệt qua mẩu tin khác, vì vậy ta cũng không phải làm gì cả.</para>
+        </section>
+        <section id="id-218042394232">
+          <title>Thêm mới mẩu tin</title>
+          <para id="id11940102">Để có thể thêm mới mẩu tin, ta có hai phương cách như sau:</para>
+          <list id="id11940107" list-type="bulleted">
+            <item>Thiết lập thuộc tính EOFAction của điều khiển ADO Data là 2-AddNew. Cách này không cần phải lập trình gì cả.</item>
+          </list>
+          <para id="id10456828"><figure id="id10456839"><media id="id8229630" alt=""><image src=".png" mime-type="image/png" height="199" width="272"/></media></figure>Hình VIII.12 Thêm mới mẩu tin dùng ADO DataĐể thêm mới vào một mẩu tin, ta sẽ đi đến cuối mẩu tin, sau đó ấn nút tiếp, ta nhận thấy giá trị của các trường sẽ rỗng để chờ chúng ta nhập mới thông tin vào.</para>
+          <list id="id12795952" list-type="bulleted">
+            <item>Thêm mới mẩu tin bằng 2 phương thức AddNew và Update, các bước tiến hành sẽ như sau:</item>
+          </list>
+          <para id="id10525929">- Thiết kế hai nút lệnh là ADD NEW và UPDATE. </para>
+          <para id="id10525936">- Trong sự kiện Click của hai nút trên lần lượt nhập vào câu lệnh sau: Adodc1.Recordset.AddNew, Adodc1.Recordset.Update với Adodc1 là thuộc tính Name của điều khiển dữ liệu.</para>
+          <para id="id12015618"><figure id="id12015628"><media id="id8224040" alt=""><image src=".png" mime-type="image/png" height="189" width="259"/></media></figure>Hình VIII.13 Sử dụng phương thức AddNew và Update</para>
+        </section>
+        <section id="id-135273692523">
+          <title>Dùng sự kiện MoveComplete để cập nhật giao diện người sử dụng</title>
+          <para id="id11587063">Ta có thể dùng sự kiện MoveComplete của điều khiển ADO Data để khởi động sửa đổi trong ứng dụng khi người sử dụng di chuyển từ mẩu tin này sang mẩu tin khác.</para>
+          <para id="id11587079">Sự kiện MoveComplete được kích hoạt khi một mẩu tin mới thành mẩu tin hiện hành. Đây là một trong vài sự kiện được kích hoạt khi điều khiển di chuyển từ mẩu tin này sang mẩu tin khác. Các sự kiện khác bao gồm WillChange, được kích hoạt khi điều khiển di chuyển từ mẩu tin này sang mẩu tin khác hay thay đổi một mẩu tin và sự kiện RecordChangeComplete, xảy ra khi một mẩu tin được sửa đổi thành công trong cơ sở dữ liệu như một kết quả của hoạt động trong điều khiển dữ liệu.</para>
+        </section>
+        <section id="id-00293537644905">
+          <title>Xóa mẩu tin</title>
+          <para id="id11587211">Để xóa mẩu tin trong một ứng dụng sử dụng điều khiển dữ liệu, ta dùng phương thức Delete của đối tượng Recordset của điều khiển dữ liệu.</para>
+          <para id="id10512574">Ví dụ: Adodc1.Recordset.Delete</para>
+          <para id="id10447574">V.1.6 Dùng sự kiện WillChangeRecord để đảm bảo dữ liệu hợp lệ</para>
+          <para id="id10447581">Trong lập trình cơ sở dữ liệu, việc đảm bảo rằng dữ liệu nhập vào phù hợp với các quy tắc của một cơ sở dữ liệu người dùng cụ thể là yếu tố quan trọng bậc nhất và mang tính bắt buộc.</para>
+          <para id="id10447588">Đối với điều khiển ADO Data, việc xác định xem dữ liệu có hợp lệ hay không sẽ được viết trong sự kiện WillChangeRecord của điều khiển. Sự kiện này sẽ được kích hoạt khi người dùng thay đổi thông tin của một mẩu tin và di chuyển sang mẩu tin khác hoặc thêm mới mẩu tin.</para>
+        </section>
+      </section>
+      <section id="id-312482932002">
+        <title>Kết nối với cơ sở dữ liệu và làm việc với các mẩu tin thông qua điều khiển Data (DAO Data Control)</title>
+        <para id="id12637274">Điều khiển Data hạn chế hơn điều khiển ADO Data vì nó chỉ cho phép chúng ta nối kết đến một số nguồn dữ liệu cụ thể, chẳng hạn như Access, Excel, Foxpro,… nhưng Version của các hệ quản trị này cũng là những Version đã lâu đời.</para>
+        <para id="id12138633">Để sử dụng điều khiển này, ta cần xác định các giá trị của các thuộc tính sau: Connect, DatabaseName, RecordSource.</para>
+        <para id="id12138646">- Connect xác định cơ sở dữ liệu của ta là loại gì.</para>
+        <para id="id10515974">- DatabaseName chỉ đến một cơ sở dữ liệu cụ thể.</para>
+        <para id="id10515987">- RecordSource là một bảng dữ liệu trong cơ sở dữ liệu (đối với cơ sở dữ liệu Access).</para>
+        <para id="id10538743">Sau khi đã xác định giá trị của các thuộc tính trên thì việc duyệt qua các mẩu tin cũng tương tự như của điều khiển ADO Data.</para>
+        <para id="id10538754">Thuộc tính EOFAction của điều khiển Data quy định việc chúng ta có thể thêm mới một mẩu tin hay là không (tương tự điều khiển ADO Data).</para>
+      </section>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,424 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Các kiểu dữ liệu có cấu trúc</title>
+  <metadata>
+  <md:content-id>m29873</md:content-id><md:title>Các kiểu dữ liệu có cấu trúc</md:title>
+  <md:abstract>Chương này giới thiệu về các cấu trúc dữ liệu trong VB. Việc nắm bắt được các vấn đề này giúp cho việc tổ chức dữ liệu khi viết chương trình VB được hợp lý hơn.</md:abstract>
+  <md:uuid>c7ed9a18-d1fc-414a-94f0-d8cf137f8c3a</md:uuid>
+</metadata>
+
+<content>
+    <para id="id9890161">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id9890176">- Sử dụng kiểu dữ liệu chuỗi.</para>
+    <para id="id9890181">- Sử dụng kiểu ngày tháng.</para>
+    <para id="id9890187">- Kiểu động (Variant)</para>
+    <para id="id9890192">- Kiểu mảng</para>
+    <para id="id9890197">Kiến thức có liên quan:</para>
+    <para id="id9890209">- Các cấu trúc lập trình trong VB.</para>
+    <para id="id9890216">Tài liệu tham khảo:</para>
+    <para id="id9890228">
+      <link url="http://www.vovisoft.com/VisualBasic/VB6Chapter5.htm">http://www.vovisoft.com/VisualBasic/VB6Chapter5.htm</link>
+    </para>
+    <para id="id9890242">
+      <link url="http://www.vovisoft.com/VisualBasic/VB6Chapter6.htm">http://www.vovisoft.com/VisualBasic/VB6Chapter6.htm</link>
+    </para>
+    <para id="id9890257">Kiểu chuỗi ký tự (String)</para>
+    <section id="id-165763321912">
+      <title>Khai báo</title>
+      <para id="id9890270">Có hai đặc tả chuỗi ký tự theo cú pháp như sau: </para>
+      <para id="id9890280">- String * &lt;Chiều dài&gt; Chỉ ra một chuỗi ký tự có độ dài cố định là bao nhiêu ký tự. Trong trường hợp giá trị thực của chuỗi có độ dài ngắn hơn độ dài khai báo thì độ dài của chuỗi thì một số khoảng trắng được thêm vào cho đủ độ dài thực. Trong trường hợp giá trị thực của chuỗi có độ dài lớn hơn độ dài khai báo thì sẽ cắt bớt các ký tự dư thừa bên phải. Một chuỗi không có ký tự nào (độ dài bằng 0) gọi là chuỗi rỗng.</para>
+      <para id="id9890307">- String: Khi không chỉ ra chiều dài tối đa của chuỗi thì mặc nhiên chuỗi có chiều dài tối đa là 65.500 ký tự.</para>
+      <para id="id9890330">Ví dụ:</para>
+      <para id="id9890334">Dim Name As String * 30, Class As String * 10</para>
+      <para id="id9890340">Dim A As String</para>
+    </section>
+    <section id="id-30450790231">
+      <title>Các hàm xử lý chuỗi</title>
+      <list id="id9890355" list-type="bulleted">
+        <item>Ghép chuỗi: cho phép ghép 2 hay nhiều chuỗi lại với nhau nhờ phép toán &amp;.</item>
+      </list>
+      <para id="id9890382">Ví dụ:</para>
+      <para id="id9890394">Dim FirstWord As String, SecondWord As String</para>
+      <para id="id10104124">Dim Greeting As String</para>
+      <para id="id10104144">FirstWord = "Hello"</para>
+      <para id="id10104150">SecondWord = "World" </para>
+      <para id="id10104154">Greeting = FirstWord &amp; SecondWord </para>
+      <para id="id10104159">' Greeting bây giờ là "HelloWorld"</para>
+      <list id="id10104176" list-type="bulleted">
+        <item>Len: trả về chiều dài một chuỗi được chỉ định.</item>
+      </list>
+      <para id="id10104194">Ví dụ:</para>
+      <para id="id10104206">Greeting = "Hi John!" </para>
+      <para id="id10104218">Dim iLen As Integer</para>
+      <para id="id10104238">iLen = Len(Greeting) ' iLen bây giờ bằng 8</para>
+      <list id="id10104251" list-type="bulleted">
+        <item>Left: Trích chuỗi con từ phần đầu chuỗi gốc Left (String, [length]).</item>
+        <item>Right: Trích chuỗi con từ phần đuôi chuỗi gốc Right (String, [length])</item>
+        <item>Mid: Trích chuỗi con từ giữa chuỗi gốc</item>
+      </list>
+      <para id="id10104311">Mid(String, Start As Long, [length])</para>
+      <para id="id10104319">Ví dụ 1:</para>
+      <para id="id10104330">Dim Today As String, StrDay As String, StrMonth As String</para>
+      <para id="id10104336">Dim StrYear As String, StrMonthYear As String</para>
+      <para id="id10104341">Today = "24/05/2001" ' Lấy ra 2 ký tự từ bên trái của chuỗi TodayStrDay = Left(Today,2) ' StrDay bây giờ bằng "24"' Lấy ra 4 ký tự từ bên phải của String TodayStrYear = Right(Today,4) ' StrYear bây giờ bằng "2001"' Lấy ra 2 characters bắt đầu từ ký tự thứ tư của chuỗi </para>
+      <para id="id10104399">‘ Today, ký tự đầu tiên từ bên trái là thứ nhấtStrMonth = Mid(Today,4,2) ' StrMonth bây giờ bằng "05"' Lấy ra phần còn lại bắt đầu từ ký tự 4 của chuỗi TodayStrMonthYear = Mid(Today,4) ' StrMonthYear bằng “05/2001"</para>
+      <para id="id10104439">Ví dụ 2:</para>
+      <para id="id10104451">Today = "24/05/2001" </para>
+      <para id="id10104456">' Thay thế character thứ 3 của Today bằng "-"</para>
+      <para id="id10104462">Mid(Today,3,1) = "-" </para>
+      <para id="id10104466">' Thay thế 2 ký tự bắt đầu từ ký tự 4 của Today bằng "10"</para>
+      <para id="id9885571">Mid(Today,4,2) = "10" </para>
+      <para id="id9885576">' Thay thế character thứ 6 của Today bằng "-"</para>
+      <para id="id9885582">Mid(Today,6,1) = "-" ' Today bây giờ bằng "24-10-2001"</para>
+      <list id="id9885595" list-type="bulleted">
+        <item>InStr: Tìm chuỗi con trong chuỗi gốc. Nếu hàm InStr trả về 0, nghĩa là không tìm thấy.</item>
+      </list>
+      <para id="id9885614">Cú pháp: InStr([start,] string1, string2 [, compare])</para>
+      <para id="id9885631">Trong đó:</para>
+      <para id="id9885636">- Start: Xác định vị trí trong chuỗi bắt đầu việc tìm kiếm. Nếu giá trị là Null thì sẽ bắt đầu từ đầu chuỗi. Nếu như tham số Compare có đặc tả thì bắt buộc phải khai báo tham số Start.</para>
+      <para id="id9885651">- String1: Biểu thức chuỗi để so sánh.</para>
+      <para id="id9885657">- String2: Chuỗi cần tìm.</para>
+      <para id="id9885662">- Compare: Xác định kiểu so sánh chuỗi.</para>
+      <para id="id9885668">Giá trị: vbTextCompare, vbBinaryCompare. </para>
+      <para id="id9885688">Ví dụ 1:</para>
+      <para id="id9885700">Dim myString As String, Position As Integer</para>
+      <para id="id9885725">myString = "The *rain in Spain mainly..." </para>
+      <para id="id9885729">Position = Instr(myString,"*") ' Position sẽ là 5</para>
+      <para id="id9885741">Nếu trong myString không có dấu "*" thì Position sẽ bằng 0</para>
+      <para id="id9885748">Ví dụ 2:</para>
+      <para id="id9885760">Dim KeyValuePair As String, Key As String</para>
+      <para id="id9885764">Dim Value As String</para>
+      <para id="id9885768">KeyValuePair = "BeatlesSong=Yesterday"</para>
+      <para id="id9885772">Pos = Instr(KeyValuePair, "=")</para>
+      <para id="id9885777">Key = Left(KeyValuePair, Pos-1)</para>
+      <para id="id9885781">Value = Mid(KeyValuePair, Pos+1)</para>
+      <list id="id9885788" list-type="bulleted">
+        <item>Replace: tìm và thay thế chuỗi.</item>
+      </list>
+      <para id="id9885805">Cú pháp: </para>
+      <para id="id9885821">Replace(Expression, find, replace[, start[, count[, compare]]])</para>
+      <para id="id9885826">Trong đó:</para>
+      <para id="id9885832">- Expression:Biểu thức chuỗi chứa chuỗi cần thay thế.</para>
+      <para id="id9885841">- find:Chuỗi cần tìm.</para>
+      <para id="id9885846">- replace: Chuỗi thay thế chuỗi tìm được.</para>
+      <para id="id9885855">- start:Tương tự như hàm InStr.</para>
+      <para id="id9885866">- count: Xác định số lần thay thế. Mặc định là 1.</para>
+      <para id="id9885872">- compare: Tương tự như hàm InStr.</para>
+      <list id="id9885881" list-type="bulleted">
+        <item>LTrim (RTrim): cắt tất cả các khoảng trắng bên trái (bên phải của chuỗi)</item>
+      </list>
+      <para id="id9885900">Cú pháp:LTrim(string)</para>
+      <para id="id9885917">RTrim(string)</para>
+      <list id="id10196496" list-type="bulleted">
+        <item>UCase: đổi chuỗi sang chuỗi gồm các ký tự là chữ hoa.</item>
+      </list>
+      <para id="id10196514">Cú pháp:UCase(string)</para>
+      <list id="id10196532" list-type="bulleted">
+        <item>Asc: cho mã Ascii của một ký tự.</item>
+        <item>Chr: trả về ký tự ứng với mã Ascii được chỉ định.</item>
+      </list>
+      <para id="id10196564">Dim ASCIINumberA As Integer, CharB As String * 1</para>
+      <para id="id10196569">Dim StrFive As String * 1</para>
+      <para id="id10196573">ASCIINumberA = Asc("A") ' ASCIINumberA bây giờ bằng 65</para>
+      <para id="id10196586">CharB = Chr(66)</para>
+      <para id="id10196591">StrFive = Chr(Asc("0") + 5) ' ta có digit "5"</para>
+      <list id="id10196597" list-type="bulleted">
+        <item>InstrRev: tương tự như InStr nhưng việc tìm kiếm được tiến hành từ phải sang.</item>
+        <item>Val: Hàm đổi chuỗi sang số.</item>
+        <item>Str: Hàm đổi số sang chuỗi.</item>
+      </list>
+    </section>
+    <section id="id-76266688532">
+      <title>Kiểu ngày tháng (Date)</title>
+      <para id="id10196660">- Là kiểu mà các biến của nó chứa giá trị ngày tháng.</para>
+      <para id="id10196668">- Để cho VB biết dữ liệu là kiểu Date ta cần đặt giữa hai dấu # (hoặc cặp “”).</para>
+      <para id="id10196676">Ví dụ:</para>
+      <para id="id10196688">Dim D As Date</para>
+      <para id="id10196708">D = #01/02/98# ‘ Hay “01/02/98” </para>
+      <para id="id10196722"><figure id="id10196733"><media id="id14118817" alt=""><image src=".png" mime-type="image/png" height="265" width="250"/></media></figure>Hình IV.1 Hộp thoại xác lập kiểu ngàyNếu hiểu theo kiểu người Mỹ, đây là ngày 2 tháng giêng năm 1998, còn nếu theo kiểu Anh thì đây là ngày 1 tháng hai năm 1998. Tuy nhiên, định dạng ngày tháng hiển thị phụ thuộc vào quy định của Windows.</para>
+      <para id="id10196792">- Hộp thoại hình IV.1 hiển thị khi ta chọn Regional Setting trong cửa sổ Control Panel của Windows, nó cho phép quy định kiểu ngày tháng tùy thuộc cách mà người dùng quy định. VB xử lý ngày tháng theo kiểu Mỹ, nhưng nếu máy hiển thị theo kiểu Anh thì nó vẫn hiển thị theo kiểu Anh.</para>
+      <para id="id10196813">- Hàm Now: trả về ngày giờ hiện tại.</para>
+      <para id="id10196832">Ví dụ: Dùng hàm Now &amp; Format:</para>
+      <para id="id10196848">MsgBox "NOW IS " &amp; Format (Now, "ddd dd-mmm-yyyy hh:nn:ss")</para>
+      <para id="id10196863">' sẽ hiển thị </para>
+      <para id="id9830921">NOW IS Tue 05-Oct-2004 16:15:53</para>
+    </section>
+    <section id="id-2430151514">
+      <title>Các loại số</title>
+      <list id="id9830941" list-type="bulleted">
+        <item>Để chuyển đổi một chuỗi ra số ta có các hàm Val, CInt, CSng. Ngược lại để chuyển đổi từ số sang chuỗi ta dùng CStr, Str.</item>
+      </list>
+      <para id="id9830952">Ví dụ:</para>
+      <para id="id9830964">Dollars = "500" </para>
+      <para id="id9830969">ExchangeRatePerDollar = "7000"</para>
+      <para id="id9830973">tempValue= Val(Dollars) * Val(ExchangeRatePerDollar)</para>
+      <para id="id9830981">VNDong = CStr(tempValue)</para>
+      <para id="id9830986">MsgBox "Amount in VN Dong is " &amp; VNDong</para>
+      <para id="id9830991">Ví dụ:</para>
+      <para id="id9831007">Dollars = "500.0" ExchangeRatePerDollar = "7000.0"'Dùng hàm CSng để đổi chuỗi ra SingletempValue = CSng(Dollars) * CSng(ExchangeRatePerDollar)'Dùng hàm Format để có các dấu phẩy ở ngàn và triệu </para>
+      <para id="id9831040">‘ và phải có 2 chữ số sau dấu chấm thập phân.VNDong = Format (tempValue, "#,###,###.00")MsgBox "Amount in VN Dong is " &amp; VNDong</para>
+      <list id="id9831057" list-type="bulleted">
+        <item>Round: bỏ bớt một số chữ số sau dấu chấm thập phân</item>
+      </list>
+      <para id="id9831075">Ví dụ: </para>
+      <para id="id9831084">Round ( 12.3456789, 4 )</para>
+      <para id="id9831091">chỉ giữ lại 4 con số sau dấu chấm thập phân và cho ta 12.3457</para>
+    </section>
+    <section id="id-853319432862">
+      <title>Kiểu Object</title>
+      <para id="id9831106">Biến kiểu Object chứa một địa chỉ 4 Byte trỏ đến đối tượng trong ứng dụng hiện hành hoặc các ứng dụng khác. Dùng lệnh Set để chỉ ra đối tượng cụ thể.</para>
+      <para id="id9831129">Dim ObjDb As Object</para>
+      <para id="id9831162">Set ObjDb = OpenDatabase("d:\tqdinh\thu.mdb")</para>
+      <para id="id9831189">Khi khai báo biến đối tượng, ta nên chỉ ra tên lớp tường minh, chẳng hạn như TextBox thay vì Control, ứng dụng của ta sẽ chạy nhanh hơn.</para>
+      <para id="id9831202">Ta có thể xem danh sách các lớp có sẵn trong cửa sổ Object Browser.</para>
+    </section>
+    <section id="id-0838586323049">
+      <title>Kiểu Variant</title>
+      <para id="id9831218">Biến kiểu Variant có thể chứa mọi kiểu dữ liệu kể cả kiểu mảng, kiểu do người dùng định nghĩa nhưng ngoại trừ kiểu chuỗi có độ dài cố định . </para>
+      <para id="id9831232">Biến kiểu Variant có thể nhận các giá trị đặc biệt như Empty, Nothing, Error, Null. Ta có thể xác định kiểu dữ liệu của biến Variant bằng các sử dụng hàm VarType hoặc hàm TypeName.</para>
+      <para id="id9831247">Hàm VarType dùng để kiểm tra kiểu dữ liệu</para>
+      <table id="id9831253" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Hằng</entry>
+              <entry>Giá trị</entry>
+              <entry>Diễn giải</entry>
+            </row>
+            <row>
+              <entry>vbEmpty</entry>
+              <entry>0</entry>
+              <entry>Không chứa gì cả</entry>
+            </row>
+            <row>
+              <entry>vbNull</entry>
+              <entry>1</entry>
+              <entry>Dữ liệu không hợp lệ</entry>
+            </row>
+            <row>
+              <entry>vbInteger</entry>
+              <entry>2</entry>
+              <entry>Dữ liệu kiểu Integer chuẩn</entry>
+            </row>
+            <row>
+              <entry>vbLong</entry>
+              <entry>3</entry>
+              <entry>Dữ liệu kiểu Long Integer</entry>
+            </row>
+            <row>
+              <entry>vbSingle</entry>
+              <entry>4</entry>
+              <entry>Dữ liệu kiểu dấu chấm động Single</entry>
+            </row>
+            <row>
+              <entry>vbDouble</entry>
+              <entry>5</entry>
+              <entry>Dữ liệu kiểu dấu chấm động Double</entry>
+            </row>
+            <row>
+              <entry>vbCurrency</entry>
+              <entry>6</entry>
+              <entry>Kiểu Currency </entry>
+            </row>
+            <row>
+              <entry>vbDate</entry>
+              <entry>7</entry>
+              <entry>Kiểu Date </entry>
+            </row>
+            <row>
+              <entry>vbString</entry>
+              <entry>8</entry>
+              <entry>Kiểu String</entry>
+            </row>
+            <row>
+              <entry>vbObject</entry>
+              <entry>9</entry>
+              <entry>Kiểu Object</entry>
+            </row>
+            <row>
+              <entry>vbError</entry>
+              <entry>10</entry>
+              <entry>Có một đối tượng lỗi</entry>
+            </row>
+            <row>
+              <entry>vbBoolean</entry>
+              <entry>11</entry>
+              <entry>Kiểu giá trị Boolean chuẩn</entry>
+            </row>
+            <row>
+              <entry>vbVariant</entry>
+              <entry>12</entry>
+              <entry>Kiểu Variant </entry>
+            </row>
+            <row>
+              <entry>vbDataObject</entry>
+              <entry>13</entry>
+              <entry>Kiểu DAO chuẩn (data access object)</entry>
+            </row>
+            <row>
+              <entry>vbDecimal</entry>
+              <entry>14</entry>
+              <entry>Giá trị thuộc hệ thập phân</entry>
+            </row>
+            <row>
+              <entry>vbByte</entry>
+              <entry>17</entry>
+              <entry>Kiểu Byte </entry>
+            </row>
+            <row>
+              <entry>vbUserDefinedType</entry>
+              <entry>36</entry>
+              <entry>Kiểu do người dùng định nghĩa</entry>
+            </row>
+            <row>
+              <entry>vbArray</entry>
+              <entry>8192</entry>
+              <entry>Kiểu mảng</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id10117442">Một số chú ý khi dùng biến kiểu Variant:</para>
+      <para id="id10117455">- Nếu muốn thi hành các hàm toán học, Variant phải chứa giá trị kiểu số.</para>
+      <para id="id10117462">- Nếu muốn nối chuỗi, dùng toán tử &amp; thay vì toán tử +.</para>
+      <para id="id10117468">Giá trị Empty:</para>
+      <para id="id10117480">- Đây là giá trị đặc biệt xuất hiện khi một biến chưa được gán trị. Ta dùng hàm IsEmpty để kiểm tra giá trị Empty.</para>
+      <para id="id10117493">- Giá trị Empty biến mất khi có một giá trị bất kỳ được gán cho biến Variant, để trở về giá trị Empty, ta gán từ khoá Empty cho biến Variant.</para>
+      <para id="id10117507">Giá trị Null: Biến Variant chứa giá trị Null trong trường hợp những ứng dụng cơ sở dữ liệu thể hiện không có dữ liệu hoặc dữ liệu không xác định.</para>
+      <para id="id10117525">Giá trị Error: Trong một biến kiểu Variant, Error là một giá trị đặc biệt cho biết đã có một lỗi đã xảy ra bên trong thủ tục.</para>
+      <para id="id10117542">Ví dụ:</para>
+      <para id="id10117554">Private Sub cmdShowDataTypes_Click() </para>
+      <para id="id10117568">Dim sMess As String </para>
+      <para id="id10637899">Dim vVariant As Variant </para>
+      <para id="id10637921">vVariant = "Xin chao" 'String </para>
+      <para id="id10637935">sMess = VarType(vVariant) &amp; vbCrLf ' xuống dòng &amp; về đầu dòng</para>
+      <para id="id10637950">vVariant = 25 ' Integer</para>
+      <para id="id10637963">sMess = sMess &amp; VarType(vVariant) &amp; vbCrLf </para>
+      <para id="id10637972">vVariant = True ' Boolean</para>
+      <para id="id10637990">sMess = sMess &amp; VarType(vVariant) &amp; vbCrLf </para>
+      <para id="id10637999">'Date</para>
+      <para id="id10638010">vVariant = #1/1/2001# 'trong cặp dấu #</para>
+      <para id="id10638024">sMess = sMess &amp; VarType(vVariant)</para>
+      <para id="id10638033">MsgBox sMess </para>
+      <para id="id10638040">End Sub </para>
+      <para id="id10638054">Khi chạy chương trình kết quả là:</para>
+      <figure id="id10638062">
+        <media id="id18430794" alt=""><image src="graphics1.jpg" mime-type="image/jpeg" height="250" width="405"/></media>
+      </figure>
+    </section>
+    <section id="id-597486458912">
+      <title>Kiểu Mảng</title>
+      <section id="id-642953882365">
+        <title>Khái niệm</title>
+        <para id="id10638106">- Mảng là tập hợp các phần tử có cùng một kiểu.</para>
+        <para id="id10638114">- Dùng mảng sẽ làm cho chương trình đơn giản và gọn hơn vì ta có thể sử dụng vòng lặp. Mảng sẽ có biên trên và biên dưới, trong đó các thành phần của mảng là liên tiếp trong khoảng giữa hai biên này.</para>
+        <para id="id10638131">- Có hai loại biến mảng: mảng có chiều dài cố định và mảng có chiều dài thay đổi lúc thi hành.</para>
+      </section>
+      <section id="id-422374003181">
+        <title>Khai báo</title>
+        <list id="id10638148" list-type="bulleted">
+          <item>Mảng có chiều dài cố định:</item>
+        </list>
+        <para id="id10638166">Dim &lt;Tên biến mảng&gt;(&lt;Kích thước&gt;) [As &lt;Kiểu&gt;]</para>
+        <para id="id10638188">Lúc này phần tử đầu tiên có chỉ số là 0 &amp; phần tử cuối cùng có chỉ số là &lt;Kích thước&gt;.</para>
+        <para id="id10638200">Dim &lt;Tên biến mảng&gt;(&lt;Chỉ số đầu&gt; To &lt;Chỉ số cuối&gt;) [As &lt;Kiểu&gt;]</para>
+        <para id="id10638235">Ví dụ:</para>
+        <para id="id10638251">' Khai báo một biến mảng 15 phần tử kiểu Integer</para>
+        <para id="id10638259">Dim Counters(14)As Integer</para>
+        <para id="id9899942">' Khai báo một biến mảng 21 phần tử kiểu Double </para>
+        <para id="id9899953">Public Sums(20)As Double </para>
+        <para id="id9899978">' Khai báo một biến mảng 10 phần tử kiểu chuỗi ký tự</para>
+        <para id="id9899993">Dim List (1 To 10) As String * 12</para>
+        <para id="id9900028">- Hàm UBound trả về biên trên của một mảng.</para>
+        <para id="id9900045">- Hàm LBound trả về biên dưới của một mảng.</para>
+        <para id="id9900063">Ví dụ:</para>
+        <para id="id9900080">UBound(List) sẽ trả về giá trị là 10.</para>
+        <para id="id9900097">LBound(List) sẽ trả về giá trị là 1.</para>
+        <list id="id9900114" list-type="bulleted">
+          <item>Lưu ý: ta có thể khai báo một mảng nhiều chiều như sau</item>
+        </list>
+        <para id="id9900131">Dim Multi3D (3, 1 To 10, 9) As Double</para>
+        <para id="id9900154"> Khai báo này tạo ra một mảng 3 chiều với kích thước 4 x 10 x 10.</para>
+        <list id="id9900170" list-type="bulleted">
+          <item>Mảng động:</item>
+        </list>
+        <para id="id9900187">- Đây là mảng có kích thước thay đổi, đó là một trong những ưu điểm của mảng động vì nó giúp ta tiết kiệm tài nguyên hệ thống. Ta có thể sử dụng một mảng có kích thước lớn trong một thời gian nào đó rồi xoá bỏ để trả lại vùng nhớ cho hệ thống.</para>
+        <para id="id9900204">- Khai báo một mảng động bằng cách cho nó một danh sách không theo chiều nào cả. Cú pháp: Dim &lt;Tên mảng&gt; () [As &lt;Kiểu&gt;]</para>
+        <para id="id9900244">Ví dụ:</para>
+        <para id="id9900259">Dim DynArray() As Integer</para>
+        <para id="id9900281">Sau đó ta có thể cấp phát số phần tử thật sự bằng lệnh ReDim.</para>
+        <para id="id9900300">ReDim &lt;Tên mảng&gt;(N) ' Trong đó N là một biểu thức kiểu Integer.</para>
+        <para id="id9900328">ReDim dùng để xác định hay thay đổi kích thước của một mảng động. Ta có thể dùng ReDim để thay đổi số phần tử, số chiều của một mảng nhiều lần nhưng không thể thay đổi kiểu dữ liệu của mảng ngoại trừ kiểu mảng là kiểu Variant.</para>
+        <para id="id10060803">Mỗi lần gọi ReDim tất cả các giá trị chứa trong mảng sẽ bị mất. VB khởi tạo lại giá trị cho chúng (Empty đối với mảng Variant, 0 cho mảng kiểu số, chuỗi rỗng cho mảng chuổi hoặc Nothing cho mảng các đối tượng). Nhưng đôi khi ta muốn tăng kích cỡ của mảng nhưng không muốn làm mất dữ liệu, ta dùng ReDim đi kèm với từ khoá Preserve. Ta xem ví dụ dưới đây:</para>
+        <para id="id10060841">ReDim Preserve DynArray (UBound(DynArray) +10)</para>
+        <para id="id10060875">Tuy nhiên chỉ có biên trên của chiều cuối cùng trong mảng được thay đổi khi ta dùng Preserve. Nếu ta cố tình thay đổi chiều khác hoặc biên dưới thì VB sẽ báo lỗi.</para>
+      </section>
+      <section id="id-123652821194">
+        <title>Một số thao tác trên mảng</title>
+        <list id="id10060907" list-type="bulleted">
+          <item>Truy xuất từng phần tử trong mảng: &lt;Tên mảng&gt;(&lt;Vị trí&gt;)</item>
+          <item>Sao chép mảng: Đối với VB6, ta có thể gán một mảng cho một mảng khác, hoặc kết quả trả về của một hàm có thể là một mảng.</item>
+        </list>
+        <para id="id10060928">Ví dụ:</para>
+        <para id="id10060940">Sub ByteCopy (old () As Byte, New () As Byte)</para>
+        <para id="id10060988">New = old</para>
+        <para id="id10060996">End Sub</para>
+        <para id="id10061009">Tuy nhiên, cách này cũng chỉ áp dụng được cho mảng khai báo động mà thôi. Khi gán biến, có một số quy luật mà ta cần lưu ý: Đó là quy luật về kiểu dữ liệu và quy luật về kích thước và số chiều của mảng.</para>
+        <para id="id10061025">Lỗi khi gán mảng có thể xảy ra lúc biên dịch hoặc khi thi hành. Ta có thể thêm bẫy lỗi để đảm bảo rằng hai mảng là tương thích trước khi gán.</para>
+        <list id="id10061039" list-type="bulleted">
+          <item>Mảng là kết quả trả về của hàm. Chẳng hạn như:</item>
+        </list>
+        <para id="id10061050">Public Function ArrayFunction (b As Byte) As Byte()</para>
+        <para id="id10061079">Dim x(2) As Byte</para>
+        <para id="id10061113">x(0) = b</para>
+        <para id="id10061123">x(1) = b + 2</para>
+        <para id="id10061135">x(2) = b + b</para>
+        <para id="id10061147">ArrayFunction = x</para>
+        <para id="id10061159">End Function</para>
+        <para id="id10061172">Khi gọi hàm trả về mảng, biến giữ giá trị trả về phải là một mảng và có kiểu như kiểu của hàm, nếu không nó sẽ báo lỗi "không tương thích kiểu".</para>
+      </section>
+      <section id="id-814495146471">
+        <title>Kiểu do người dùng định nghĩa - Kiểu mẩu tin</title>
+        <para id="id9899530">Cú pháp:</para>
+        <para id="id9899546">Type &lt;tên kiểu&gt;</para>
+        <para id="id9899568">&lt;Tên trường 1&gt; : &lt;Kiểu trường 1&gt;</para>
+        <para id="id9899575">&lt;Tên trường 2&gt; : &lt;Kiểu trường 2&gt;</para>
+        <para id="id9899582">:</para>
+        <para id="id9899589">&lt;Tên trường n&gt; : &lt;Kiểu trường n&gt;</para>
+        <para id="id9899598">End Type</para>
+        <para id="id9899613">Ví dụ:</para>
+        <para id="id9899628">Type TEmployee</para>
+        <para id="id9899650">Fullname As String</para>
+        <para id="id9899672">Salary As Single</para>
+        <para id="id9899694">Age As Integer</para>
+        <para id="id9899714">End Type</para>
+        <para id="id9899732">Chúng ta vừa định nghĩa một kiểu dữ liệu mới có tên là TEmployee. Kiểu này có nét tương tự như một lớp. Về mặt chức năng, cả hai là như nhau, nhưng một lớp có thể chứa trong DLL và sẵn sàng cho việc dùng chung với các ứng dụng khác, trong khi đó kiểu dữ liệu do người dùng định nghĩa phải được khai báo lại trong từng dự án. Do vậy, kiểu lớp có nhiều mặt tiện lợi hơn.</para>
+        <para id="id9899755">Cách truy xuất từng trường của kiểu mẩu tin:</para>
+        <para id="id9899762">&lt;Tên biến mẩu tin&gt;.&lt;Tên trường&gt;</para>
+        <para id="id9899776">Ví dụ: Giả sử ta có khai báo biến sau:</para>
+        <para id="id9899793">Dim e As TEmployee</para>
+        <para id="id9899818">Ta có thể gán:</para>
+        <para id="id9899825">e.Fullname = “Nguyen Van An”</para>
+        <para id="id9899839">e.Salary = 300000.00</para>
+        <para id="id9899845">e.Age = 26</para>
+        <para id="id9899852">Câu lệnh With:</para>
+        <para id="id9899856">- Được sử dụng để viết gọn hơn khi thao tác với dữ liệu kiểu mẩu tin.</para>
+        <para id="id9899866">- Cú pháp:</para>
+        <para id="id9899871">With &lt;Tên biến mẩu tin&gt;</para>
+        <para id="id9899890">[ Truy xuất đến từng trường của mẩu tin theo dạng:</para>
+        <para id="id9899899">.&lt;Tên trường&gt;</para>
+        <para id="id9899917">]</para>
+        <para id="id9899921">End With</para>
+        <para id="id10101978">Ví dụ: Dim e As TEmployee</para>
+        <para id="id10102011">Ta có thể gán:</para>
+        <para id="id10102018">With e</para>
+        <para id="id10102035">.Fullname = “Nguyen Van An”</para>
+        <para id="id10102049">.Salary = 300000.00</para>
+        <para id="id10102057">.Age = 26</para>
+        <para id="id10102065">End With</para>
+      </section>
+    </section>
+  </content>
+</document>

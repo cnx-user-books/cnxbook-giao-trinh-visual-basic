@@ -1,0 +1,216 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Môi trường dữ liệu</title>
+  <metadata>
+  <md:content-id>m30695</md:content-id><md:title>Môi trường dữ liệu</md:title>
+  <md:abstract>Mục tiêu:
+	Chương này gồm các bài tập nhằm rèn luyện cho sinh viên cách thức sử dụng môi trường dữ liệu (Data Environment) của VB để lập trình CSDL.</md:abstract>
+  <md:uuid>c97a9195-88ac-4578-936d-bc10f47af9d9</md:uuid>
+</metadata>
+
+<content>
+    <para id="id8982062">Học xong chương này, sinh viên phải nắm bắt được các vấn đề sau:</para>
+    <para id="id8982076">Sử dụng thành thạo môi trường dữ liệu gồm:</para>
+    <para id="id8982086">- Tạo đối tượng Connection.</para>
+    <para id="id8982096">- Tạo đối tượng Command.</para>
+    <para id="id8982105">- Viết mã lệnh thao tác với môi trường dữ liệu.</para>
+    <para id="id8982116">Kiến thức có liên quan:</para>
+    <para id="id8982128">- Giáo trình Visual Basic, Chương 12.</para>
+    <para id="id8982138">Tài liệu tham khảo:</para>
+    <para id="id8982150">- Visual Basic 6 Certification Exam Guide – Chapter 10, Page 277 - Dan Mezick &amp; Scot Hillier - McGraw-Hill - 1998.</para>
+    <para id="id8982197">- Tự học Lập trình cơ sở dữ liệu với Visual Basic 6.0 trong 21 ngày (T1) - Chương 9, trang 395 - Nguyễn Đình Tê (chủ biên) – Nhà xuất bản Giáo dục - 2001.</para>
+    <para id="id8982244"/>
+    <para id="id8982248">HƯỚNG DẪN</para>
+    <section id="id-179358960372">
+      <title>Bài 7-1</title>
+      <section id="id-475266133703">
+        <title>DATA ENVIRONMENT</title>
+        <para id="id8982266">Data Environment cho phép chúng ta tạo ứng dụng cơ sở dữ liệu với OLEDB một cách nhanh chóng và hiệu quả. Trong bài tập này, ta sẽ tìm hiểu về Data Environment và Report Designer của VB.</para>
+        <para id="id8982278">Bước 1: Tạo thư mục Basic\Bt7-1. Tạo một dự án kiểu Stardard EXE lưu vào trong thư mục đó.</para>
+        <para id="id8982293">Bước 2: Nếu mục Data Environment không có sẵn trong Project Explorer, ta chọn Project\Components…, đánh dấu vào mục Data Environment trong tùy chọn Designers, nhấp OK. Chọn Project\More ActiveX Designers… để thêm Data Environment vào môi trường soạn thảo.</para>
+        <para id="id8982315">Bước 3: Trong Data Environment, nhấp chuột phải vào đối tượng Connection1, chọn Properties…, chọn Microsoft Jet 3.51 OLE DB Provider.</para>
+        <para id="id8982356">Bước 4: Trong mục chọn Connection, chọn cơ sở dữ liệu mình muốn thao tác trong mục Select or Enter a Database Name Box; ở đây ta chọn CSDL BIBLIO.MDB (thường ở đường dẫn C:\Program Files\Microsoft Visual Studio\VB98\BIBLIO.MDB). Nhấp nút Test Connection để kiểm tra nối kết với CSDL có bị lỗi hay không? Ta sẽ nhấp OK nếu nối kết này thành công (nếu không ta phải kiểm tra lại).</para>
+        <para id="id8982405">Bước 5: Trong Data Environment, nhấp chuột phải vào đối tượng Connection1 và chọn RENAME để đổi tên thành BIBLIO.</para>
+        <para id="id8982429">Bước 6: Nhấp chuột phải vào BIBLIO và chọn ADD COMMAND trên menu, một đối tượng command được tạo ra với tên là Command1 trong Data Environment. Nhấp chuột phải vào đối tượng mới tạo này, chọn RENAME để đổi tên thành Publishers.</para>
+        <para id="id8982459">Bước 7: Nhấp chuột phải vào Publishers và chọn mục Properties, một hộp thoại quy định các thuộc tính cho đối tượng Publishers được mở ra. Trong mục chọn General, chọn Source Data là SQL Statement và ta nhập câu SQL sau vào khung nhập:</para>
+        <para id="id8982480">SELECT PubID, Name FROM Publishers WHERE Name LIKE ?</para>
+        <para id="id8982485">Câu SQL trên phải nhận vào một tham số từ chương trình gọi nó (dấu chấm hỏi). Nghĩa là để câu SQL này thực thi được, ta cần cung cấp một tham số đầu vào cho nó.</para>
+        <para id="id8982501">Bước 8: Để định nghĩa tham số, ta chuyển sang mục chọn Parameters, ta thấy có một tham số đã được định nghĩa tên là Param1. Mặc nhiên của tham số này là kiểu số, tuy nhiên ta sẽ đổi chúng thành kiểu chuỗi với các thuộc tính như sau:</para>
+        <para id="id8982518">Data TypeadVarChar</para>
+        <para id="id8982528">Host Data TypeString</para>
+        <para id="id8982537">Size255</para>
+        <para id="id8982547">Bước 9: Tạo một recordset con cho đối tượng Publishers command bằng cách nhấp chuột phải vào vào đối tượng này và chọn ADD CHILD COMMAND trên menu. Các câu truy vấn này dùng để tìm thông tin về các sách dựa vào nhà xuất bản nào đó. Khi một command con được thêm vào, nó có tên là COMMAND1.</para>
+        <para id="id8982569">Bước 10: Trong command con này, nó cần phải có một câu SQL để truy xuất thông tin. Câu truy vấn này có nhiệm vụ kết nối thông tin từ các bảng Title và Author đối với từng loại nhà xuất bản.</para>
+        <para id="id8982589"><figure id="id8982593"><media id="id2628712" alt=""><image src="../../media/graphics1-a228.png" mime-type="image/png" height="75" width="78"/></media></figure>Bước 11: Mở cửa sổ Data View bằng cách chọn View\Data View Window trên menu. Trong Data View, xác định thư mục Data Environment Connections. Đối tượng connection BIBLIO được hiển thị trong thư mục này. Mở đối tượng connection và xác định thư mục Tables. Trong thư mục này, chọn bảng Titles. Nhấp đúp vào bảng Titles này để hiển thị nội dung của bảng.</para>
+        <para id="id8982650">Bước 12: Khi đã hiển thị nội dung của bảng, ta mở Data Tools bằng cách chọn VIEW\SHOW PANES trên menu. Chọn tất cả các mục trong phần này (Diagram, Grid, SQL, Results).</para>
+        <para id="id8982669">Bước 13: Khi tất cả các mục của Data Tool được chọn, ta kéo các bảng Title Author và Authors vào khung diagram của Data Tools. Sau đó ta phải kiểm tra các liên kết của các bảng: bảng Titles có liên kết với bảng Title Author bởi trường ISBN không? Bảng Title Author có liên kết với bảng Authors bởi trường Au_ID không? Nếu không có các mối liên kết này ta phải chọn đúng trường trong bảng Title Author và kéo chúng vào trường tương ứng trong 2 bảng Titles và Authors.</para>
+        <para id="id8982691">Bước 14: Để tạo ra câu truy vấn, ta đánh dấu chọn vào trường PubID, Title trong bảng Titles; trường Author trong bảng Authors. Kế tiếp, kiểm tra khung Grid ta thấy có một dòng có dấu * (như hình dưới) biểu thị là ta đã chọn tất cả các trường của tất cả các bảng. Ta không cần chọn tất cả thông tin, do đó ta nhấp vào dòng có dấu * và bấm phím Delete để xóa chúng. Lúc đó trong khung SQL ta thấy có câu SQL sau:</para>
+        <para id="id8982720">SELECT Titles.PubID AS Expr1, Titles.Title AS Expr2, </para>
+        <para id="id8982725">Authors.Author AS Expr3</para>
+        <para id="id8982735">FROM Titles, `Title Author`, Authors</para>
+        <para id="id8982739">WHERE Titles.ISBN = `Title Author`.ISBN AND </para>
+        <para id="id8982744">`Title Author`.Au_ID = Authors.Au_ID</para>
+        <figure id="id8982751">
+          <media id="id1169424160448" alt=""><image src="../../media/graphics2-d8a4.png" mime-type="image/png" height="388" width="623"/></media>
+        </figure>
+        <para id="id8982780">Hình VII.1: SQL Builder</para>
+        <para id="id8982806">Bước 15: Chọn câu SQL hiển thị bên trên rồi nhấp Edit\Copy.</para>
+        <para id="id8982820">Bước 16: Nhấp đúp trở lại vào Data Environment, nhấp chuột phải vào command con đã có và chọn PROPERTIES trên menu. Sau đó đổi tên của command trong mục General thành Titles. Chọn Source Data là SQL Command; sau đó dán nội dung câu SQL đã copy ở trên vào khung nhập câu SQL (chọn Edit\Paste).</para>
+        <para id="id8982843">Bước 17: Chọn mục RELATION , ta thấy trường PubID của cả hai bảng Publishers và Titles được hiển thị. Nhấp nút ADD để xác định liên kết giữa câu command cha và command con.</para>
+        <para id="id8982861">Bước 18: Đóng các cửa sổ và lưu dự án lại.</para>
+      </section>
+      <section id="id-87525235999">
+        <title>XÂY DỰNG GIAO DIỆN CHƯƠNG TRÌNH</title>
+        <para id="id8982883">Bước 19: Thêm vào một điều khiển vào dự án bằng cách chọn Project\Components trên menu; tìm đến mục Microsoft Hierachial Flexgrid Control 6.0 (OLEDB). Đánh dấu tùy chọn này và nhấp OK.</para>
+        <para id="id8982902">Bước 20: Mở Form1, tạo giao diện cho chương trình như dạng sau (hình bên dưới):</para>
+        <para id="id8982917">Item 1: Label</para>
+        <para id="id8982924">Name: lblCompany</para>
+        <para id="id8982932">Caption: Company Name</para>
+        <para id="id8982940">Item 2: TextBox</para>
+        <para id="id8982946">Name: txtCompany</para>
+        <para id="id8982954">Text: micro</para>
+        <para id="id8982962">Item 3: CommandButton</para>
+        <para id="id8982968">Name: cmdGO</para>
+        <para id="id8982976">Caption: GO</para>
+        <para id="id8982984">Default: TRUE</para>
+        <para id="id8982994">Item 4: Hierarchial FlexGrid</para>
+        <para id="id8983001">Name: grdTitles</para>
+        <para id="id8983008">AllowUserResizing: 1-flexResizeColumns</para>
+        <para id="id8983016">DataSource: DataEnvironment1</para>
+        <para id="id8983023">DataMember: Publishers</para>
+        <para id="id8983031">FixedCols: 0</para>
+        <figure id="id8983042">
+          <media id="id3664729" alt=""><image src="../../media/graphics3-2132.png" mime-type="image/png" height="224" width="299"/></media>
+        </figure>
+        <para id="id8983070">Hình VII.2: Giao diện ứng dụng</para>
+        <para id="id8983098">Bước 21: Nhấp chuột vào phải vào Hierarachical FlexGrid trên Form1, hộp thoại thuộc tính của Hierarachical được mở ra. Chọn mục BANDS trong hộp thoại này. Chọn Band0 (Publishers) sau đó không đánh dấu vào trường PubID (với tên là Expr1) để nó không hiển thị khi thực hiện câu SQL. Cũng vậy, không đánh dấu vào trường PubID của Band1 (hình dưới):</para>
+        <figure id="id8983135">
+          <media id="id1169426418096" alt=""><image src="../../media/graphics4-f262.png" mime-type="image/png" height="328" width="436"/></media>
+        </figure>
+        <para id="id8983164">Hình VII.3: Chọn trường hiển thị trên lưới</para>
+        <para id="id8983192">Bước 22: Đổi tên của các cột trong Band1 từ Expr2, Expr3 thành Title và Author bằng cách: Nhấp chuột 2 lần vào mục cần đổi tên trong Column Caption, nhập tên mới vào; sau đó chọn OK.</para>
+        <para id="id8983216">Bước 23: Mục đích của chương trình này là: Khi chương trình thực thi, trong TextBox có một từ là micro, từ được đề nghị tìm kiếm. Khi nhấp chuột vào nút nhấn; đoạn văn bản trong TextBox được dùng để thực thi câu SQL Publishers; câu SQL này sẽ truy tìm tất cả các công ty mà tên của chúng chứa chuỗi được nhập vào trong TextBox; kết quả trả về được hiển thị trên lưới. Do đó, ta sẽ xử lý sự kiện cmdGO_Click bằng đoạn mã sau:</para>
+        <para id="id8983251">MousePointer = vbHourglass</para>
+        <para id="id8983256">With DataEnvironment1</para>
+        <para id="id8983264">.rsPublishers.Close</para>
+        <para id="id8983275">.Publishers "%" &amp; txtCompany.Text &amp; "%"</para>
+        <para id="id8983287">End With</para>
+        <para id="id8983297">' Thiet lap tren luoi</para>
+        <para id="id8983307">Set grdTitles.DataSource = DataEnvironment1</para>
+        <para id="id8983316">grdTitles.CollapseAll</para>
+        <para id="id8983326">MousePointer = vbDefault</para>
+        <para id="id8983336">Bước 24: Lưu dự án và chạy chương trình. Sử dụng micro để tìm kiếm (ta có thể thử với từ khác như: hill hay mill)</para>
+        <para id="id8984987">TẠO BÁO CÁO (REPORT)</para>
+        <para id="id8984992">Bước 25: Nếu Data Report Designer không hiển thị dưới menu PROJECT, mở hộp thoại COMPONENTS, chọn Data Report Designer trong mục chọn Designers. Sau đó ta thêm Data Report Designer vào dự án bằng cách chọn PROJECT\ADD DATA REPORT trên menu.</para>
+        <para id="id8985021">Bước 26: Liên kết Data Report Designer với Data Environment nhờ việc thiết lập thuộc tính DataSource của Data Report là DataEnvirronment1 và thuộc tính DataMember là Publishers.</para>
+        <para id="id8985072">Bước 27: Nhấp chuột phải trên Data Report Designer và chọn RETRIEVE STRUCTURE trên menu. Một hộp thoại xác nhận hiện lên và ta chọn YES.</para>
+        <para id="id8985090">Bước 28: Ta nhận thấy trên report gồm các phần: report header, page header, publisher information, title information, page footer, và report footer. </para>
+        <para id="id8985107">Bước 29: Chọn phần Report Header, trong phần này, thêm một Report Label vào, đặt Caption là Book Report; ta có thể đổi Font chữ và kích thước Font tương ứng.</para>
+        <para id="id8985133">Bước 30: Chọn Group header, trong phần này thêm một Report TextBox vào; đặt thuộc tính DataMember là Publishers và DataField là Name.</para>
+        <para id="id8985193">Bước 31: Chọn phần Detail của Report. Trong phần này, thêm 2 Report TextBox vào, đặt 2 điều khiển này cạnh nhau trong phần Detail; chọn TextBox thứ nhất và đặt thuộc tính DataMember là Titles và DataField là Expr2, đối với TextBox thứ hai: DataMember: Titles, DataField: Expr3.</para>
+        <para id="id8985278">Bước 32: Lưu dự án lại.</para>
+        <para id="id8985290">Bước 33: Chọn Form1 trong môi trường soạn thảo; tạo một menu trong Form1 bằng cách chọn Tools\Menu Editor; trong Menu Editor, tạo một Report menu với các phần tử là Preview và Print với các thuộc tính sau:</para>
+        <para id="id8985344">Item 1 – Menu</para>
+        <para id="id8985350">Name: mnuReport</para>
+        <para id="id8985358">Caption: Report</para>
+        <para id="id8985366">Item 2 – Menu</para>
+        <para id="id8985373">Name: mnuPreview</para>
+        <para id="id8985381">Caption: Preview</para>
+        <para id="id8985388">Item 3 – Menu</para>
+        <para id="id8985395">Name: mnuPrint</para>
+        <para id="id8985403">Caption: Print</para>
+        <para id="id8985411">Bước 34: Ta có thể xem báo cáo trước khi in nhờ hàm Show của đối tượng Report. Trong hàm xử lý sự kiện mnuPreview, thêm đoạn mã sau:</para>
+        <para id="id8985428">DataReport1.Show</para>
+        <para id="id8985435">Bước 35: In báo cáo được thực hiện nhờ hàm PrintReport của đối tượng Report. Trong hàm xử lý sự kiện mnuPrint, thêm đoạn mã sau:</para>
+        <para id="id8985452">DataReport1.PrintReport</para>
+        <para id="id8985458">Bước 36: Lưu và chạy chương trình. Thử hiển thị và in report.</para>
+        <para id="id8985473">Bài 7-2</para>
+        <para id="id8985477">BIỂU MẪU NHẬP LIỆU VỚI DATA ENVIRONMENT</para>
+        <list id="id8985483" list-type="bulleted">
+          <item>Tạo một dự án mới; bổ sung Data Enviroment vào dự án của ta nhờ chọn Project/Add Data Environment. Khi lựa chọn mục này, môi trường DED sẽ hiển thị; sử dụng cửa sổ Properties để thiết lập thuộc tính Name là: datHH. Ở đây, ta sẽ sử dụng DED để kết nối với CSDL HANGHOA.MDB.</item>
+          <item>Sửa lại thuộc tính Name của Connection1 là conHH; sau đó chuột phải lên conHH, chọn Properties.</item>
+        </list>
+        <para id="id8985509">Ở hộp thoại đầu tiên, ta phải chọn một trình cung cấp dữ liệu, ở đây chọn Microsoft Jet 4.0 OLE DB Provider, nhấn Next để tiếp tục.</para>
+        <para id="id8985527">Tiếp theo ta cần nhập chính xác đường dẫn đến tập tin CSDL, chẳng hạn ở đây là: H:\Visual Basic\HangHoa.Mdb. </para>
+        <para id="id8985536">Cuối cùng, nhấn nút Test Connection để kiểm tra việc nối kết dữ liệu chính xác hay không?</para>
+        <para id="id8985544">
+          <figure id="id8985547">
+            <media id="id6987957" alt=""><image src="../../media/graphics5-4a98.png" mime-type="image/png" height="363" width="313"/></media>
+          </figure>
+          <figure id="id8985576">
+            <media id="id2724576" alt=""><image src="../../media/graphics6-4496.png" mime-type="image/png" height="368" width="296"/></media>
+          </figure>
+        </para>
+        <para id="id8985599">Hình VII.4: Tạo Connection</para>
+        <para id="id8985627">Tạo đối tượng Command:</para>
+        <list id="id8985632" list-type="bulleted">
+          <item>Xây dựng một đối tượng Command kết nối trực tiếp với Table (bảng) THANGHOA trong file dữ liệu HangHoa.mdb.</item>
+          <item>Nhấp chuột phải trên kết nối dữ liệu conHH &amp; chọn Add Command; sửa Command Name là: comHH; chọn Table từ Combo Box Database Object, chọn THANGHOA từ Combo Box Object Name.</item>
+          <item>Trước khi đóng hộp thoại này, ta chuyển qua nhãn Advanced &amp; thiết lập LockType là 3 – Optimistic (mặc nhiên là 1 – Read Only); Cursor Location: Use client-side cursor. Nhờ vậy ta mới có thể cập nhật Record Set từ chương trình của ta.</item>
+          <item>Trở lại giao diện DED, ta được:</item>
+        </list>
+        <para id="id8985692">Hình VII.5: Đối tượng Command<figure id="id8985720"><media id="id9023108" alt=""><image src="../../media/graphics7-19ac.png" mime-type="image/png" height="362" width="453"/></media></figure></para>
+        <para id="id8985743">Tạo một ứng dụng nhập liệu với DED</para>
+        <list id="id8985750" list-type="bulleted">
+          <item>Ở môi trường DED, ta kéo các trường của Command comHH vào Form1, chỉnh sửa lại cho thích hợp.</item>
+          <item>Ở đây ta có sử dụng một lưới để hiển thị dữ liệu; do vậy ta chọn Project\Component; chọn Microsoft DataGrid Control 6.0 (OLE DB); sau đó kéo điều khiển này vào Form, thiết lập các thuộc tính cho thích hợp.</item>
+        </list>
+        <para id="id8985768">Name: grdHH.</para>
+        <para id="id8985772">DataSource: datHH</para>
+        <para id="id8985777">DataMember: comHH</para>
+        <list id="id8985781" list-type="bulleted">
+          <item>Nhấp chuột phải lên điều khiển DataGrid, chọn Retrieve Structure. Sau đó, lưu dự án &amp; chạy chương trình ta được:</item>
+        </list>
+        <figure id="id8985794">
+          <media id="id5962752" alt=""><image src="../../media/graphics8-b65f.png" mime-type="image/png" height="263" width="344"/></media>
+        </figure>
+        <para id="id8985822">Hình VII.6: Kết quả thực thi ứng dụng</para>
+        <list id="id8985850" list-type="bulleted">
+          <item>Thêm các nút hành động (Thêm, Sửa, Xóa,…). Chẳng hạn các sự kiện cmd_Them_Click, cmdXoa_Click, cmdLuu_Click, cmdHuy_Click được xử lý:</item>
+        </list>
+        <figure id="id8985867">
+          <media id="id3958241" alt=""><image src="../../media/graphics9-716d.png" mime-type="image/png" height="384" width="392"/></media>
+        </figure>
+        <para id="id8985891">Hình VII.7: Giao diện đầy đủ</para>
+        <para id="id8985918">Private Sub cmdThem_Click()</para>
+        <para id="id8985923">With datHH.rscomHH</para>
+        <para id="id8985931">.AddNew</para>
+        <para id="id8985938">End With</para>
+        <para id="id8985946">End Sub</para>
+        <para id="id8985950">Private Sub cmdXoa_Click()</para>
+        <para id="id8985955">With datHH.rscomHH</para>
+        <para id="id8985962">.Delete</para>
+        <para id="id8985970">.Update</para>
+        <para id="id8985976">Me.Refresh</para>
+        <para id="id8985984">End With</para>
+        <para id="id8985991">End Sub</para>
+        <para id="id8985996">Private Sub cmdHuy_Click()</para>
+        <para id="id8986000">With datHH.rscomHH</para>
+        <para id="id8986008">.CancelUpdate</para>
+        <para id="id8986015">Me.Refresh</para>
+        <para id="id8986023">End With</para>
+        <para id="id8986030">End Sub</para>
+        <para id="id8986035">Private Sub cmdLuu_Click()</para>
+        <para id="id8986039">On Error GoTo Xuly</para>
+        <para id="id8986047">With datHH.rscomHH</para>
+        <para id="id8986055">.Update</para>
+        <para id="id8986062">End With</para>
+        <para id="id8986070">Me.Refresh </para>
+        <para id="id8986080">Exit Sub</para>
+        <para id="id8986088">Xuly:</para>
+        <para id="id8986092">MsgBox Err.Description, vbCritical + vbSystemModal, "Error"</para>
+        <para id="id8986100">End Sub</para>
+        <para id="id8986105">Như vậy, ta đã thiết kế xong một Form cho phép hiển thị thông tin các hàng hóa, Form này cho phép sửa đổi, thêm mới các mẩu tin trong bảng THANGHOA của CSDL HANGHOA.MDB.</para>
+      </section>
+    </section>
+    <section id="id-361629133844">
+      <title>BÀI TẬP TỰ LÀM</title>
+      <para id="id8986125">1) Sử dụng DataEnviroment, thiết kế Form nhập liệu cho bảng THangHoa (hình dưới). Ở đây thay vì hiển thị MaLoai, ta lại hiển thị TenLoai:</para>
+      <figure id="id8986138">
+        <media id="id1169427806280" alt=""><image src="../../media/graphics10-8cac.png" mime-type="image/png" height="423" width="479"/></media>
+      </figure>
+      <para id="id8986162">Hình VII.8: Form nhập liệu</para>
+      <para id="id8986189">2) Sử dụng DataEnviroment, thiết kế Form nhập liệu cho bảng TNhanVien.</para>
+      <para id="id8986196">3) Sử dụng DataEnviroment, thiết kế Form cho phép nhập (sửa, xóa) thông tin về một phát sinh về một mặt hàng nào đó trong ngày. Lưu ý: Trường STT là kiểu AutoNumber (Access), Ngay: lấy ngày hệ thống (hàm Now). </para>
+    </section>
+  </content>
+</document>
